@@ -1,0 +1,19 @@
+
+<f:layout name="Ajax" />
+
+Dieses Template generiert den Menübaum
+<f:section name="main">
+    <f:if condition="{categories -> f:count()} > 0">
+        <f:then>
+            <f:for each="{categories}" as="category" iteration="iteration">
+                <option value="{category.uid}">
+                    {category.title}
+                </option>
+
+            </f:for>
+        </f:then>
+        <f:else>
+            <option>Keine Unterkategorien gefunden</option>
+        </f:else>
+    </f:if>
+</f:section>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-03-10T14:08:14Z" product-name="bjr_lend">
+		<header/>
+		<body>
+
+			<trans-unit id="tx_bjrlend_domain_model_article">
+				<source>Artikel der ausgeliehen werden kann</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_article.title">
+				<source>Titel</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_article.short_description">
+				<source>Kurzbeschreibung</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_article.description">
+				<source>Beschreibung</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_article.lend_conditions">
+				<source>Ausleihbedignungen</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_article.fee">
+				<source>Gebühr</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_article.booking_online">
+				<source>online buchbar</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_article.booking_phone">
+				<source>telefonisch buchbar</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_article.phone">
+				<source>Telefonnummer</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_article.by_email">
+				<source>Anfrage per Email</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_article.email">
+				<source>Email Adresse</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_article.image">
+				<source>Bilder</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_article.is_lend">
+				<source>ausgeliehen ja / nein</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_article.show_calendar">
+				<source>Kalender anzeigen</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_article.category">
+				<source>Kategoriebeziehung</source>
+			</trans-unit>
+            <trans-unit id="tx_bjrlend_domain_model_article.tab_reservations">
+                <source>Reservierungen</source>
+            </trans-unit>
+			
+			<trans-unit id="tx_bjrlend_domain_model_category">
+				<source>Category</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_category.title">
+				<source>title</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_category.parent">
+				<source>parent</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_category.childs">
+				<source>childs</source>
+			</trans-unit>
+			
+			<trans-unit id="tx_bjrlend_domain_model_organization">
+				<source>Organization</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_organization.name">
+				<source>name</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_organization.lend_conditions">
+				<source>Ausleihbedingungen</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_organization.opening_times">
+				<source>openingTimes</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_organization.address">
+				<source>address</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_organization.contact">
+				<source>Ansprechpartner</source>
+			</trans-unit>
+            <trans-unit id="tx_bjrlend_domain_model_organization.tab_info">
+                <source>Infos</source>
+            </trans-unit>
+            <trans-unit id="tx_bjrlend_domain_model_organization.tab_agb">
+                <source>Rechtliches</source>
+            </trans-unit>
+
+
+            <trans-unit id="tx_bjrlend_domain_model_contact">
+				<source>Contact</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_contact.name">
+				<source>name</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_contact.address">
+				<source>address</source>
+			</trans-unit>
+			
+			<trans-unit id="tx_bjrlend_domain_model_address">
+				<source>Address</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_address.street">
+				<source>street</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_address.zip">
+				<source>zip</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_address.city">
+				<source>city</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_address.phone">
+				<source>phone</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_address.mobil">
+				<source>mobil</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_address.email">
+				<source>email</source>
+			</trans-unit>
+			
+			<trans-unit id="tx_bjrlend_domain_model_customer">
+				<source>Customer</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_customer.name">
+				<source>name</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_customer.address">
+				<source>Kommunkkationsdaten</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_customer.orders">
+				<source>orders</source>
+			</trans-unit>
+			
+			<trans-unit id="tx_bjrlend_domain_model_order">
+				<source>Order</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_order.customer_name">
+				<source>Name: </source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_order.customer_phone">
+				<source>Telefon:</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_order.customer_email">
+				<source>E-Mail:</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_order.positions">
+				<source>Bestellpositionen</source>
+			</trans-unit>
+			
+			<trans-unit id="tx_bjrlend_domain_model_orderposition">
+				<source>OrderPosition</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_orderposition.article_title">
+				<source>articleTitle</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_orderposition.article_fee">
+				<source>articleFee</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_orderposition.lend_conditions">
+				<source>lendConditions</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_orderposition.organization_name">
+				<source>organizationName</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_orderposition.organization_street">
+				<source>organizationStreet</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_orderposition.organization_zip">
+				<source>organizationZip</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_orderposition.organization_city">
+				<source>organizationCity</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_orderposition.organization_phone">
+				<source>organizationPhone</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_orderposition.organization_email">
+				<source>organizationEmail</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_orderposition.article">
+				<source>Relation zu Artikel</source>
+			</trans-unit>
+
+            <trans-unit id="tx_bjrlend_domain_model_reservations.tab_customer">
+                <source>Kundendaten</source>
+            </trans-unit>
+			
+		</body>
+	</file>
+</xliff>

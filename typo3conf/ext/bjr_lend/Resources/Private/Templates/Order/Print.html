@@ -1,0 +1,25 @@
+<f:layout name="Print" />
+
+
+<f:flashMessages />
+
+<f:debug>{args}</f:debug>
+
+<f:section name="main">
+    <h2>Reservierungsbestätigung</h2>
+    <div class="bjr-lend-print-link head" onclick="printIt();">Drucken</div>
+    <f:render partial="Order/PrintProperties" arguments="{order:order}" />
+    <div class="bjr-lend-print-link bjr-lend-print-link foot" onclick="printIt();">Drucken</div>
+
+    
+    <script type="text/javascript">
+        function printIt(){
+            window.close();
+            window.print();
+
+        }
+
+    </script>
+
+
+</f:section>

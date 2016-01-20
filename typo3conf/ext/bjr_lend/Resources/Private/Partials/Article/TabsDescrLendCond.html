@@ -1,0 +1,49 @@
+{namespace bjr = Bjr\BjrLend\ViewHelpers}
+
+<!-- Tab panes -->
+<div class="article-detail-tabs row">
+    <div class="col-sm-12">
+        <ul class="nav nav-tabs" id="detailtabs">
+            <li class="active"><a href="#artikelbeschreibung" data-toggle="tab">Beschreibung</a></li>
+            <li><a href="#ausleihbedingungen" data-toggle="tab">Ausleihbedingungen / AGB</a></li>
+            <li><a href="#kontaktinformationen" data-toggle="tab">Kontaktinformationen</a></li>
+            <li><a href="#ausleihstelleinformation" data-toggle="tab">Weitere Infos</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="artikelbeschreibung">
+                <p>
+                <f:format.nl2br>{article.shortDescription}</f:format.nl2br>
+                    </p>
+                <f:if condition="{{article.description}">
+                    <p><br />
+                    <f:format.nl2br>{article.description}</f:format.nl2br>
+                    </p>
+                </f:if>
+            </div>
+            <div class="tab-pane" id="ausleihbedingungen">
+                <p>
+                <f:format.nl2br>{article.lendConditions}</f:format.nl2br>
+                <br />
+                </p>
+                <p><strong>Ausleibedingungen Ausleihstelle:</strong><br />
+                    <f:format.nl2br>{article.organization.lendConditions}</f:format.nl2br>
+                </p>
+                <p><strong>AGB der  Ausleihstelle:</strong><br />
+                    <f:format.nl2br>{article.organization.agb}</f:format.nl2br>
+                </p>
+            </div>
+            <div class="tab-pane" id="kontaktinformationen">
+                <f:render partial="Article/Contact" arguments="{contact:article.organization.contact}" />
+            </div>
+            <div class="tab-pane" id="ausleihstelleinformation">
+                <p>Öffnungszeiten der Ausleihstelle:<br />
+                    <f:format.nl2br>{article.organization.openingTimes}</f:format.nl2br>
+                </p>
+                <p>Weitere Infos:<br />
+                    <f:format.nl2br>{article.organization.info}</f:format.nl2br>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.Tabs -->

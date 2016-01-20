@@ -1,0 +1,5 @@
+
+
+[15.05.2015] in Version 0.9.6 :
+added : ArticleController->searchResultFrameAction()
+       with an URL it is possible to get a result html snippet to insert in another webpage

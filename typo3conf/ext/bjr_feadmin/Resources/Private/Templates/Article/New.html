@@ -1,0 +1,26 @@
+<f:layout name="Default" />
+
+
+<f:section name="main">
+    <h1>Neuen Artikel anlegen</h1>
+
+    <f:flashMessages renderMode="div" />
+
+    <f:render partial="FormErrors" arguments="{object:Article}"/>
+    <f:if condition="{0:organization} == {0: 'Error'}">
+        <f:then>
+
+        </f:then>
+        <f:else>
+            <f:form action="update" name="article" object="{article}" class="form-horizontal" additionalAttributes="{autocomplete: 'off'}"
+                    enctype="multipart/form-data" arguments="{article: article}">
+                <f:form.hidden name="organizationUid" value="{organization.uid}" ></f:form.hidden>
+                <f:form.hidden name="creation" value="1" ></f:form.hidden>
+                <f:render partial="Article/FormFields" arguments="{all}" />
+                <f:form.submit name="articleUpdate" value="Anlegen" />
+            </f:form>
+        </f:else>
+    </f:if>
+
+
+</f:section>

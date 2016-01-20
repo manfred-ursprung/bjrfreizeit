@@ -1,0 +1,15 @@
+{namespace bjr = Bjr\BjrLend\ViewHelpers}
+
+<td>{organization.uid}</td>
+<td>{organization.name}</td>
+<td>{organization.region.name}</td>
+<td>ja</td>
+<td>nein</td>
+
+<td>
+	<div class="btn-group">
+		<f:link.action action="organizationList" controller="Article" pageUid="{settings.pidArticleList}" arguments="{organization : organization}" class="btn btn-default btn-xs" title="Konto"><i class="fa fa-user"></i></f:link.action>
+		<f:link.action action="edit" pageUid="{settings.pidOrganizationEdit}" arguments="{organization : organization}" class="btn btn-default btn-xs" title="bearbeiten"><i class="fa fa-pencil"></i></f:link.action>
+		<f:link.action action="delete" arguments="{organization : organization}" class="btn btn-default btn-xs" title="löschen"><i class="fa fa-trash-o"></i></f:link.action>
+	</div>
+</td>

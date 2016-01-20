@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" product-name="siteprovider" date="2016-01-13T14:17:27+01:00">
+		<header/>
+		<body>
+			<trans-unit id="flux.standard">
+				<source>Standard Seite</source>
+			</trans-unit>
+			<trans-unit id="flux.standard.description">
+				<source>Keine Unterscheidung zwischen Startseite und Folgeseite</source>
+			</trans-unit>
+			<trans-unit id="flux.example">
+				<source>Example element</source>
+			</trans-unit>
+			<trans-unit id="flux.example.description">
+				<source>Small example element</source>
+			</trans-unit>
+			<trans-unit id="flux.example.fields.settings.helloWorld">
+				<source>Example input</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

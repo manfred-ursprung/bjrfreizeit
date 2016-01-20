@@ -1,0 +1,61 @@
+<div class="tx-bjr-lend order-approval" >
+    <p class="order-customer-data">
+        <strong>Hier zuerst die Daten des Kunden:</strong><br />
+        <span class="label"><f:translate key="tx_bjrlend_domain_model_order.customer_name" /> </span>
+
+		<span class="customer-data customer-name">
+			{order.customerName}
+		</span>
+	</p>
+    <p class="order-customer-data">
+		<span class="label"><f:translate key="tx_bjrlend_domain_model_order.customer_phone" />
+		</span>
+		<span class="customer-data customer-phone">
+			{order.customerPhone}
+		</span>
+	</p>
+    <p class="order-customer-data">
+		<span class="label"><f:translate key="tx_bjrlend_domain_model_order.customer_email" />
+		</span>
+		<span class="customer-data customer-email">
+			{order.customerEmail}
+		</span>
+	</p>
+    <p class="order-customer-data" style="padding-top: 20px">
+        Folgende Artikel wurden reserviert:
+    </p>
+    <div class="order-positions">
+
+        <div class="article-item col-sm-12">
+            <div class="thumbnail">
+                <div class="article-image col-sm-3">
+                    <!-- <img src="{siteUrl}{position.article.urlForImage}" width="250px"  alt="Produktbild für {position.articleTitle}" class="img-responsive img-rounded"> -->
+                </div>
+                <div class="caption ">
+                    <div class="article-desc col-sm-6">
+                        <h3 class="art-title">{position.articleTitle}</h3>
+
+                        <p class="art-kosten">
+                            <span class="art-label">Gebühr: </span>
+                            <span class="kosten">{position.articleFee}</span>
+                        </p>
+                        <p class="art-issue-date">
+                            <span class="art-label">Ausleihzeitraum: </span>
+                            <span class="duration-of-issue">{position.issueStartDay} - {position.issueEndDay}</span>
+
+                        </p>
+                        <div class="lend-conditions">
+                            <p class="head">
+                               <span class="art-label">Ausleihbedingungen:&nbsp;</span>
+                               <span class="kosten"> {position.lendConditions} </span>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+    </div>
+</div>

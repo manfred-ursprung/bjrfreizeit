@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-03-10T14:08:14Z" product-name="bjr_lend">
+		<header/>
+		<body>
+
+			<trans-unit id="name.description">
+				<source>Name</source>
+			</trans-unit>
+
+			<trans-unit id="organizations.description">
+				<source>Organisationen</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

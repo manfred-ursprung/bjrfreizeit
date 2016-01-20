@@ -1,0 +1,59 @@
+<div class="tx-bjr-lend order-approval" >
+    <p class="order-customer-data">
+        <span class="label"><f:translate key="tx_bjrlend_domain_model_order.customer_name" /> </span>
+
+		<span class="customer-data customer-name">
+			{order.customerName}
+		</span>
+	</p>
+    <p class="order-customer-data">
+		<span class="label"><f:translate key="tx_bjrlend_domain_model_order.customer_phone" />
+		</span>
+		<span class="customer-data customer-phone">
+			{order.customerPhone}
+		</span>
+	</p>
+    <p class="order-customer-data">
+		<span class="label"><f:translate key="tx_bjrlend_domain_model_order.customer_email" />
+		</span>
+		<span class="customer-data customer-email">
+			{order.customerEmail}
+		</span>
+	</p>
+    <p class="order-customer-data" style="padding-top: 20px; font-weight: bold">
+        Folgende Artikel sind für Sie reserviert:
+    </p>
+    <div class="order-positions">
+        <f:for each="{order.positions}" as="position" iteration="iteration">
+            <div class="article-item col-sm-12">
+                <div class="thumbnail">
+
+                    <div class="caption ">
+                        <div class="article-desc col-sm-6">
+                            <p class="art-title">Artikel : {position.articleTitle}</p>
+
+                            <p class="art-issue-date">
+                                <span class="art-label">Ausleihzeitraum von</span>
+                                <span style="font-weight: bold">{position.issueStartDay}</span><br />
+                                bis <span style="font-weight: bold">{position.issueEndDay}</span>
+
+                            </p>
+                            <div class="lend-conditions">
+                                <p class="head">
+                                   <span class="art-label">Ausleihstelle:&nbsp;</span>
+                                   {position.organizationName}<br />
+                                    {position.organizationStreet}<br />
+                                    {position.organizationZip} {position.organizationCity} <br />
+                                    {position.organizationPhone}<br />
+                                    {position.organizationEmail}<br />
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </f:for>
+    </div>
+</div>

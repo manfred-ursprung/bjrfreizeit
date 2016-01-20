@@ -1,0 +1,383 @@
+@charset "utf-8";
+
+/* custom v5 alex */
+
+body {
+	font-family: 'Exo 2', sans-serif;
+	font-size: 14px;
+	background: #FBFBFB;
+}
+
+#wrap {
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 0px 7px rgba(0, 0, 0, .4);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 0px 7px rgba(0, 0, 0, .4);
+	background-color:#FFFFFF;
+}
+
+#content {
+	padding-bottom: 35px;
+}
+
+header,
+div.navbar.navbar-default,
+#footer {
+	margin-left: -15px;
+	margin-right: -15px;
+	-webkit-box-shadow: none;
+   box-shadow: none;
+
+}
+#footer {
+	padding-left: 25px;
+	padding-right: 25px;
+}
+div.navbar.navbar-default {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.navbar-default .navbar-nav > li > a {
+	font-size: 19px;
+	color: #3d3d99;
+}
+
+h3.art-title {
+	font-size:18px;
+}
+
+p.art-kategorie,
+p.art-region,
+.article-action {
+	font-size:12px;
+}
+
+.panel.panel-primary.search {
+	background: #f5f5f5;
+}
+
+.panel.panel-primary.search.expanded {
+	background: #f5f5f5;
+	-webkit-box-shadow: 0 0px 4px 0 rgba(0,0,0,0.2);
+	box-shadow: 0 0px 4px 0 rgba(0,0,0,0.2);
+}
+
+.navbar .container {
+	position:relative;
+}
+
+.artikelliste {
+	padding: 8px 15px;
+	margin: 0 15px 0 0;
+	list-style: none;
+	background-color: #f5f5f5;
+	border-radius: 5px 5px 0 0;
+	position:absolute;
+	top: -36px;
+	right: 0px;
+	-webkit-box-shadow: 0 -2px 4px 0 rgba(0,0,0,0.2);
+	box-shadow: 0 -2px 4px 0 rgba(0,0,0,0.2);
+	/* verlauf */
+	background: rgb(245,245,245); /* Old browsers */
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y1ZjVmNSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjkzJSIgc3RvcC1jb2xvcj0iI2Y1ZjVmNSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlMGUwZTAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top, rgba(245,245,245,1) 0%, rgba(245,245,245,1) 93%, rgba(224,224,224,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(245,245,245,1)), color-stop(93%, rgba(245,245,245,1)), color-stop(100%, rgba(224,224,224,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(245,245,245,1) 0%, rgba(245,245,245,1) 93%, rgba(224,224,224,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(245,245,245,1) 0%, rgba(245,245,245,1) 93%, rgba(224,224,224,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, rgba(245,245,245,1) 0%, rgba(245,245,245,1) 93%, rgba(224,224,224,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom, rgba(245,245,245,1) 0%, rgba(245,245,245,1) 93%, rgba(224,224,224,1) 100%); /* W3C */
+ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#e0e0e0', GradientType=0 ); /* IE6-8 */
+/* verlauf ende */
+}
+
+.artikelliste.expanded {
+	border-radius: 5px;
+	-webkit-box-shadow: 0 0 6px 0px rgba(0,0,0,0.5);
+	box-shadow: 0 0 6px 0px rgba(0,0,0,0.5);
+	background:#FFF url(none) !important;
+}
+
+.artikelliste .btn.btn-success {
+	width: 100%;
+}
+
+.artikelliste p.head {
+	margin: 0;
+}
+
+.artikelliste .fa.fa-chevron-up,
+.artikelliste .fa.fa-chevron-down.expanded,
+.expand-search .fa.fa-chevron-up,
+.expand-search .fa.fa-chevron-down.expanded {
+	display:none;
+}
+
+.artikelliste .fa.fa-chevron-down,
+.artikelliste .fa.fa-chevron-up.expanded,
+.expand-search .fa.fa-chevron-down,
+.expand-search .fa.fa-chevron-up.expanded {
+	display:inline-block;
+}
+
+/* ==================================== Articelliste static =============================== */
+.artikellistestatic {
+	padding: 10px 9px;
+	/*margin: 0 15px 0 0;
+	list-style: none;*/
+	background-color: #428bca;/*#f5f5f5;*/
+	color: #FFF;
+	border-radius: 5px;/*position:absolute;
+	top: -36px;
+	right: 0px;*/
+	/*-webkit-box-shadow: 0 0px 8px 0 rgba(0,0,0,0.3);
+	box-shadow: 0 0px 8px 0 rgba(0,0,0,0.3);*/
+}
+
+.artikellistestatic ul {
+	list-style:none;
+	padding-left: 0;
+}
+
+.artikellistestatic ul li {
+	padding: 5px 0px 5px 5px;
+	margin: 5px 0;
+	border-bottom: 1px solid #FFF;
+	position:relative;
+}
+
+.artikellistestatic ul li span {
+	display: block;
+}
+
+.artikellistestatic ul li:hover {
+	cursor:default;
+	background-color:#fff;
+	color: #428bca;
+	border-radius: 5px;
+}
+
+.artikellistestatic .fa {
+	padding-top: 2px
+}
+
+.artikellistestatic ul li a {
+	position:absolute;
+	top:0;
+	right: 3px;
+}
+
+.artikellistestatic .btn.btn-success {
+	width: 100%;
+}
+
+.btn-toolbar {
+	margin: 0px;
+	padding: 7px 7px 0px 7px;
+	background-color: #f5f5f5;
+	border-radius: 4px;
+	margin-bottom: 10px;
+	border:1px solid #E9E9E9;
+}
+
+.btn-toolbar .form-group {
+	padding-top: 5px;
+}
+
+.article-item.col-sm-12 .article-desc h3.art-title,
+.article-detail .article-desc h3.art-title {
+	margin-top: 0px;
+}
+
+.article-item.col-sm-3 .article-desc h3.art-title {
+	margin-top: 0px;
+	font-size:16px;
+}
+
+.article-item .article-action .btn.btn-success,
+.article-detail .article-action .btn.btn-success {
+	/*position: absolute;
+bottom: 0px;
+right: 15px;*/
+width: 100%;
+}
+
+.article-item .art-features,
+.article-detail .art-features {
+	padding-left: 0px;
+	margin-left: 0px;
+	list-style: none;
+}
+
+.xarticle-item .article-action {
+	height: 150px;
+}
+
+.article-item .art-features li,
+.article-detail .art-features li {
+	margin-bottom: 5px;
+}
+
+.article-item .art-features .fa-fw {
+	width: 2em;
+}
+
+.article-detail-tabs {
+	padding-top: 20px;
+	min-height: 190px;
+}
+
+.article-detail-tabs .tab-content {
+	padding: 20px;
+	border-right: 1px solid #ddd;
+	border-left: 1px solid #ddd;
+}
+
+.well.well-feature {
+	font-size: 14px;
+	font-weight: 500;
+	padding: 6px;
+	background-color: rgb(65, 58, 150);
+	background-image: none;
+	color: #fff;
+	border-radius: 8px;
+}
+
+.well.well-feature .fa-fw {
+	text-align: left;
+}
+
+.well.well-feature a {
+	color: #fff;
+}
+
+/* ==================================== Articelliste static =============================== */
+#footer {
+	background-color: #2369b7;
+	color:#FFFFFF;
+	min-height: 160px;
+}
+
+#footer a {
+	color: #fff;
+	text-decoration: none;
+}
+
+#footer a:hover {
+	text-decoration: underline;
+	background-color: transparent;
+}
+
+.article-preview-short .caption h3 {
+	font-size:14px;
+	margin-top: 10px;
+	margin-bottom: 0px;
+	min-height: 35px;
+}
+
+#datepicker .ui-datepicker-inline.ui-widget-content {
+	border: none !important;
+}
+
+#datepicker .ui-datepicker-inline.ui-widget {
+	font-family: 'Exo 2', sans-serif !important;
+	font-size: 0.9em !important;
+}
+
+.ui-corner-all,
+.ui-corner-bottom,
+.ui-corner-left,
+.ui-corner-bl,
+.ui-corner-all,
+.ui-corner-top,
+.ui-corner-left,
+.ui-corner-tl,
+.ui-corner-all,
+.ui-corner-bottom,
+.ui-corner-right,
+.ui-corner-br,
+.ui-corner-all,
+.ui-corner-top,
+.ui-corner-right,
+.ui-corner-tr {
+	border-radius: 0px;
+}
+
+#datepicker .ui-datepicker-inline.ui-widget {
+	border: none;
+	background: transparent;
+}
+
+.ui-state-default {
+border: 1px solid #3e8f3e !important;
+background: #59b559 !important;
+color: #fff !important;
+}
+#datepicker .ui-state-default {
+cursor:default;
+}
+.ui-widget-header {
+	background: #f4f4f4 url(none) !important;
+	border: 1px solid #CCC !important;
+}
+/* --------------------------------------- Responsive datepicker */
+@media (max-width: 767px) {
+	.ui-datepicker-multi .ui-datepicker-group {
+		float: none !important;
+	}
+	.ui-datepicker-multi-3 .ui-datepicker-group {
+		width: 100% !important;
+	}
+	.ui-datepicker-multi-3  {
+		width: 100% !important;
+	}
+}
+@media (min-width: 768px) and (max-width: 991px) {
+.ui-datepicker-multi .ui-datepicker-group {
+		float: none !important;
+	}
+	.ui-datepicker-multi-3 .ui-datepicker-group {
+		width: 100% !important;
+	}
+	.ui-datepicker-multi-3  {
+		width: 100% !important;
+	}
+
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+	.ui-datepicker-multi-3 .ui-datepicker-group {
+		width: 27.1% !important;
+	}
+	#bjrlendRegisterArticle {
+		margin-bottom: 20px;
+	}
+}
+@media (min-width: 1200px) {
+}
+header #topheader {
+	background: url(../typo3conf/ext/bjrtemplates/Resources/Public/images/icons_bg.png) repeat-x center top;
+	height: 168px;
+}
+
+header #topheader img#logo2 {
+	margin-top: 46px;
+	/*margin-left: 29px;
+	margin-right: 29px;*/
+	display:inline;
+}
+header #topheader img#logo3 {
+float: right;
+margin-right: 36px;
+margin-top: 18px;
+}
+.dropdown-menu {
+	font-size: 16px;
+}
+
+.navbar-default {
+	
+}
+
+.navbar-nav.navbar-right:last-child {
+	margin-right: inherit;
+}
+
+

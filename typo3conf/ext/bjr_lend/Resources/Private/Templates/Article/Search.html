@@ -1,0 +1,143 @@
+
+    <div class="searchbar">
+       <div class="panel panel-primary search">
+          <div class="panel-body">
+
+              <f:form  class="form-horizontal" pageUid="{searchResultPid}" action="searchResult" controller="article" method="post">
+                <div class="collapse-group">
+                   <div class="form-group">
+                      <label for="inputKeyword" class="col-xs-12 col-sm-2 control-label">Stichwort</label>
+                      <div class="col-sm-8 col-xs-8">
+                          <f:form.textfield class="form-control input-sm" id="inputKeyword" placeholder="Stichwort" name="stichwort" />
+
+                      </div>
+                      <div class="col-sm-2 col-xs-4">
+                          <f:form.button type="submit" class="btn btn-sm btn-primary col-xs-12" name="simple" value="simple">
+                              <i class="fa fa-search fa-lg"></i> Suchen
+                          </f:form.button>
+
+                      </div>
+                   </div>
+                   <div class="collapse" id="viewdetails">
+                      <div class="form-group">
+                         <label for="selectKat" class="col-sm-2 col-xs-12 control-label">Kategorie</label>
+                         <div class="col-sm-10 col-xs-12">
+                             <f:form.select name="selectKat" id="selectKat" class="form-control input-sm" value="-1"
+                                   options="{categories}" optionValueField="uid" optionLabelField="title"
+                                   prependOptionLabel="--Bitte wählen Sie--" prependOptionValue="-1"   />
+                            <f:form.hidden name="currentPageId" id="currentPageId" value="{pageId}" />
+
+                         </div>
+                      </div>
+                      <div class="form-group">
+                         <label for="selectSubkat" class="col-sm-2 col-xs-12 control-label">Unterkategorie</label>
+                         <div class="col-sm-10 col-xs-12">
+                            <select class="form-control input-sm" id="selectSubkat" name="tx_bjrlend_pi1[selectSubKat]">
+
+                            </select>
+                         </div>
+                      </div>
+                      <div class="form-group">
+                         <label for="selectLoc" class="col-sm-2 col-xs-12 control-label">Region</label>
+                         <div class="col-sm-10 col-xs-12">
+                             <f:form.select name="selectLoc" id="selectLoc" class="form-control input-sm"
+                                            options="{regions}" optionValueField="uid" optionLabelField="name"
+                                            prependOptionLabel="--Bitte wählen Sie--" prependOptionValue="-1" />
+
+
+                         </div>
+                      </div>
+
+                       <div class="form-group">
+                           <label for="selectOrg" class="col-sm-2 col-xs-12 control-label">Anbieter</label>
+                           <div class="col-sm-10 col-xs-12">
+                               <f:form.select name="selectOrg" id="selectOrg" class="form-control input-sm"
+                                              options="{organizations}" optionValueField="uid" optionLabelField="name"
+                                              prependOptionLabel="--Bitte wählen Sie--" prependOptionValue="-1" />
+
+
+                           </div>
+                       </div>
+                      <div class="form-group">
+                         <label for="selectLoc" class="col-sm-2 col-xs-12 control-label">Buchbar</label>
+                         <div class="col-xs-10">
+                            <label class="checkbox-inline">
+                               <f:form.checkbox  id="online" name="online" value="1" />
+                               online buchbar</label>
+                            <label class="checkbox-inline">
+                               <f:form.checkbox  id="byPhone" name="byPhone" value="1" />
+                               telefonisch buchbar</label>
+                         </div>
+                      </div>
+                      <div class="form-group">
+                         <div class="col-sm-offset-2 col-sm-10 col-xs-12">
+                            <f:form.button type="submit" class="btn btn-sm btn-primary col-xs-12" name="advanced" value="advanced">
+
+                                <i class="fa fa-search fa-lg"></i>
+                                Suchen
+                            </f:form.button>
+                         </div>
+                      </div>
+                   </div>
+                   <p class="text-center expand-search">
+                       <a class="btn" data-toggle="collapse" data-target="#viewdetails">
+                           <i class="fa fa-chevron-down"></i>
+                           <i class="fa fa-chevron-up"></i>
+                           Erweiterte Suche
+                       </a>
+                   </p>
+                </div>
+
+                <!-- /.collapse-group -->
+             </f:form>
+          </div>
+       </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            //selectField #selectKat auf --Bitte wählen Sie -- setzen
+            $('#selectKat').prop('selected', -1);
+            var pageId = $('#currentPageId').val();
+
+
+            $.fancybox({
+                maxWidth: 800,
+                maxHeight: 700
+            });
+            $(document).on('click', '#selectKat', function(){
+                $('#selectSubkat').html('');
+                var category = $('#selectKat option:selected').val();
+                $.ajax({
+                    async: 'true',
+                    url: 'index.php',
+                    type: 'POST',
+                    data: {
+                        eID: "bjrlend",
+                        request: {
+                            pluginName:  'Pi1',
+                            controller:  'Category',
+                            action:      'subCategory',
+                            arguments: {
+                                'pageId': pageId,
+                                'category': category
+                            }
+                        }
+
+                    },
+                    //dataType: "json",
+                    dataType: 'html',
+
+                    success: function(result) {
+                        console.log(result);
+                        $('#selectSubkat').html(result);
+
+                    },
+                    error: function(error) {
+                        console.log(error);
+                        $('#selectSubkat').html((error.responseText));
+                    }
+                });
+            });
+        });
+    </script>

@@ -1,0 +1,70 @@
+{namespace bjr = Bjr\BjrLend\ViewHelpers}
+
+<f:layout name="Default" />
+
+<f:debug title="kurzdarstellung">{basketItems}</f:debug>
+<f:debug>{settings}</f:debug>
+<f:debug>{order}</f:debug>
+
+<f:section name="main">
+    <f:debug>{sendMail}</f:debug>
+<f:flashMessages />
+    <p class="head">
+        Vielen Dank<br />
+        Reservierung abgeschlossen<br />
+
+    </p>
+    <p><a class="bjr-lend-print-link" data-order="{order.uid}">Drucken der Bestellbestätigung</a></p>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+
+            $('.bjr-lend-print-link').click(function(event){
+
+                printReservation(event.target);
+                //window.open().document.write(output);
+
+            })
+
+        });
+
+        function printReservation(node){
+            var pageId = $('body').attr('id'),
+                temp = pageId.split('p'),
+                order = $(node).data('order');
+            pageId = temp[1];
+
+
+            $.ajax({
+                async: 'true',
+                url: 'index.php',
+                type: 'POST',
+
+                data: {
+                    eID: "bjrlend",
+                    request: {
+                        pluginName:  'Pi2',
+                        controller:  'Basket',
+                        action:      'printReservation',
+                        arguments: {
+                            pageId: pageId,
+                            order: order
+
+                        }
+                    }
+                },
+                dataType: "html",
+                //dataType: 'json',
+
+                success: function(data) {
+                    //console.log( data );
+                    window.open('', '_blank', 'menubar=1,toolbar=1,titlebar=1,width=750,height=600,resizable=1').document.write(data);
+                },
+                error: function(error) {
+
+                    console.log(error.responseText);
+                }
+            });
+    </script>
+</f:section>

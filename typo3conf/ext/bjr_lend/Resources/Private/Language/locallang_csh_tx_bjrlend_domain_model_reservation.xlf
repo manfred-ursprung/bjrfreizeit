@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-04-08T17:37:14Z" product-name="bjr_lend">
+		<header/>
+		<body>
+
+			<trans-unit id="issue_start.description">
+				<source>Reservierungsdatum von</source>
+			</trans-unit>
+			<trans-unit id="issue_end.description">
+				<source>Reservierungsdatum bis</source>
+			</trans-unit>
+			<trans-unit id="customer_name.description">
+				<source>lendConditions</source>
+			</trans-unit>
+			<trans-unit id="customer_phone.description">
+				<source>organizationName</source>
+			</trans-unit>
+			<trans-unit id="customer_email.description">
+				<source>organizationStreet</source>
+			</trans-unit>
+			<trans-unit id="article.description">
+				<source>Artikel</source>
+			</trans-unit>
+
+		</body>
+	</file>
+</xliff>

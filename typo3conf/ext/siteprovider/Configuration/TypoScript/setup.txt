@@ -1,0 +1,180 @@
+plugin.tx_siteprovider {
+	view {
+		templateRootPaths.0 = {$plugin.tx_siteprovider.view.templateRootPaths.default}
+		partialRootPaths.0 = {$plugin.tx_siteprovider.view.partialRootPaths.default}
+		layoutRootPaths.0 = {$plugin.tx_siteprovider.view.layoutRootPaths.default}
+	}
+	#By default the following settings only will have relevance if you have fluidcontent_core extension loaded
+	settings{
+		container {
+			types {
+				default = div
+				Example = div
+			}
+		}
+	}
+	conventions{
+        startPID = {$plugin.tx_siteprovider.conventions.start}
+    }
+}
+
+
+plugin.tx_vhs.settings.asset {
+    font {
+        name = font
+        path = http://fonts.googleapis.com/css?family=Exo+2:400,100,100italic,200,200italic,300,300italic,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic
+        type = css
+        external = 1
+        }
+    bootstrap {
+        name = bootstrap
+        path = EXT:siteprovider/Resources/Public/css/bootstrap.min.css
+        standalone = 1
+    }
+    bootstrap-theme {
+        name = bootstrap-theme
+        path = EXT:siteprovider/Resources/Public/css/bootstrap-theme.min.css
+        standalone = 1
+    }
+
+    font-awesome {
+        name = font-awesome
+        path = EXT:siteprovider/Resources/Public/css/font-awesome.css
+        standalone = 1
+    }
+    menu {
+        name = menu
+        path = EXT:siteprovider/Resources/Public/css/menu.css
+        movable = 0
+        standalone = 1
+    }
+    katliste {
+        name = katliste
+        path = EXT:siteprovider/Resources/Public/css/katliste.css
+        standalone = 1
+    }
+    resdebug {
+        name = resdebug
+        path = EXT:siteprovider/Resources/Public/css/resdebug.css
+        standalone = 1
+    }
+
+    fancybox-css{
+        name = fancybox-css
+        path = EXT:siteprovider/Resources/Public/css/jquery.fancybox.css
+        type = css
+        external = 0
+        standalone = 1
+        }
+
+    custom {
+            name = custom
+            path = EXT:siteprovider/Resources/Public/css/custom.css
+            standalone = 1
+    }
+    ui-css{
+            name = ui-css
+            path = EXT:siteprovider/Resources/Public/css/jquery-ui.css
+            type = css
+            external = 0
+            standalone = 1
+        }
+
+    jquery {
+        name = jquery
+        path = EXT:siteprovider/Resources/Public/scripts/jquery-1.11.3.js
+        rewrite = 0
+        external = 0
+        movable = 0
+        standalone = 1
+    }
+    bootstrap-min {
+        name = bootstrap-min
+        path = EXT:siteprovider/Resources/Public/scripts/bootstrap.min.js
+        movable = 1
+        standalone = 1
+    }
+#    holder {
+#       name = holder
+#       path = EXT:siteprovider/Resources/Public/scripts/holder.js
+#       movable = 1
+#       standalone = 1
+#   }
+#   moment-min {
+#      name = moment-min
+#      path = EXT:siteprovider/Resources/Public/scripts/moment.min.js
+#      movable = 1
+#      standalone = 1
+#      }
+#   bootstrap-datetimepicker {
+#      name = bts-datetimepicker
+#      path = EXT:siteprovider/Resources/Public/scripts/bootstrap-datetimepicker.min.js
+#      movable = 1
+#      standalone = 1
+#   }
+#   bootstrap-datetimepicker-de {
+#      name = bts-datetimepicker-de
+#      path = EXT:siteprovider/Resources/Public/scripts/bootstrap-datetimepicker.de.js
+#      movable = 1
+#      standalone = 1
+#   }
+#  anstatt dessen:
+#
+    ui {
+      name = ui
+      path = EXT:siteprovider/Resources/Public/scripts/jquery-ui-1.10.4.js
+      movable = 1
+      external = 0
+      standalone = 1
+      dependencies = jquery
+   }
+#   uiDe{
+#        name = uiDe
+#        path = EXT:siteprovider/Resources/Public/scripts/datepicker-de.js
+#        movable = 1
+#        standalone = 1
+#        dependencies = ui
+#   }
+#   modernizr {
+#     name = modernizr
+#      path = EXT:siteprovider/Resources/Public/scripts/modernizr.min.js
+#      movable = 0
+#      standalone = 1
+#   }
+#   css3-mediaqueries{
+#    name = css3-mediaqueries
+#     path = EXT:siteprovider/Resources/Public/scripts/css3-mediaqueries.js
+#     movable = 0
+#     standalone = 1
+#   }
+   fancybox {
+      name = fancybox
+      path = EXT:siteprovider/Resources/Public/scripts/jquery.fancybox.js
+      dependencies = jquery
+      movable = 0
+      standalone = 1
+   }
+#   bjr {
+#         name = bjr
+#         path = EXT:siteprovider/Resources/Public/scripts/bjr.js
+#         dependencies = jquery
+#         movable = 0
+#         standalone = 1
+#      }
+}
+
+# HTML5Shiv Asset for lt IE 9
+[browser = msie && version = <9]
+plugin.tx_vhs.settings.asset{
+    html5shiv {
+        path = EXT:siteprovider/Resources/Public/scripts/html5.js
+        standalone = 1
+        movable = 0
+    }
+    respond {
+        path = EXT:siteprovider/Resources/Public/scripts/respond.js
+        standalone = 1
+        movable = 0
+    }
+}
+[global]

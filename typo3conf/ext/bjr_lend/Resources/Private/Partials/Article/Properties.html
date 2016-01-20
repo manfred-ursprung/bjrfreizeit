@@ -1,0 +1,52 @@
+{namespace bjr = Bjr\BjrLend\ViewHelpers}
+
+<!-- Detail -->
+<div class="well">
+    <div class="article-detail row">
+        <div class="article-image col-sm-3" data-article="{article.uid}" id="article-uid">
+            <a class="fancybox" href="{article.urlForImage}" >
+
+                <f:image src="{article.urlForImage}" treatIdAsReference="FALSE" width="200c" height="150c" alt="Produktbild für {article.title}" class="img-responsive img-rounded"/>
+            </a>
+        </div>
+        <div class="article-desc col-sm-5">
+            <h3 class="art-title">{article.title}</h3>
+            <p class="art-kategorie">
+                <span class="art-label">Kategorie: </span>
+                <span class="hauptkategorie"><bjr:category mode="parent">{article.category}</bjr:category></span>
+                <span class="subkategorie">{article.category.title}</span></p>
+            <p class="art-region">
+                <span class="art-label">Region: </span>
+                <span class="region">{article.organization.region.name}</span>
+            </p>
+            <p class="art-organization">
+                <span class="art-label">Anbieter: </span>
+                <span class="region">{article.organization.name}</span>
+            </p>
+            <p class="art-kosten">
+                <span class="art-label">Gebühr: </span>
+                <span class="kosten">{article.fee}</span>
+            </p>
+        </div>
+        <div class="article-action col-sm-4">
+            <ul class="art-features">
+
+                <f:if condition="{article.organization.onlineAdministration}">
+                    <li><i class="fa fa-check-square fa-fw fa-lg"></i>online buchbar</li>
+                </f:if>
+                <f:if condition="{article.bookingPhone}">
+                    <li class="well well-feature well-phone">
+                        <i class="fa fa-phone-square fa-fw fa-lg"></i>
+                        {article.organization.address.phone}
+                    </li>
+                </f:if>
+                <f:if condition="{article.byEmail}">
+                    <li class="well well-feature well-email">
+                        <i class="fa fa-envelope fa-fw fa-lg"></i>
+                        <a href="mailto:{article.organization.address.email}?subject=Anfrage {article.title}" title="per E-mail anfragen">per E-Mail anfragen</a></li>
+                </f:if>
+            </ul>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>

@@ -1,0 +1,169 @@
+{namespace v=FluidTYPO3\Vhs\ViewHelpers}
+
+<f:section name="SharedResources">
+
+    <link href='http://fonts.googleapis.com/css?family=Exo+2:400,100,100italic,200,200italic,300,300italic,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Assets sind in Typoscript ausgelagert -->
+    <v:page.header.meta content="text/javascript" http-equiv="Content-Script-Type" ></v:page.header.meta>
+    <v:page.header.meta content="IE=edge" http-equiv="X-UA-Compatible" ></v:page.header.meta>
+    <v:page.header.meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" ></v:page.header.meta>
+    <v:page.header.meta name="description" content="" ></v:page.header.meta>
+    <v:page.header.meta name="keywords" content="" ></v:page.header.meta>
+    <v:page.header.meta name="robots" content="index, follow, noarchive" ></v:page.header.meta>
+    <v:page.header.meta dir="ltr"  ></v:page.header.meta>
+    <v:page.header.meta lang="de" ></v:page.header.meta>
+
+
+
+
+</f:section>
+
+
+
+<f:section name="Top">
+<!-- skip to content -->
+<a href="#content" class="sr-only">Skip to main content</a>
+
+<!-- Wrap all page content here -->
+<header>
+	<div id="topheader">
+    	<f:link.page pageUid="2"><img src="typo3conf/ext/bjrtemplates/Resources/Public/images/logo_02.png" width="665" height="98" id="logo2" class="img-responsive"></f:link.page>
+        <img src="typo3conf/ext/bjrtemplates/Resources/Public/images/logo_03.png" width="125" height="63" id="logo3" class="hidden-sm hidden-xs">
+	</div>
+</header>
+
+    <f:render  partial="Page/PageObjects" section="MainNav" arguments="{_all}" />
+
+    <f:render  partial="Page/PageObjects" section="Breadcrumb" arguments="{_all}" />
+
+
+</f:section>
+
+<!-- nicht mehr gebraucht
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        Alle Kategorien <b class="caret"></b>
+    </a>
+    <f:cObject typoscriptObjectPath="lib.categoryTop" />
+</li>
+-->
+
+<f:section name="MainNav">
+    <div class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="" >
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+            </div>
+            <nav class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <f:link.page pageUid="{v:var.typoscript(path: 'plugin.tx_bjrtemplates.conventions.startPID')}" class="logo">
+                            Startseite
+                        </f:link.page>
+                    </li>
+
+                    <v:page.menu useShortcutData="TRUE" pageUid="3" levels="2" >
+
+                        <f:for each="{menu}" as="item">
+                            <f:if condition="{item.hasSubPages}">
+                                <f:then>
+                                    <li class="dropdown dropdown">
+                                        <f:link.page pageUid="{item.uid}" title="{item.title}" class="dropdown-toggle" additionalAttributes="{data-toggle: 'dropdown'}">
+                                            {item.title}<b class="caret"></b>
+                                        </f:link.page>
+                                        <ul class="dropdown-menu">
+                                            <v:page.menu pageUid="{item.uid}" levels="3">
+                                                <f:for each="{menu}" as="subItem">
+                                                    <li>
+                                                        <f:link.page pageUid="{subItem.uid}" title="{subItem.title}">
+                                                            {subItem.title}
+                                                        </f:link.page>
+                                                    </li>
+                                                </f:for>
+                                            </v:page.menu>
+                                        </ul>
+                                    </li>
+                                </f:then>
+                                <f:else>
+                                    <li>
+                                        <f:link.page pageUid="{item.uid}" title="{item.title}">
+                                            {item.title}
+                                        </f:link.page>
+                                    </li>
+                                </f:else>
+                            </f:if>
+                        </f:for>
+                    </v:page.menu>
+                </ul>
+                <div class="clearfix visible-sm"></div>
+                <!-- Artikelliste -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" class="">
+                            Kontakt
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+            <!--/.nav-collapse -->
+
+
+        </div>
+    </div>
+</f:section>
+
+
+
+<f:section name="Breadcrumb">
+    <div class="">
+        <v:page.breadCrumb linkCurrent="FALSE" class="breadcrumb" classFirst="first" classLast="last" entryLevel="1"/>
+    </div>
+</f:section>
+
+
+<f:section name="Search">
+    <f:cObject typoscriptObjectPath="lib.searchFormular" />
+</f:section>
+
+<f:section name="Sidebar-left">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Alle Kategorien</div>
+        <div class="panel-body">
+            <f:comment>
+            <f:cObject typoscriptObjectPath="lib.category" />
+            </f:comment>
+
+        </div>
+    </div>
+</f:section>
+
+<f:section name="Sidebar-left-FE">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Menü</div>
+        <div class="panel-body">
+            <f:cObject typoscriptObjectPath="lib.left_menu_fe" />
+        </div>
+    </div>
+</f:section>
+
+
+
+
+<f:section name="Sidebar-right">
+    <div class="artikellistestatic">
+        <f:cObject typoscriptObjectPath="lib.shortBasket" />
+    </div>
+</f:section>
+
+<div class="artikellistestatic">
+    <strong>Artikelliste</strong>
+    <ul class="artiklelliste-list">
+        <li>GPS-Gerät<a href="#" title="Artikel von der Liste löschen"><i class="fa fa-times-circle-o pull-right delete"></i></a></span></li>
+        <li>DVD-Player<a href="#" title="Artikel von der Liste löschen"><i class="fa fa-times-circle-o pull-right delete"></i></a></span></li>
+        <li>Beamer<a href="#" title="Artikel von der Liste löschen"><i class="fa fa-times-circle-o pull-right delete"></i></a></span></li>
+        <li>Funkmikrofon Headset Mikrofon Shure<a href="#" title="Artikel von der Liste löschen"><i class="fa fa-times-circle-o pull-right delete"></i></a></span></li>
+    </ul>
+    <button type="button" class="btn btn-success">weiter</button>
+</div>

@@ -1,0 +1,69 @@
+<div class="tx-bjr-lend order-approval" >
+    <p class="order-customer-data">
+        <span class="label"><f:translate key="tx_bjrlend_domain_model_order.customer_name" default="Name" /> </span>
+
+		<span class="customer-data customer-name">
+			{order.customerName}
+		</span>
+	</p>
+    <p class="order-customer-data">
+		<span class="label"><f:translate key="tx_bjrlend_domain_model_order.customer_phone" default="Phone"/>
+		</span>
+		<span class="customer-data customer-phone">
+			{order.customerPhone}
+		</span>
+	</p>
+    <p class="order-customer-data">
+		<span class="label"><f:translate key="tx_bjrlend_domain_model_order.customer_email" default="Email"/>
+		</span>
+		<span class="customer-data customer-email">
+			{order.customerEmail}
+		</span>
+	</p>
+    <h3 class="order-customer-data">
+        Folgende Artikel sind für Sie reserviert:
+    </h3>
+    <div class="order-positions">
+        <f:for each="{order.positions}" as="position" iteration="iteration">
+            <div class="article-item col-sm-12">
+                <div class="thumbnail">
+                    <div class="article-image col-sm-3">
+                        <f:image src="{position.article.urlForImage}" width="100c" height="100c" alt="Produktbild  für {position.article.title}"
+                                 treatIdAsReference="FALSE" class="img-responsive" />
+                    </div>
+                    <div class="caption ">
+                        <div class="article-desc col-sm-6">
+                            <h3 class="art-title">{position.articleTitle}</h3>
+
+                            <p class="art-kosten">
+                                <span class="art-label">Gebühr: </span>
+                                <span class="kosten">{position.articleFee}</span>
+                            </p>
+                            <p class="art-issue-date">
+                                <span class="art-label">Ausleihzeitraum: </span>
+                                <span class="duration-of-issue">{position.issueStartDay} - {position.issueEndDay}</span>
+
+                            </p>
+                            <div class="lend-conditions">
+                                <p class="head">
+                                    <a href="#" class="" data-toggle="collapse" data-parent=".lend-conditions" data-target=".lend-conditions-tab">
+                                        <i class="fa fa-chevron-down"></i>
+                                        <i class="fa fa-chevron-up"></i>
+                                        Ausleihbedingungen
+                                    </a>
+                                </p>
+                                <div class="lend-conditions-tab">
+                                    <f:format.raw>{position.lendConditions}</f:format.raw>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </f:for>
+    </div>
+</div>

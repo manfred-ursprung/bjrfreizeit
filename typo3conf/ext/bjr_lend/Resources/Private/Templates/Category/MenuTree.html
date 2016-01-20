@@ -1,0 +1,28 @@
+{namespace bjr = Bjr\BjrLend\ViewHelpers}
+
+<f:layout name="Default" />
+
+Dieses Template generiert den Menübaum
+<f:section name="main">
+
+    <f:for each="{menuTree}" as="mainCategory" iteration="iteration">
+        <p class="hauptkategorie">
+            <a href="#" class="" data-toggle="collapse" data-target=".subkategorien.kat{iteration.index}">{mainCategory.title}
+                <!--<span class="badge hidden-md pull-right">{mainCategory.childs -> f:count()}</span> -->
+
+                <span class="badge hidden-md pull-right"><bjr:ArticleCountInCategory category="{mainCategory}" /></span>
+            </a>
+        </p>
+        <f:if condition="{mainCategory.childs -> f:count()} > 0">
+            <f:then>
+                <ul class="nav nav-pills subkategorien kat{iteration.index} xhidden-xs xhidden-sm collapse">
+                    <f:for each="{mainCategory.childs}" as="childCategory">
+                        <li><a href="{f:uri.page(pageUid: listPage, additionalParams: '{tx_bjrlend_pi1: {category: childCategory.uid}}')}">{childCategory.title}</a></li>
+                    </f:for>
+                </ul>
+            </f:then>
+        </f:if>
+
+
+    </f:for>
+</f:section>

@@ -1,0 +1,17 @@
+{namespace bjr = Bjr\BjrLend\ViewHelpers}
+
+<f:layout name="Default" />
+
+
+
+<f:section name="main">
+
+
+    <f:flashMessages />
+
+    <!-- Artikel Übersicht -->
+    <div class="panel panel-default">
+        <div class="panel-heading">Die beliebtesten Artikel</div>
+    </div>
+    <f:render partial="Article/List" arguments="{articles:articles, articleImagePath: articleImagePath, detailPage: detailPage}" />
+</f:section>

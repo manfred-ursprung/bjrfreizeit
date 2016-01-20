@@ -1,0 +1,25 @@
+{namespace bjr = Bjr\BjrLend\ViewHelpers}
+
+<f:layout name="Default" />
+
+This Template is responsible for displaying a single view for a domain object
+
+
+
+
+<f:section name="main">
+
+    <f:flashMessages renderMode="div" />
+    <f:render partial="Article/Properties" arguments="{article:article, articleImagePath: articleImagePath}" />
+    <f:if condition="{article.organization.onlineAdministration}">
+        <f:render partial="Article/DropDownSelectEvent" arguments="{article:article, pageId: pageId, reservedDates:reservedDates}" />
+    </f:if>
+    <f:render partial="Article/TabsDescrLendCond" arguments="{article:article}" />
+    <div class="hiddenFields">
+        <input name="pageId" id="pageId" value="{pageId}" />
+        <div id="registerArticleError"></div>
+    </div>
+
+
+
+</f:section>

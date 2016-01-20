@@ -1,0 +1,87 @@
+<div class="tx-bjr-lend order-approval" >
+    <h2>Reservierung für:</h2>
+    <p class="order-customer-data">
+        <span class="label">Name : </span>
+
+		<span class="customer-data customer-name">
+			{order.customerName}
+		</span>
+	</p>
+    <p class="order-customer-data">
+		<span class="label"> Telefon : </span>
+		<span class="customer-data customer-phone">
+			{order.customerPhone}
+		</span>
+	</p>
+    <p class="order-customer-data">
+		<span class="label">Email : </span>
+		<span class="customer-data customer-email">
+			{order.customerEmail}
+		</span>
+	</p>
+    <h3 class="order-customer-data">
+        Folgende Artikel sind für Sie reserviert:
+    </h3>
+    <div class="order-positions col-sm-12">
+        <f:for each="{order.positions}" as="position" iteration="iteration">
+            <div class="article-item col-sm-12">
+
+                <div class="thumbnail">
+                    <div class="article-image col-sm-3">
+                        <f:image src="{position.article.urlForImage}" width="100c" height="100c" alt="Produktbild  für {position.articleTitle}"
+                                 treatIdAsReference="FALSE" class="img-responsive img-rounded" />
+                    </div>
+                    <div class="caption ">
+                        <div class="article-desc col-sm-6">
+                            <h3 class="art-title">{position.articleTitle}</h3>
+
+                            <p class="art-kosten">
+                                <span class="art-label">Gebühr: </span>
+                                <span class="kosten">{position.articleFee}</span>
+                            </p>
+                            <p class="art-issue-date">
+                                <span class="art-label">Ausleihzeitraum: </span>
+                                <span class="duration-of-issue">{position.issueStartDay} - {position.issueEndDay}</span>
+
+                            </p>
+
+                        </div>
+
+                        <div class="lend-conditions-tab col-sm-6">
+                            <f:format.raw>{position.lendConditions}</f:format.raw>
+                        </div>
+
+                    </div>
+                    <div class="lend-organization">
+                        <h4>Kontaktdaten der Ausleihstelle</h4>
+                        <p class="order-customer-data">
+                            <span class="label">Name : </span>
+
+                        <span class="customer-data customer-name">
+                            {position.organizationName}
+                        </span>
+                        </p>
+                        <p class="order-customer-data">
+                            <span class="label">Adresse : </span>
+
+                        <span class="customer-data customer-name">
+                            {position.organizationStreet}<br />
+                            {position.organizationZip} {position.organizationCity}
+                        </span>
+                        </p>
+                        <p class="order-customer-data">
+                            <span class="label">Telefon : </span>
+
+                        <span class="customer-data customer-name">
+                            {position.organizationPhone}
+                        </span>
+                        </p>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+        </f:for>
+    </div>
+</div>

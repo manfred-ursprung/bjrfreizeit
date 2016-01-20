@@ -1,0 +1,11 @@
+plugin.tx_siteprovider {
+    view{
+        templateRootPaths.default = EXT:siteprovider/Resources/Private/Templates/
+        partialRootPaths.default = EXT:siteprovider/Resources/Private/Partials/
+        layoutRootPaths.default = EXT:siteprovider/Resources/Private/Layouts/
+    }
+	conventions {
+        # cat=plugin.tx_siteprovider/string; type=string; label=PID der Startseite
+        start = 2
+    }
+}

@@ -1,0 +1,31 @@
+plugin.tx_bjrfeadmin {
+	view {
+		# cat=plugin.tx_bjrfeadmin/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:bjr_feadmin/Resources/Private/Templates/
+		# cat=plugin.tx_bjrfeadmin/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:bjr_feadmin/Resources/Private/Partials/
+		# cat=plugin.tx_bjrfeadmin/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:bjr_feadmin/Resources/Private/Layouts/
+	}
+	persistence {
+		# cat=plugin.tx_bjrfeadmin//a; type=string; label=Default storage PID for Articles
+		storagePid = 12,15,16,17
+	}
+	settings{
+	    # cat=plugin.tx_bjrfeadmin//b; type=string; label=Default storage PID for Organization overview administration
+	   	    pidOrganization = 50
+	    # cat=plugin.tx_bjrfeadmin//c; type=string; label=Folder for storing Organizations
+            pidOrganizationFolder = 12
+        # cat=plugin.tx_bjrfeadmin//d; type=string; label=Default storage PID for Frontend User
+            pidFrontendUser = 49
+        # cat=plugin.tx_bjrfeadmin//d; type=string; label=Frontend User Group for Organizations
+            frontendUserGroup = 2
+        # cat=plugin.tx_bjrfeadmin//d; type=string; label=PID for Login Page
+            loginPid = 51
+        # cat=plugin.tx_bjrfeadmin//e; type=string; label=PID for Article list of Organization
+            pidArticleList = 52
+
+
+
+	}
+}

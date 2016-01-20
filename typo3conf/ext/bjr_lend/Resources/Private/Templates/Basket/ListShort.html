@@ -1,0 +1,100 @@
+{namespace bjr = Bjr\BjrLend\ViewHelpers}
+
+<f:layout name="Default" />
+
+<f:debug title="kurzdarstellung">{basketItems}</f:debug>
+<f:debug>{settings}</f:debug>
+
+<li><a href="#"><i class="fa fa-list-ul"></i> Meine Artikelliste</a></li>
+<div class="artikellistestatic">
+    <strong>Artikelliste</strong>
+    <ul class="artiklelliste-list">
+        <li>GPS-Gerät<a href="#" title="Artikel von der Liste löschen"><i class="fa fa-times-circle-o pull-right delete"></i></a></span></li>
+        <li>DVD-Player<a href="#" title="Artikel von der Liste löschen"><i class="fa fa-times-circle-o pull-right delete"></i></a></span></li>
+        <li>Beamer<a href="#" title="Artikel von der Liste löschen"><i class="fa fa-times-circle-o pull-right delete"></i></a></span></li>
+        <li>Funkmikrofon Headset Mikrofon Shure<a href="#" title="Artikel von der Liste löschen"><i class="fa fa-times-circle-o pull-right delete"></i></a></span></li>
+    </ul>
+    <button type="button" class="btn btn-success">weiter</button>
+</div>
+
+
+
+<f:section name="main">
+
+
+<f:flashMessages />
+<div id="basket-list-short">
+    <strong>Meine Artikelliste</strong>
+    <f:render partial="Basket/BasketItemsShortList" arguments="{basketItems: basketItems}" />
+
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+        if($('#basket-list-long').length > 0){
+            $('#basket-list-short').parent().hide();
+        }
+        setClickEventBasketPageLink();
+
+    });
+    /**
+     * Click auf "weiter" in Warenkorb Kurzliste
+     */
+    function setClickEventBasketPageLink(){
+        $('.basket-page-link').click(function(){
+            var url  = '<f:uri.action pageUid="{settings.basketPid}" />';
+            window.location.replace(url);
+        });
+    }
+
+
+    function deleteArticle(posNo){
+
+        var pageId = $('body').attr('id');
+        var temp = pageId.split('-');
+        pageId = temp[1];
+
+        $.ajax({
+            async: 'true',
+            url: 'index.php',
+            type: 'POST',
+
+            data: {
+                eID: "bjrlend",
+                request: {
+                    pluginName:  'Pi2',
+                    controller:  'Basket',
+                    action:      'removeArticle',
+                    arguments: {
+                        'pageId': pageId,
+
+                        'posno': posNo
+                    }
+                }
+            },
+            //dataType: "json",
+            dataType: 'json',
+
+            success: function(data) {
+
+                    console.log( data );
+                    //$('.artikellistestatic').hide();
+                    //$('.artikellistestatic').html(' ');
+                    $('.artikellistestatic').html(data.content);
+                    //$('.artikellistestatic').show();
+                    setClickEventBasketPageLink();
+                    if($('#basket-list-long').length > 0){
+                        window.location.reload();
+                    }
+            },
+            error: function(error) {
+                console.log(error.responseText);
+            }
+        });
+
+
+        //alert('Aktion : Löschen des Artikels mit der Position ' + posNo +' auf Page ' + pageId);
+    }
+</script>
+</div>
+</f:section>
+<f:debug>{basketItems}</f:debug>

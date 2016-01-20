@@ -1,0 +1,39 @@
+﻿/* =================================== Extra small devices (phones, less than 768px) */
+@media (max-width: 767px) {
+
+h1.resdebug:before {
+	content:"phones, less than 768px (.col-xs-) ";
+}
+}
+
+/* =================================== Extra iPhone portrait*/
+@media only screen and (max-width: 640px) and (orientation: portrait) {
+
+h1.resdebug:before {
+	content:"iPhone portrait, max-width: 640px / portrait";
+}
+}
+
+/* =================================== Small devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+
+h1.resdebug:before {
+	content:"tablets, 768px and up (.col-sm-) ";
+}
+}
+
+/* =================================== Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199px) {
+
+h1.resdebug:before {
+	content:"desktops, 992px and up (.col-md-) ";
+}
+}
+
+/* =================================== Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+h1.resdebug:before {
+	content:"large desktops, 1200px and up (.col-lg-) ";
+}
+}

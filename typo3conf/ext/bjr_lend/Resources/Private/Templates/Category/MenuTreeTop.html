@@ -1,0 +1,46 @@
+
+<f:layout name="Default" />
+
+Dieses Template generiert den Menübaum für die Topnavigation
+<f:section name="main">
+    <ul class="dropdown-menu">
+    <f:for each="{menuTree}" as="mainCategory" iteration="iteration">
+        <li class="dropdown dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                {mainCategory.title}
+            </a>
+            <f:if condition="{mainCategory.childs -> f:count()} > 0">
+                <f:then>
+                    <ul class="dropdown-menu">
+                        <f:for each="{mainCategory.childs}" as="childCategory">
+                            <f:if condition="{childCategory.childs -> f:count()} > 0">
+                                <f:then>
+                                    <li class="dropdown dropdown-submenu">
+                                        <a href="{f:uri.page(pageUid: listPage, additionalParams: '{tx_bjrlend_pi1: {category: childCategory.uid}}')}"
+                                           accesskey="" class="dropdown-toggle" data-toggle="dropdown">
+                                            {childCategory.title}
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <f:for each="{childCategory.childs}" as="childchildCategory">
+                                                <li>
+                                                    <a href="{f:uri.page(pageUid: listPage, additionalParams: '{tx_bjrlend_pi1: {category: childCategory.uid}}')}">{childCategory.title}</a>
+                                                </li>
+                                            </f:for>
+                                        </ul>
+                                    </li>
+                                </f:then>
+                                <f:else>
+                                    <li>
+                                        <a href="{f:uri.page(pageUid: listPage, additionalParams: '{tx_bjrlend_pi1: {category: childCategory.uid}}')}">{childCategory.title}</a>
+                                    </li>
+                                </f:else>
+                           </f:if>
+                        </f:for>
+                    </ul>
+                </f:then>
+            </f:if>
+        </li>
+
+    </f:for>
+    </ul>
+</f:section>

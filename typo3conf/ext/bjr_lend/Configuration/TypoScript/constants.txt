@@ -1,0 +1,30 @@
+plugin.tx_bjrlend {
+	view {
+		# cat=plugin.tx_bjrlend/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:bjr_lend/Resources/Private/Templates/
+		# cat=plugin.tx_bjrlend/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:bjr_lend/Resources/Private/Partials/
+		# cat=plugin.tx_bjrlend/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:bjr_lend/Resources/Private/Layouts/
+	}
+	persistence {
+		# cat=plugin.tx_bjrlend/a; type=string; label=Default storage PID
+		storagePid =
+	}
+	settings{
+	    # cat=plugin.tx_bjrlend/b; type=string; label=Pfad zu den Artikelbildern
+	    articleImagePath = uploads/tx_bjrlend/
+	    # cat=plugin.tx_bjrlend/c type=string; label=PID der Seite für die Suchergebnisse
+        searchResultPid = 19
+        # cat=plugin.tx_bjrlend/d type=string; label=PID der Warenkorb Seite
+        basketPid = 20
+        # cat=plugin.tx_bjrlend/e type=string; label=PID der Reservierung-Bestätigungsseite
+        confirmationPid = 21
+        # cat=plugin.tx_bjrlend/f type=string; label=PID der Reservierung-Drucken-Seite
+        printOrderConfirmationPid = 45
+        # cat=plugin.tx_bjrlend//e type=string; label=Sender Adresse der Bestellmails
+        orderSenderEmail = info@manfred-ursprung.de
+        # cat=plugin.tx_bjrlend/c type=int; label=Anzahl der Suchergebnisse für die zufällig ausgewählten Artikel
+        numberRandomList = 4
+	}
+}

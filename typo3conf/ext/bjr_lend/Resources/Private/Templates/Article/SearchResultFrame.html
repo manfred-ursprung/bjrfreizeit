@@ -1,0 +1,80 @@
+{namespace bjr = Bjr\BjrLend\ViewHelpers}
+
+<f:layout name="Default" />
+
+<f:debug>{detailPage}</f:debug>
+<f:debug>{articles}</f:debug>
+<f:debug>{debug}</f:debug>
+
+<f:section name="main">
+
+<f:flashMessages renderMode="div" />
+
+
+
+    <!-- Artikel Übersicht -->
+    <f:if condition="{articles}">
+        <f:then>
+            <div class="row artikel-uebersicht">
+                <f:for each="{articles}" as="item" iteration="iteration">
+                    <!-- item -->
+
+                    <div class="article-item col-sm-12">
+                        <div class="thumbnail">
+                            <div class="article-image col-sm-3">
+                                <a class="fancybox" href="{item.urlForImage}">
+                                    <img src="{item.urlForImage}" width="100%" height="150" alt="Produktbild für {item.title}" class="img-responsive img-rounded">
+                                </a>
+                            </div>
+                            <div class="caption">
+                                <div class="article-desc col-sm-5">
+                                    <h3 class="art-title">{item.title}</h3>
+                                    <p class="art-kategorie"><span class="art-label">Kategorie: </span>
+                                        <span class="hauptkategorie">
+                                            <bjr:category mode="parent">{item.category}</bjr:category>
+                                        </span>
+                                        <span class="subkategorie">{item.category.title}</span>
+                                    </p>
+                                    <p class="art-region">
+                                        <span class="art-label">Region: </span>
+                                        <span class="region">{item.organization.region.name}</span>
+                                    </p>
+                                    <p class="art-organization">
+                                        <span class="art-label">Anbieter: </span>
+                                        <span class="region">{item.organization.name}</span>
+                                    </p>
+                                    <p class="art-kosten">
+                                        <span class="art-label">Gebühr: </span>
+                                        <span class="kosten">{item.fee}</span>
+                                    </p>
+                                </div>
+                                <div class="article-action col-sm-4">
+                                    <ul class="art-features">
+                                        
+                                        <f:if condition="{item.organization.onlineAdministration}">
+                                            <li><i class="fa fa-check-square fa-fw fa-lg"></i>online buchbar</li>
+                                        </f:if>
+                                        <li><i class="fa fa-phone-square fa-fw fa-lg"></i>{item.phone}</li>
+                                        <f:if condition="{item.byEmail}">
+                                            <li><i class="fa fa-envelope fa-fw fa-lg"></i><a href='mailto:{item.organization.address.email}?subject=Anfrage für Artikel "{item.title}"' title="per E-mail anfragen">per E-Mail anfragen</a></li>
+                                        </f:if>
+                                    </ul>
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <!-- /.item -->
+                </f:for>
+            </div>
+        </f:then>
+        <f:else>
+            <div class="article-item col-sm-12">
+                <p>Leider keine Artikel gefunden.</p>
+            </div>
+        </f:else>
+    </f:if>
+
+
+</f:section>

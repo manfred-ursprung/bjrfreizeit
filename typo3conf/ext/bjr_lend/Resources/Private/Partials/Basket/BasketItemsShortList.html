@@ -1,0 +1,24 @@
+{namespace bjr = Bjr\BjrLend\ViewHelpers}
+
+<ul class="artiklelliste-list">
+
+    <!-- Artikel Übersicht -->
+
+    <f:if condition="{basketItems -> f:count()} > 0">
+        <f:then>
+            <f:for each="{basketItems}" as="item" iteration="iteration">
+
+                <li>{item.title}
+                    <a onclick="javascript:deleteArticle({item.posNo});return false;" title="Artikel von der Liste löschen"><i class="fa fa-times-circle-o pull-right delete"></i></a>
+                </li>
+            </f:for>
+
+            <button type="button" class="btn btn-success basket-page-link">weiter</button>
+        </f:then>
+        <f:else>
+            <span>Warenkorb ist leer</span>
+        </f:else>
+    </f:if>
+
+    </li>
+</ul>

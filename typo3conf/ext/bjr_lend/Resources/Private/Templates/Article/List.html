@@ -1,0 +1,90 @@
+{namespace bjr = Bjr\BjrLend\ViewHelpers}
+
+<f:layout name="Default" />
+
+This Template is responsible for creating a table of domain objects.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        List.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="main">
+
+<f:flashMessages />
+
+    <!-- Artikel Übersicht -->
+    <div class="row artikel-uebersicht">
+        <f:for each="{articles}" as="item" iteration="iteration">
+            <!-- item -->
+
+            <div class="article-item col-sm-12">
+                <div class="thumbnail">
+                    <div class="article-image col-sm-3">
+                        <a class="fancybox" href="{item.urlForImage}" >
+
+                            <f:image src="{item.urlForImage}" treatIdAsReference="FALSE" width="200c" height="150c" alt="Produktbild für {item.title}" class="img-responsive img-rounded"/>
+
+                        </a>
+                    </div>
+                    <div class="caption">
+                        <div class="article-desc col-sm-5">
+                            <h3 class="art-title">{item.title}</h3>
+                            <p class="art-kategorie"><span class="art-label">Kategorie: </span>
+                                <span class="hauptkategorie">
+                                    <bjr:category mode="parent">{item.category}</bjr:category>
+                                </span>
+                                <span class="subkategorie">{item.category.title}</span>
+                            </p>
+                            <p class="art-region">
+                                <span class="art-label">Region: </span>
+                                <span class="region">{item.organization.region.name}</span>
+                            </p>
+                            <p class="art-organization">
+                                <span class="art-label">Anbieter: </span>
+                                <span class="region">{item.organization.name}</span>
+                            </p>
+                            <p class="art-kosten">
+                                <span class="art-label">Gebühr: </span>
+                                <span class="kosten">{item.fee}</span>
+                            </p>
+                        </div>
+                        <div class="article-action col-sm-4">
+                            <ul class="art-features">
+                                
+                                <f:if condition="{item.organization.onlineAdministration}">
+                                    <li><i class="fa fa-check-square fa-fw fa-lg"></i>online buchbar</li>
+                                </f:if>
+                                <f:if condition="{item.bookingPhone}">
+                                    <li><i class="fa fa-phone-square fa-fw fa-lg"></i>{item.organization.address.phone}</li>
+                                </f:if>
+                                <f:if condition="{item.byEmail}">
+                                    <li><i class="fa fa-envelope fa-fw fa-lg"></i><a href='mailto:{item.organization.address.email}?subject=Anfrage für Artikel "{item.title}"' title="per E-mail anfragen">per E-Mail anfragen</a></li>
+                                </f:if>
+                            </ul>
+                            <f:if condition="{item.organization.onlineAdministration}">
+                                <f:then>
+                                    <a href="{f:uri.page(pageUid: detailPage, additionalParams: '{tx_bjrlend_pi1: {article: item.uid}}')}" title="Artikel Details" class="btn btn-success">Details / Buchen</a>
+                                </f:then>
+                                <f:else>
+                                    <a href="{f:uri.page(pageUid: detailPage, additionalParams: '{tx_bjrlend_pi1: {article: item.uid, add: 0}}')}" title="Artikel Details" class="btn btn-success">Details</a>
+                                </f:else>
+                            </f:if>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <!-- /.item -->
+        </f:for>
+        <f:if condition="{articles -> f:count() } == 0">
+            <div class="article-item col-sm-12">
+                <p>In dieser Kategorie gibt es noch keine Artikel </p>
+            </div>
+        </f:if>
+    </div>
+</f:section>

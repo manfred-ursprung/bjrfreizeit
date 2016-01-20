@@ -1,0 +1,219 @@
+{namespace bjr = Bjr\BjrLend\ViewHelpers}
+
+<f:layout name="Default" />
+
+
+<f:section name="main">
+
+<f:flashMessages renderMode="div"  />
+    <div id="basket-list-long">
+        <f:if condition="{basket.items}">
+            <f:then>
+                <h2>Artikelliste</h2>
+
+                <!-- Artikel Übersicht -->
+                <div class="row artikel-uebersicht ">
+
+                    <f:for each="{basket.items}" as="item" iteration="iteration">
+                        <!-- item -->
+
+                        <div class="article-item col-sm-12 well manfred" id="basket-item-{item.posNo}">
+                            <div class="thumbnail">
+                                <div class="article-image col-sm-3">
+                                    <a class="fancybox" href="{item.image}" >
+                                        <f:image src="{item.image}" treatIdAsReference="FALSE" width="100c" height="100c" alt="Produktbild für {item.title}" class="img-responsive img-rounded"/>
+                                    </a>
+                                </div>
+                                <div class="caption ">
+                                    <div class="article-desc col-sm-6">
+                                        <h3 class="art-title">{item.title}</h3>
+
+                                        <p class="art-kosten">
+                                            <span class="art-label">Gebühr: </span>
+                                            <span class="kosten">{item.fee}</span>
+                                        </p>
+                                        <p class="art-issue-date">
+                                            <span class="art-label">Ausleihzeitraum: </span>
+                                            <span class="duration-of-issue"><bjr:durationIssue>{item}</bjr:durationIssue></span>
+                                        </p>
+                                        <div class="lend-conditions">
+                                            <p class="head">
+                                                <a href="#" class="" data-toggle="collapse" data-parent=".lend-conditions" data-target=".lend-conditions-tab">
+                                                    <i class="fa fa-chevron-down"></i>
+                                                    <i class="fa fa-chevron-up"></i>
+                                                    Ausleihbedingungen
+                                                </a>
+                                            </p>
+                                            <div class="lend-conditions-tab">
+                                                <f:format.nl2br>{item.lendConditions}</f:format.nl2br>
+                                                <br />
+                                                <p><strong>Ausleihbedingungen Ausleihstelle:</strong><br />
+                                                    <f:format.nl2br>{item.organization.lendConditions}</f:format.nl2br>
+                                                </p>
+                                                <p><strong>AGB der Ausleihstelle:</strong><br />
+                                                    <f:format.nl2br>{item.organization.agb}</f:format.nl2br>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="article-action col-sm-3">
+
+                                        <a href="#" class="btn btn-succes removeArticle" data-posno="{item.posNo}" data-articleUid="{item.articleUid}" data-pageId="{settings.basketPid}" data-itemtagprefix="basket-item-" title="Artikel aus Warenkorb entfernen" >Entfernen</a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <!-- /.item -->
+                    </f:for>
+                    <f:form action="confirmation" name="orderForm" pageUid="{settings.confirmationPid}" id="orderForm" controller="basket" class="col-sm-12 well form-horizontal">
+                        <div class="article-item col-sm-12">
+                            <div class="thumbnail">
+                                <div class="form-group  checkbox-inline">
+                                    <label for="lendConditions" class="checkbox-inline required" style="width:100%">
+                                        <f:form.checkbox name="lendConditions" value="1" id="lendConditions" class="lend-condition-check " />
+                                        Anerkennung der jeweiligen Ausleihbedingungen
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="thumbnail">
+                                <div class="form-group">
+                                    <label for="customerName" class="col-sm-3 col-xs-12 control-label  required">Name</label>
+                                    <div class="col-sm-9 col-xs-12">
+                                        <f:form.textfield name="customerName" id="customerName" value="" required="1" class="form-control input-sm"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="customerEmail" class="col-sm-3 col-xs-12 control-label  required">E-Mail Adresse</label>
+                                    <div class="col-sm-9 col-xs-12">
+                                        <f:form.textfield name="customerEmail" id="customerEmail" value="" required="1" class="form-control input-sm"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="customerPhone" class="col-sm-3 col-xs-12 control-label  required">Telefonnummer</label>
+                                    <div class="col-sm-9 col-xs-12">
+                                        <f:form.textfield name="customerPhone" id="customerPhone" value="" required="1" class="form-control input-sm"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="thumbnail">
+                                <p><span class="glyphicon glyphicon-exclamation-sign">&nbsp;</span>Bezahlung erfolgt direkt bei der jeweiligen Ausleihstelle (Abholung / Rückgabe) <br />
+                                    Nach dem Bestellvorgang erhalten Sie eine Übersicht über alle bestellten Artikel, Ausleihstellen,
+                                    Ausleihbedingungen zum Ausdrucken.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-offset-1 col-sm-11">
+                            <div class="pull-right">
+                                <a href="#" title="Artikel Details" class="btn btn-success btn-sm" id="orderFormSubmit" style="width:100%">
+                                     Weiter <i class="glyphicon glyphicon-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="hiddenFields">
+                            <div id="removeArticleError"></div>
+                        </div>
+                         <div class="clearfix"></div>
+                    </f:form>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                        $('.lend-conditions .head a[data-toggle="collapse"]').on('click', function () {
+                            event.preventDefault();
+                            $('.lend-conditions').toggleClass( "expanded" );
+                            $('.lend-conditions .fa.fa-chevron-down').toggleClass( "expanded" );
+                            $('.lend-conditions .fa.fa-chevron-up').toggleClass( "expanded" );
+                        });
+
+                        $.fancybox({
+                            maxWidth: 800,
+                            maxHeight: 700
+                        });
+                        $('.removeArticle').click(function(event){
+
+                            var articleUid  =  $(this).data('articleuid'),
+                                    posNo   =  $(this).data('posno'),
+                                    pageId  =  $(this).data('pageid'),
+                                    itemTag =  '#' + $(this).data('itemtagprefix') + posNo;
+
+                            $.ajax({
+                                async: 'true',
+                                url: 'index.php',
+                                type: 'POST',
+                                data: {
+                                    eID: "bjrlend",
+                                    request: {
+                                        pluginName:  'Pi2',
+                                        controller:  'Basket',
+                                        action:      'removeArticle',
+                                        arguments: {
+                                            'pageId': pageId,
+                                            'articleUid': articleUid,
+                                            'posno' : posNo
+                                        }
+                                    }
+                                },
+                                dataType: "json",
+                                //dataType: 'html',
+
+                                success: function(result) {
+                                    $(itemTag).remove();
+                                    if(result.empty){
+                                        $('#basket-list-long').html(result.text);
+                                    }else{
+                                        $('#basket-list-long').prepend(result.text);
+                                    }
+
+
+                                    //alert(result.text);
+                                    //$('#contact_person').html(result);
+                                    //window.location.reload();
+                                },
+                                error: function(error) {
+                                    $('.hiddenFields').show();
+                                    $('#removeArticleError').html((error.responseText));
+                                }
+                            });
+                            event.preventDefault();
+
+                        });
+
+                        $('#orderFormSubmit').click(function(event){
+                            var message = 'Felder nicht alle ausgefüllt.';
+                            if($('#customerName').val().length == 0){
+                                message += '\nDas Feld \'Name\' ist nicht ausgefüllt.';
+                            }
+                            if($('#customerEmail').val().length == 0){
+                                message += '\nDas Feld \'Email Adresse\' ist nicht ausgefüllt.';
+                            }
+                            if($('#customerPhone').val().length == 0){
+                                message += '\nDas Feld \'Telefonnummer\' ist nicht ausgefüllt.';
+                            }
+                            if($('#lendConditions:not(:checked)').length > 0){
+                                message += '\nDas Feld \'Ausleihbedingungen\' ist nicht markiert.';
+                            }
+                            if(($('#customerName').val().length > 0)
+                                && ($('#customerEmail').val().length > 0)
+                                && ($('#customerPhone').val().length > 0)
+                                && ($('#lendConditions:checked').is(':checked'))){
+                                      // alert("Alle Felder ausgefüllt.");
+                                $('#orderForm').submit();
+                            }else{
+                                alert(message);
+                            }
+                            event.preventDefault();
+                        });
+
+                    });
+
+
+                </script>
+            </f:then>
+            <f:else>
+
+            </f:else>
+        </f:if>
+    </div>
+</f:section>

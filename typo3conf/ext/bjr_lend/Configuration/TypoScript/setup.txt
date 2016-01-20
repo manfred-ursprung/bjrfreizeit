@@ -1,0 +1,32 @@
+plugin.tx_bjrlend {
+	view {
+		templateRootPath = {$plugin.tx_bjrlend.view.templateRootPath}
+		partialRootPath = {$plugin.tx_bjrlend.view.partialRootPath}
+		layoutRootPath = {$plugin.tx_bjrlend.view.layoutRootPath}
+	}
+	persistence {
+		storagePid = {$plugin.tx_bjrlend.persistence.storagePid}
+	}
+	features {
+		# uncomment the following line to enable the new Property Mapper.
+		# rewrittenPropertyMapper = 1
+	}
+	settings{
+	    articleImagePath        ={$plugin.tx_bjrlend.settings.articleImagePath}
+	    searchResultPid         ={$plugin.tx_bjrlend.settings.searchResultPid}
+	    basketPid               ={$plugin.tx_bjrlend.settings.basketPid}
+	    confirmationPid         ={$plugin.tx_bjrlend.settings.confirmationPid}
+	    orderSenderEmail        ={$plugin.tx_bjrlend.settings.orderSenderEmail}
+	    printOrderConfirmationPID ={$plugin.tx_bjrlend.settings.printOrderConfirmationPid}
+        numberRandomList        ={$plugin.tx_bjrlend.settings.numberRandomList}
+	}
+	mvc.callDefaultActionIfActionCantBeResolved = 1
+}
+bjrLendAjax = PAGE
+bjrLendAjax {
+    typeNum = 87654321
+    config.disableAllHeaderCode = 1
+    config.metaCharset = UTF-8
+    10 = COA
+    10 <  styles.content.get
+}

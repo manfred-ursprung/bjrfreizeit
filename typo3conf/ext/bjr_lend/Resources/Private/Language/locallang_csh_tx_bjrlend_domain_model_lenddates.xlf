@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-03-10T14:08:14Z" product-name="bjr_lend">
+		<header/>
+		<body>
+
+			<trans-unit id="article_title.description">
+				<source>articleTitle</source>
+			</trans-unit>
+			<trans-unit id="article_fee.description">
+				<source>articleFee</source>
+			</trans-unit>
+			<trans-unit id="lend_conditions.description">
+				<source>lendConditions</source>
+			</trans-unit>
+			<trans-unit id="organization_name.description">
+				<source>organizationName</source>
+			</trans-unit>
+			<trans-unit id="organization_street.description">
+				<source>organizationStreet</source>
+			</trans-unit>
+			<trans-unit id="organization_zip.description">
+				<source>organizationZip</source>
+			</trans-unit>
+			<trans-unit id="organization_city.description">
+				<source>organizationCity</source>
+			</trans-unit>
+			<trans-unit id="organization_phone.description">
+				<source>organizationPhone</source>
+			</trans-unit>
+			<trans-unit id="organization_email.description">
+				<source>organizationEmail</source>
+			</trans-unit>
+			<trans-unit id="article.description">
+				<source>Relation zu Artikel</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

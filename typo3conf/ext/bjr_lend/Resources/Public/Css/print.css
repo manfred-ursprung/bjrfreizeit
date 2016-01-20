@@ -1,0 +1,57 @@
+h2, h3{
+    font-size: 16px;
+}
+.tx-bjr-lend-print {
+    margin-top: 30px;
+    margin-left: 20px;
+    margin-bottom: 50px;
+}
+.tx-bjr-lend .tx-bjr-lend{
+
+}
+.tx-bjr-lend .label{
+    width: 150px;
+    color: #333333;
+    font-size: 14px;
+    display: block;
+    float: left;
+}
+.tx-bjr-lend .order-customer-data{
+    display: table;
+    content: " ";
+    clear:both;
+}
+.tx-bjr-lend .customer-data{
+    width: 250px;
+    padding-left: 20px;
+    display: block;
+    float: left;
+}
+.tx-bjr-lend .order-positions{
+    padding-top: 20px;
+}
+.tx-bjr-lend .order-positions .col-sm-12{
+    padding-left: 0;
+}
+
+.bjr-lend-print-link{
+    margin: 20px 0px 30px;
+    cursor: pointer;
+    color: #2636c7;
+    font-weight: bold;
+    font-size:14px;
+    padding: 2px 5px;
+    cursor: pointer;
+    margin-left: 600px;
+}
+
+.bjr-lend-print-link:hover{
+    color: #FFF;
+    background-color: #2636c7;
+    cursor: pointer;
+}
+.clearfix{
+    clear: both;
+    display: table;
+    content:' ';
+}

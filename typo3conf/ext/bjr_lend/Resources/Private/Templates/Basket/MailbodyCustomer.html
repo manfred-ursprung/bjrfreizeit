@@ -1,0 +1,15 @@
+<f:layout name="Default" />
+
+
+<f:section name="main">
+    <p>Bestellbestätigung für {order.customerName}</p>
+
+    <p>Vielen Dank für Ihre Bestellung über brauch-mal-kurz.de. </p>
+    <p>Hier sehen Sie noch mal Ihre eingegebenen Kontaktdaten.
+        Sollten diese falsch sein, bitten wir Sie sich bei der Ausleihstelle zu melden, da sonst die Kommunikation nicht möglich ist:</p>
+    <f:render partial="Order/Mail/CustomerProperties" arguments="{order:order, siteUrl:siteUrl}" />
+
+    <p><br />Die Ausleihstelle wird über ihre Bestellung informiert und wird die Bestellung noch mal bestätigen.<br /><br />
+        Vielen Dank<br /><br />
+        Ihr Team von brauch-mal-kurz.de – BezJR Unterfranken</p>
+</f:section>

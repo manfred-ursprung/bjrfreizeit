@@ -1,0 +1,9 @@
+<f:layout name="Default" />
+
+
+<f:section name="main">
+    <h2>Folgende Bestellung wurde eben über www.brauch-mal-kurz.de von {order.customerName} getätigt:</h2>
+
+    <f:render partial="Order/Mail/LenderProperties" arguments="{order:order, position:position, siteUrl:siteUrl}" />
+    <p><br />Es bedankt sich das Team des Bezirksjugendringes</p>
+</f:section>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-03-10T14:08:14Z" product-name="bjr_lend">
+		<header/>
+		<body>
+
+			<trans-unit id="title.description">
+				<source>Titel</source>
+			</trans-unit>
+			<trans-unit id="short_description.description">
+				<source>Kurzbeschreibung</source>
+			</trans-unit>
+			<trans-unit id="description.description">
+				<source>Beschreibung</source>
+			</trans-unit>
+			<trans-unit id="lend_conditions.description">
+				<source>Ausleihbedignungen</source>
+			</trans-unit>
+			<trans-unit id="fee.description">
+				<source>Gebühr, entweder Sie schreiben Ab XX Euro, oder wenn Sie eien</source>
+			</trans-unit>
+			<trans-unit id="booking_online.description">
+				<source>online buchbar</source>
+			</trans-unit>
+			<trans-unit id="booking_phone.description">
+				<source>telefonisch buchbar</source>
+			</trans-unit>
+			<trans-unit id="phone.description">
+				<source>Telefonnummer</source>
+			</trans-unit>
+			<trans-unit id="by_email.description">
+				<source>Anfrage per Email</source>
+			</trans-unit>
+			<trans-unit id="email.description">
+				<source>Email Adresse</source>
+			</trans-unit>
+			<trans-unit id="image.description">
+				<source>Bilder</source>
+			</trans-unit>
+			<trans-unit id="is_lend.description">
+				<source>ausgeliehen ja / nein</source>
+			</trans-unit>
+			<trans-unit id="show_calendar.description">
+				<source>Kalender anzeigen</source>
+			</trans-unit>
+			<trans-unit id="category.description">
+				<source>Kategoriebeziehung</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

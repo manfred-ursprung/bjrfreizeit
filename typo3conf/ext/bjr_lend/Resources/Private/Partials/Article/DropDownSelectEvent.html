@@ -1,0 +1,44 @@
+{namespace bjr = Bjr\BjrLend\ViewHelpers}
+
+<!-- dates -->
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <f:form  controller="Article" pageUid="{pageId}" enctype="multipart/form-data" class="form-book-article" name="bookAnArticle" id="bookAnArticle">
+                <f:form.hidden  name="bookArticle" value="1" />
+                <f:form.hidden  name="article" value="{article.uid}" />
+                <f:form.hidden  name="reservedDates" id="reservedDates" value="{reservedDates}" />
+                <div class="col-lg-2 col-md-12">
+                    <label for="issueStartDay" class="control-label">Zeitraum</label>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <div class="input-group date" id="datetimepicker8">
+                            <f:form.textfield class="form-control input-sm" name="issueStartDay" id="issueStartDay"/>
+                            <span class="input-group-addon"><span data-icon-element="" class="fa fa-calendar"></span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="form-group">
+                        <div class="input-group date" id="datetimepicker9">
+                            <f:form.textfield class="form-control input-sm" name="issueEndDay" id="issueEndDay" />
+                            <span class="input-group-addon"><span data-icon-element="" class="fa fa-calendar"></span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-offset-1 col-lg-3 col-md-12">
+                    <a  title="Artikel Details" class="btn btn-success btn-sm" id="bjrlendRegisterArticle" style="width:100%">
+                        <i class="fa fa-check"></i> Termin eintragen
+                    </a>
+
+
+                </div>
+            </f:form>
+        </div>
+        <div class="row">
+            <div id="datepicker"></div>
+        </div>
+    </div>
+</div>
+<!-- /.dates -->
