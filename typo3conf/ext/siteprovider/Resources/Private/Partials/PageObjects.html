@@ -1,0 +1,90 @@
+
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+     xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+     xmlns:flux="http://typo3.org/ns/FluidTYPO3/Flux/ViewHelpers">
+
+    <f:section name="Top">
+        <p>Hier sektion Top</p>
+    </f:section>
+
+    <f:section name="SharedResources">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Startseite</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <meta name="robots" content="index, follow, noarchive" />
+        <link rel="shortcut icon" href="favicon.ico">
+        <link href='http://fonts.googleapis.com/css?family=Exo+2:400,100,100italic,200,200italic,300,300italic,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic' rel='stylesheet' type='text/css'>
+        <!-- Assets sind in Typoscript ausgelagert , in siteprovider/Configuration/Typoscript/setup.txt -->
+    </f:section>
+
+<f:comment>
+    <f:section name="MainNav">
+        <div class="navbar navbar-default navbar-static-top" role="navigation">
+            <div class="" >
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                </div>
+                <nav class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <f:link.page pageUid="{v:variable.typoscript(path: 'plugin.tx_siteprovider.conventions.startPID')}" class="logo">
+                                Startseite
+                            </f:link.page>
+                        </li>
+                        <f:comment>
+                        <v:page.menu useShortcutData="TRUE" pageUid="2" levels="2" >
+
+                            <f:for each="{menu}" as="item">
+                                <f:if condition="{item.hasSubPages}">
+                                    <f:then>
+                                        <li class="dropdown dropdown">
+                                            <f:link.page pageUid="{item.uid}" title="{item.title}" class="dropdown-toggle" additionalAttributes="{data-toggle: 'dropdown'}">
+                                                {item.title}<b class="caret"></b>
+                                            </f:link.page>
+                                            <ul class="dropdown-menu">
+                                                <v:page.menu pageUid="{item.uid}" levels="3">
+                                                    <f:for each="{menu}" as="subItem">
+                                                        <li>
+                                                            <f:link.page pageUid="{subItem.uid}" title="{subItem.title}">
+                                                                {subItem.title}
+                                                            </f:link.page>
+                                                        </li>
+                                                    </f:for>
+                                                </v:page.menu>
+                                            </ul>
+                                        </li>
+                                    </f:then>
+                                    <f:else>
+                                        <li>
+                                            <f:link.page pageUid="{item.uid}" title="{item.title}">
+                                                {item.title}
+                                            </f:link.page>
+                                        </li>
+                                    </f:else>
+                                </f:if>
+                            </f:for>
+                        </v:page.menu>
+                        </f:comment>
+                    </ul>
+                    <div class="clearfix visible-sm"></div>
+                    <!-- Artikelliste -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" class="">
+                                Kontakt
+                            </a>
+                        </li>
+
+                    </ul>
+                </nav>
+                <!--/.nav-collapse -->
+
+
+            </div>
+        </div>
+    </f:section>
+</f:comment>
+
+
+</div>

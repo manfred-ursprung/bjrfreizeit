@@ -5,7 +5,8 @@
 body {
 	font-family: 'Exo 2', sans-serif;
 	font-size: 14px;
-	background: #FBFBFB;
+	/*background: #FBFBFB;*/
+	background: #047688;
 }
 
 #wrap {
@@ -24,7 +25,8 @@ div.navbar.navbar-default,
 	margin-left: -15px;
 	margin-right: -15px;
 	-webkit-box-shadow: none;
-   box-shadow: none;
+	box-shadow: none;
+	position:relative
 
 }
 #footer {
@@ -38,7 +40,7 @@ div.navbar.navbar-default {
 
 .navbar-default .navbar-nav > li > a {
 	font-size: 19px;
-	color: #3d3d99;
+	color: #047688;
 }
 
 h3.art-title {
@@ -85,8 +87,8 @@ p.art-region,
 	background: -o-linear-gradient(top, rgba(245,245,245,1) 0%, rgba(245,245,245,1) 93%, rgba(224,224,224,1) 100%); /* Opera 11.10+ */
 	background: -ms-linear-gradient(top, rgba(245,245,245,1) 0%, rgba(245,245,245,1) 93%, rgba(224,224,224,1) 100%); /* IE10+ */
 	background: linear-gradient(to bottom, rgba(245,245,245,1) 0%, rgba(245,245,245,1) 93%, rgba(224,224,224,1) 100%); /* W3C */
- filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#e0e0e0', GradientType=0 ); /* IE6-8 */
-/* verlauf ende */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#e0e0e0', GradientType=0 ); /* IE6-8 */
+	/* verlauf ende */
 }
 
 .artikelliste.expanded {
@@ -197,7 +199,7 @@ p.art-region,
 	/*position: absolute;
 bottom: 0px;
 right: 15px;*/
-width: 100%;
+	width: 100%;
 }
 
 .article-item .art-features,
@@ -251,7 +253,7 @@ width: 100%;
 
 /* ==================================== Articelliste static =============================== */
 #footer {
-	background-color: #2369b7;
+	background-color: #036574;
 	color:#FFFFFF;
 	min-height: 160px;
 }
@@ -307,12 +309,12 @@ width: 100%;
 }
 
 .ui-state-default {
-border: 1px solid #3e8f3e !important;
-background: #59b559 !important;
-color: #fff !important;
+	border: 1px solid #036574 !important;
+	background: #047688 !important;
+	color: #fff !important;
 }
 #datepicker .ui-state-default {
-cursor:default;
+	cursor:default;
 }
 .ui-widget-header {
 	background: #f4f4f4 url(none) !important;
@@ -331,7 +333,7 @@ cursor:default;
 	}
 }
 @media (min-width: 768px) and (max-width: 991px) {
-.ui-datepicker-multi .ui-datepicker-group {
+	.ui-datepicker-multi .ui-datepicker-group {
 		float: none !important;
 	}
 	.ui-datepicker-multi-3 .ui-datepicker-group {
@@ -353,8 +355,9 @@ cursor:default;
 @media (min-width: 1200px) {
 }
 header #topheader {
-	background: url(../typo3conf/ext/bjrtemplates/Resources/Public/images/icons_bg.png) repeat-x center top;
-	height: 168px;
+	position: absolute;
+	z-index: 10;
+	top: 0px;
 }
 
 header #topheader img#logo2 {
@@ -364,20 +367,21 @@ header #topheader img#logo2 {
 	display:inline;
 }
 header #topheader img#logo3 {
-float: right;
-margin-right: 36px;
-margin-top: 18px;
+	float: right;
+	margin-right: 36px;
+	margin-top: 18px;
 }
 .dropdown-menu {
 	font-size: 16px;
 }
 
 .navbar-default {
-	
+
 }
 
 .navbar-nav.navbar-right:last-child {
 	margin-right: inherit;
 }
+
 
 
