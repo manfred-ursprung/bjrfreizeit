@@ -248,6 +248,73 @@
                 <source>Abgelehnt</source>
             </trans-unit>
 
+			<trans-unit id="tx_bjrlend_domain_model_leisure">
+				<source>Freizeit</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_leisure.title">
+				<source>Freizeittitel</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_leisure.short_description">
+				<source>Kurzbeschreibung</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_leisure.description">
+				<source>Beschreibung</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_leisure.price">
+				<source>Preis</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_leisure.service_specification">
+				<source>Leistungsbeschreibung</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_leisure.minimum_participants">
+				<source>Mindestteilnehmerzahl</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_leisure.partner">
+				<source>Partner</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_leisure.cooperation">
+				<source>Kooperation</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_leisure.email">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_leisure.image">
+				<source>Image</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_leisure.location">
+				<source>Ort</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_leisure.releasedate">
+				<source>Erscheinungsdatum</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_leisure.time_period">
+				<source>Datum / Zeitraum</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_leisure.leader">
+				<source>LeiterIn</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_leisure.referent">
+				<source>ReferentIn</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_leisure.category">
+				<source>Kategorie / Tag</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_leisure.lend_dates">
+				<source>Termine</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_country">
+				<source>Land</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_country.name">
+				<source>Land</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_target_group">
+				<source>Zielgruppe</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrlend_domain_model_target_group.name">
+				<source>Titel der Zielgruppe</source>
+			</trans-unit>
+
 		</body>
 
 	</file>

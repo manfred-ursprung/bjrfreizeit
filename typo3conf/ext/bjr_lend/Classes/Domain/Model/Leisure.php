@@ -57,53 +57,39 @@ class Article extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $description;
 
 	/**
-	 * Ausleihbedignungen
+	 * Preis
 	 *
 	 * @var \string
 	 */
-	protected $lendConditions;
+	protected $price;
 
 	/**
-	 * Gebühr
+	 * Leistungsbeschreibung
 	 *
 	 * @var \string
 	 */
-	protected $fee;
+	protected $serviceSpecification;
 
 	/**
-	 * online buchbar
+	 * Mindestteilnehmerzahl
 	 *
-	 * @var boolean
+	 * @var \int
 	 */
-	protected $bookingOnline = FALSE;
+	protected $minimumParticipants;
 
 	/**
-	 * telefonisch buchbar
-	 *
-	 * @var boolean
-	 */
-	protected $bookingPhone = FALSE;
-
-	/**
-	 * Telefonnummer
+	 * Partner
 	 *
 	 * @var \string
 	 */
-	protected $phone;
+	protected $partner;
 
 	/**
-	 * Anfrage per Email
+	 * Kooperation
 	 *
 	 * @var \string
 	 */
-	protected $byEmail;
-
-	/**
-	 * Email Adresse
-	 *
-	 * @var \string
-	 */
-	protected $email;
+	protected $cooperation;
 
 	/**
 	 * Bilder
@@ -113,18 +99,38 @@ class Article extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $image;
 
 	/**
-	 * ausgeliehen ja / nein
+	 * Ort ganz allgemein
 	 *
-	 * @var boolean
+	 * @var \string
 	 */
-	protected $isLend = FALSE;
+	protected $location;
 
 	/**
-	 * Kalender anzeigen
+	 * Zeitraum
 	 *
-	 * @var boolean
+	 * @var \string
 	 */
-	protected $showCalendar = FALSE;
+	protected $timePeriod;
+
+	/**
+	 * Leiter
+	 *
+	 * @var \string
+	 */
+	protected $leader;
+
+	/**
+	 * Referent
+	 *
+	 * @var \string
+	 */
+	protected $referent;
+
+	/**
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Bjr\BjrLend\Domain\Model\TargetGroup>
+	 */
+	protected $targetGroup;
+
 
 	/**
 	 * Kategoriebeziehung
@@ -135,7 +141,7 @@ class Article extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 
 	/**
-	 * Ausleihstelle
+	 * Veranstalter
 	 *
 	 * @var \Bjr\BjrLend\Domain\Model\Organization
 	 */
@@ -147,10 +153,6 @@ class Article extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $lendDates;
 
 
-	/**
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Bjr\BjrLend\Domain\Model\Reservation>
-	 */
-	protected $reservations;
 
     /**
      * @var \int

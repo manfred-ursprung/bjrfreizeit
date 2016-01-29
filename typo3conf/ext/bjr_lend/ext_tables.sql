@@ -454,6 +454,7 @@ CREATE TABLE tx_bjrlend_domain_model_lenddates (
 
   date_from  int(11) unsigned DEFAULT '0' NOT NULL,
   date_to int(11) unsigned DEFAULT '0' NOT NULL,
+  leisure int(11) unsigned DEFAULT '0' NOT NULL,
 
   tstamp int(11) unsigned DEFAULT '0' NOT NULL,
   crdate int(11) unsigned DEFAULT '0' NOT NULL,
