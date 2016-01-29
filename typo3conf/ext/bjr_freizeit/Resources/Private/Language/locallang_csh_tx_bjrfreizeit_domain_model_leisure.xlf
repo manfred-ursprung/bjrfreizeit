@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-01-29T18:22:52Z" product-name="bjr_freizeit">
+		<header/>
+		<body>
+			<trans-unit id="title.description">
+				<source>title</source>
+			</trans-unit>
+			<trans-unit id="short_description.description">
+				<source>shortDescription</source>
+			</trans-unit>
+			<trans-unit id="description.description">
+				<source>description</source>
+			</trans-unit>
+			<trans-unit id="price.description">
+				<source>price</source>
+			</trans-unit>
+			<trans-unit id="service_specification.description">
+				<source>serviceSpecification</source>
+			</trans-unit>
+			<trans-unit id="minimum_participants.description">
+				<source>minimumParticipants</source>
+			</trans-unit>
+			<trans-unit id="partner.description">
+				<source>partner</source>
+			</trans-unit>
+			<trans-unit id="cooperation.description">
+				<source>cooperation</source>
+			</trans-unit>
+			<trans-unit id="location.description">
+				<source>location</source>
+			</trans-unit>
+			<trans-unit id="leader.description">
+				<source>leader</source>
+			</trans-unit>
+			<trans-unit id="referent.description">
+				<source>referent</source>
+			</trans-unit>
+			<trans-unit id="image.description">
+				<source>image</source>
+			</trans-unit>
+			<trans-unit id="file.description">
+				<source>file</source>
+			</trans-unit>
+			<trans-unit id="url.description">
+				<source>url</source>
+			</trans-unit>
+			<trans-unit id="country.description">
+				<source>country</source>
+			</trans-unit>
+			<trans-unit id="target_group.description">
+				<source>targetGroup</source>
+			</trans-unit>
+			<trans-unit id="leisure_period.description">
+				<source>leisurePeriod</source>
+			</trans-unit>
+			<trans-unit id="organization.description">
+				<source>organization</source>
+			</trans-unit>
+			<trans-unit id="tags.description">
+				<source>tags</source>
+			</trans-unit>
+			<trans-unit id="holiday.description">
+				<source>holiday</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

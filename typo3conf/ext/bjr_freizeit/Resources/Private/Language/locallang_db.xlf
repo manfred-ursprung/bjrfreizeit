@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-01-29T18:22:52Z" product-name="bjr_freizeit">
+		<header/>
+		<body>
+			<trans-unit id="tx_bjrfreizeit_domain_model_targetgroup">
+				<source>Target Group</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_targetgroup.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_country">
+				<source>Country</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_country.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_organization">
+				<source>Organization</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_organization.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_organization.url">
+				<source>Url</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_organization.address">
+				<source>Address</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_organization.contact">
+				<source>Contact</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_tags">
+				<source>Tags</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_tags.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisureperiod">
+				<source>Leisure Period</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisureperiod.start_period">
+				<source>Start Period</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisureperiod.end_period">
+				<source>End Period</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisure">
+				<source>Leisure</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.short_description">
+				<source>Short Description</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.price">
+				<source>Price</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.service_specification">
+				<source>Service Specification</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.minimum_participants">
+				<source>Minimum Participants</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.partner">
+				<source>Partner</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.cooperation">
+				<source>Cooperation</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.location">
+				<source>Location</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.leader">
+				<source>Leader</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.referent">
+				<source>Referent</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.image">
+				<source>Image</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.file">
+				<source>File</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.url">
+				<source>Url</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.country">
+				<source>Country</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.target_group">
+				<source>Target Group</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.leisure_period">
+				<source>Leisure Period</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.organization">
+				<source>Organization</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.tags">
+				<source>Tags</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.holiday">
+				<source>Holiday</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_holiday">
+				<source>Holiday</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_holiday.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_address">
+				<source>Address</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_address.street">
+				<source>Street</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_address.zip">
+				<source>Zip</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_address.city">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_address.phone">
+				<source>Phone</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_address.mobile">
+				<source>Mobile</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_address.email">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_contact">
+				<source>Contact</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_contact.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_contact.address">
+				<source>Address</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
