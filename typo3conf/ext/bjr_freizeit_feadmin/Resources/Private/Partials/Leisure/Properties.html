@@ -1,0 +1,138 @@
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for ="name">Artikelname:</label>
+    <div class="col-sm-9 col-xs-12">
+        <f:form.textfield property="title" value="{article.title}" class="form-control" additionalAttributes="{readonly: 'readonly'}" />
+    </div>
+</div>
+<!-- Kategorie -->
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for ="name">Kategorie</label>
+    <div class="col-sm-9 col-xs-12">
+        {parentCategory.title}
+
+    </div>
+</div>
+
+<!-- Unter Kategorie -->
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for="name">Unterkategorie</label>
+    <div class="col-sm-9 col-xs-12">
+        {article.category.title}
+
+    </div>
+</div>
+<!-- Bild -->
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for="name">Bild</label>
+    <div class="col-sm-9 col-xs-12">
+        <f:if condition="{article.image}">
+            <f:then>
+                
+                <f:image src="{article.image.originalResource.publicUrl}" width="200" alt="Produktbild" treatIdAsReference="TRUE"/>
+            </f:then>
+            <f:else>
+                <span>Produktbild fehlt!</span>
+            </f:else>
+        </f:if>
+
+    </div>
+</div>
+<!-- Gebühr in Euro ab -->
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for="fee">Gebühr in Euro ab </label>
+    <div class="col-sm-9 col-xs-12">
+        <f:form.textfield property="fee" value="{article.fee}" class="form-control" readonly="readonly"/>
+    </div>
+</div>
+
+<!-- Kurzbeschreibung -->
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for="shortDescription">Kurzbeschreibung</label>
+    <div class="col-sm-9 col-xs-12">
+        <f:form.textarea  cols="20" rows="5" property="shortDescription" additionalAttributes="{readonly: 'readonly'}"
+                          value="{article.shortDescription ->f:format.html(parseFuncTSPath: 'lib.parseFunc')}"  class=" form-control "/>
+    </div>
+</div>
+
+<!-- Beschreibung -->
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for="name">Beschreibung</label>
+    <div class="col-sm-9 col-xs-12">
+        <f:form.textarea  cols="20" rows="5" property="description" additionalAttributes="{readonly: 'readonly'}"
+                          value="{article.description ->f:format.html(parseFuncTSPath: 'lib.parseFunc')}"  class=" form-control "/>
+    </div>
+</div>
+
+
+<!-- Ausleihbedingung pro Artikel-->
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for ="name">Ausleihbedingung speziell für Artikel</label>
+    <div class="col-sm-9 col-xs-12">
+        <f:form.textarea  cols="20" rows="5" property="lendConditions" additionalAttributes="{readonly: 'readonly'}"
+                          value="{article.lendConditions  ->f:format.html(parseFuncTSPath: 'lib.parseFunc')}"  class=" form-control "/>
+
+    </div>
+</div>
+
+<!-- online buchbar wurde entfernt, Funktionalität über Ausleihstelle -> onlineAdministration  -->
+
+<!-- telefonisch buchbar-->
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for="name">Artikel telefonisch buchbar</label>
+    <div class="col-sm-9 col-xs-12">
+        <f:form.checkbox   property="bookingPhone"
+                           value="true"  class="form-control" disabled="disabled" />
+    </div>
+</div>
+
+<!-- per email buchbar-->
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for="name">Artikel per Email buchbar</label>
+    <div class="col-sm-9 col-xs-12">
+        <f:form.checkbox   property="byEmail"
+                           value="true"  class=" form-control" disabled="disabled" />
+    </div>
+</div>
+
+
+<!-- Ausleihbedingung wird nicht gebraucht, kann eingeblendet werden von Ausleihstelle-->
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for ="name">Ausleihbedingung</label>
+    <div class="col-sm-9 col-xs-12">
+        <f:form.textarea  cols="20" rows="5" name="organization.lendConditions" additionalAttributes="{readonly: 'readonly'}"
+                          value="{organization.lendConditions  ->f:format.html(parseFuncTSPath: 'lib.parseFunc')}"  class=" form-control "/>
+
+
+    </div>
+</div>
+
+<!-- INFO : siehe Ausleihbedingung  -->
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for ="name">Info</label>
+    <div class="col-sm-9 col-xs-12">
+        <f:form.textarea  cols="20" rows="5" name="organization.info" additionalAttributes="{readonly: 'readonly'}"
+                          value="{organization.info ->f:format.html(parseFuncTSPath: 'lib.parseFunc')}"  class=" form-control "/>
+    </div>
+</div>
+
+<!-- AGB : siehe Ausleihbedingung  -->
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for ="name">AGB</label>
+    <div class="col-sm-9 col-xs-12">
+        <f:form.textarea  cols="20" rows="5" name="organization.agb " additionalAttributes="{readonly: 'readonly'}"
+                          value="{organization.agb  ->f:format.html(parseFuncTSPath: 'lib.parseFunc')}"  class=" form-control "/>
+
+    </div>
+</div>
+
+<!-- Öffnungszeiten : siehe Ausleihbedingung  -->
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for ="name">Öffnungszeiten</label>
+    <div class="col-sm-9 col-xs-12">
+        <f:form.textarea  cols="20" rows="5" name="organization.openingTimes" additionalAttributes="{readonly: 'readonly'}"
+                          value="{organization.openingTimes  ->f:format.html(parseFuncTSPath: 'lib.parseFunc')}"  class=" form-control "/>
+
+    </div>
+</div>
+
+

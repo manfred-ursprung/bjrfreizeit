@@ -1,0 +1,37 @@
+{namespace v=Tx_Vhs_ViewHelpers}
+<f:layout name="Default" />
+
+
+
+<f:section name="main">
+
+
+<f:flashMessages renderMode="div" />
+
+<div  class="tx_bjrfeadmin " id="show-customer" >
+	<h3>Kundendaten</h3>
+
+    <div class="row form-group">
+        <label class="col-sm-3 col-xs-12 control-label" for="fee">Name</label>
+        <div class="col-sm-9 col-xs-12">
+            <f:form.textfield property="fee" value="{reservation.customerName}" class="form-control" additionalAttributes="{readonly: 'readonly'}"/>
+        </div>
+    </div>
+    <div class="row form-group">
+            <label class="col-sm-3 col-xs-12 control-label" for="fee">Email</label>
+            <div class="col-sm-9 col-xs-12">
+                <f:form.textfield property="fee" value="{reservation.customerEmail}" class="form-control" additionalAttributes="{readonly: 'readonly'}"/>
+        </div>
+    </div>
+    <div class="row form-group">
+        <label class="col-sm-3 col-xs-12 control-label" for="fee">Telefon</label>
+        <div class="col-sm-9 col-xs-12">
+            <f:form.textfield property="fee" value="{reservation.customerPhone}" class="form-control" additionalAttributes="{readonly: 'readonly'}"/>
+        </div>
+    </div>
+
+</div>
+</div>
+
+<!-- <f:link.action action="new">New Order</f:link.action> -->
+</f:section>

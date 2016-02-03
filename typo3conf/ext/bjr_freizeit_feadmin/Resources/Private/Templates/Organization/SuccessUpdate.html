@@ -1,0 +1,16 @@
+<f:layout name="Default" />
+
+
+<f:section name="main">
+
+
+<f:flashMessages renderMode="div" />
+
+    <f:form action="update" name="organization" object="{organization}"  class="form-horizontal result-form" additionalAttributes="{autocomplete: 'off'}" arguments="{organization: organization}">
+        <f:render partial="Organization/Properties" arguments="{organization:organization}" />
+    </f:form>
+
+<f:link.action action="new" pageUid="{settings.pidOrganizationEdit}">Neue Ausleihstelle</f:link.action>
+
+
+</f:section>

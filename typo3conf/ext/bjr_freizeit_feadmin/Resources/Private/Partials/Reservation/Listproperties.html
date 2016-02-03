@@ -1,0 +1,18 @@
+{namespace bjr = Bjr\BjrLend\ViewHelpers}
+
+<td><f:format.date format="d.m.y">{reservation.issueStart}</f:format.date></td>
+<td><f:format.date format="d.m.y">{reservation.issueEnd}</f:format.date></td>
+<td>{reservation.article.title}</td>
+<td>{reservation.customerName}<br />{reservation.customerPhone}<br />{reservation.customerEmail}</td>
+<td>{reservation.statusInfo}</td>
+
+<td>
+	<div class="btn-group">
+    <a href="#" class="show-customer btn btn-default btn-xs" data-reservationId="{reservation.uid}" title="Kundendaten anzeigen"><i class="fa fa-user"></i></a>
+    <a href="#" class="reject-reservation btn btn-default btn-xs" data-reservationId="{reservation.uid}" title="Reservierung ablehnen"><i class="fa fa-ban"></i></a>
+    <f:link.action action="delete" arguments="{reservation : reservation}" class="remove-reservation btn btn-default btn-xs" title="Reservierung löschen"><i class="fa fa-trash-o"></i></f:link.action>
+	</div>
+</td>
+<td>
+	<a href="#" class="confirm-reservation btn btn-default btn-sm btn-success_off" data-reservationId="{reservation.uid}" title="Reservierung bestätigen"><i class="fa fa-check"></i></a>
+</td>

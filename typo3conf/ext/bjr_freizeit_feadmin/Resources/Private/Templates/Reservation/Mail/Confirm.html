@@ -1,0 +1,44 @@
+{namespace v=Tx_Vhs_ViewHelpers}
+<f:layout name="Default" />
+
+
+<f:section name="main">
+    <h2>Bestellbestätigung für {reservation.customerName}</h2>
+
+    <p>
+        Vielen Dank für Ihre Bestellung.Ihr Artikel ist verfügbar.<br />
+        <br />Hier sehen Sie noch mal Ihre eingegebenen Kontaktdaten:<br />
+    </p>
+    <div class="tx-bjr-lend order-approval" >
+        <p class="order-customer-data">
+            <span class="label"><f:translate key="tx_bjrlend_domain_model_order.customer_name" /> </span>
+
+		<span class="customer-data customer-name">
+			{reservation.customerName}
+		</span>
+        </p>
+        <p class="order-customer-data">
+		<span class="label"><f:translate key="tx_bjrlend_domain_model_order.customer_phone" />
+		</span>
+		<span class="customer-data customer-phone">
+			{reservation.customerPhone}
+		</span>
+        </p>
+        <p class="order-customer-data">
+		<span class="label"><f:translate key="tx_bjrlend_domain_model_order.customer_email" />
+		</span>
+		<span class="customer-data customer-email">
+			{reservation.customerEmail}
+		</span>
+        </p>
+
+    </div>
+    <p><strong>Folgende Artikel sind für Sie reserviert</strong></p>
+    <p>
+        Artikel : {reservation.article.title}<br />
+        Ausleihzeitraum von <strong><f:format.date format="d.m.y">{reservation.issueStart}</f:format.date></strong><br />
+        bis <strong><f:format.date format="d.m.y">{reservation.issueEnd}</f:format.date> </strong>
+    </p>
+    <br />
+    <p><br />Es bedankt sich das Team der {organization.name}</p>
+</f:section>

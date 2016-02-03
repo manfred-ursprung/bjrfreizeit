@@ -1,0 +1,61 @@
+<f:layout name="Default" />
+
+
+
+<f:section name="main">
+
+    <h1>Ändern des Artikels "{article.title}"</h1>
+
+    <f:flashMessages renderMode="div" />
+
+    <f:render partial="FormErrors" arguments="{object:Article}"/>
+
+    <f:form action="update" name="article" object="{leisure}" class="form-horizontal" additionalAttributes="{autocomplete: 'off'}"
+            enctype="multipart/form-data" arguments="{leisure: leisure}">
+        <f:render partial="Leisure/FormFields" arguments="{all}" />
+        <f:link.action action="list" class="btn btn-default btn-form-back-left"> Zurück </f:link.action>
+        <f:form.submit name="articleUpdate" value="Ändern" class="btn btn-default"/>
+    </f:form>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var pageId = $('#currentPageId').val();
+
+            $(document).on('click', '#selectKat', function(){
+                $('#selectSubkat').html('');
+                var category = $('#selectKat option:selected').val();
+                $.ajax({
+                    async: 'true',
+                    url: 'index.php',
+                    type: 'POST',
+                    data: {
+                        eID: "bjrlend",
+                        request: {
+                            pluginName:  'Pi1',
+                            controller:  'Category',
+                            action:      'subCategory',
+                            arguments: {
+                                'pageId': pageId,
+                                'category': category
+                            }
+                        }
+
+                    },
+                    //dataType: "json",
+                    dataType: 'html',
+
+                    success: function(result) {
+                        console.log(result);
+                        $('#selectSubkat').html(result);
+
+                    },
+                    error: function(error) {
+                        console.log(error);
+                        $('#selectSubkat').html((error.responseText));
+                    }
+                });
+            });
+        });
+    </script>
+
+</f:section>

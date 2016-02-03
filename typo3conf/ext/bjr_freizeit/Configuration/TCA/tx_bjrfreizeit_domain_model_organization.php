@@ -23,10 +23,10 @@ return array(
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('bjr_freizeit') . 'Resources/Public/Icons/tx_bjrfreizeit_domain_model_organization.gif'
 	),
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, url, address, contact',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, url, address, contact, feusername, article_folder_pid, online_administration',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, name, url, address, contact, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, name, url, address, contact, online_administration, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime, feusername, article_folder_pid'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -168,6 +168,49 @@ return array(
 				),
 			),
 		),
-		
+		'feusername' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:bjr_freizeit/Resources/Private/Language/locallang_db.xlf:tx_bjrfreizeit_domain_model_organization.feusername',
+			'config' => array(
+				'type' => 'select',
+				'foreign_table' => 'fe_users',
+				'foreign_table_where' => 'AND fe_users.usergroup=2',
+				'size' => 3,
+				'autoMaxSize' => 10,
+				'maxitems' => 9999,
+				'multiple' => 0,
+			),
+		),
+		'article_folder_pid' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:bjr_freizeit/Resources/Private/Language/locallang_db.xlf:tx_bjrfreizeit_domain_model_organization.article_folder_pid',
+			'config' => array(
+				'type' => 'input',
+				'size' => 30,
+				'eval' => 'trim',
+				"wizards"  => array(
+					"_PADDING" => 2,
+					"link"     => array(
+						"type"         => "popup",
+						"title"        => "Link",
+						"icon"         => "link_popup.gif",
+						"script"       => "browse_links.php?mode=wizard&act=folder",
+						"JSopenParams" =>  "height=300,width=500,status=0,menubar=0,scrollbars=1",
+						'params' => array (
+							'blindLinkOptions' => 'page'
+						)
+					)
+				)
+			)
+
+		),
+		'online_administration' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:bjr_freizeit/Resources/Private/Language/locallang_db.xlf:tx_bjrfreizeit_domain_model_organization.online_administration',
+			'config' => array(
+				'type' => 'check',
+			),
+		),
+
 	),
 );## EXTENSION BUILDER DEFAULTS END TOKEN - Everything BEFORE this line is overwritten with the defaults of the extension builder

@@ -1,0 +1,25 @@
+<f:layout name="Default" />
+
+
+<f:section name="main">
+
+
+    <f:flashMessages renderMode="div" />
+
+    <div class="backlink">
+        <f:link.action action="list" class="btn btn-default btn-form-back-left"> Zur Liste der Regionen </f:link.action>
+    </div>
+
+    <f:form action="update" name="region" object="{region}" class="form-horizontal"
+            enctype="multipart/form-data" arguments="{region: region}" onsubmit="return false;">
+        <div class="row form-group">
+            <label class="col-sm-3 col-xs-12 control-label" for ="name">Name</label>
+            <div class="col-sm-9 col-xs-12">
+                <f:form.textfield property="name" value="{region.name}" class="form-control"  additionalAttributes="{readonly: 'readonly'}" />
+            </div>
+        </div>
+    </f:form>
+    <f:link.action action="new" >Neue Region</f:link.action>
+
+
+</f:section>

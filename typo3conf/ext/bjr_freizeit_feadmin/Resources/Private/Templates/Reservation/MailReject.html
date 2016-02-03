@@ -1,0 +1,31 @@
+{namespace v=Tx_Vhs_ViewHelpers}
+<f:layout name="Default" />
+
+
+<f:section name="main">
+    <p>
+        Hallo,<br />
+        Sie haben bei uns über brauch-mal-kurz.de folgende Artikel bestellt:<br />
+    </p>
+
+    <p>
+        Artikel : {reservation.article.title}<br />
+        Ausleihzeitraum von <strong><f:format.date format="d.m.y">{reservation.issueStart}</f:format.date></strong><br />
+        bis <strong><f:format.date format="d.m.y">{reservation.issueEnd}</f:format.date> </strong>
+    </p>
+    <p>
+        Leider gibt es bei der Bestellung ein Problem. Der Artikel steht zum gewünschten Zeitraum nicht zur Verfügung.
+        Vielleicht finden sie in brauch-mal-kurz.de ja noch ein Alternative.
+        <br /><br />
+        Wenn Sie Näheres erfahren möchten, können Sie sich auch direkt an uns wenden.
+    </p>
+    <p class="head" style="font-weight: bold">
+        <span class="art-label">Ausleihstelle:&nbsp;</span>
+        {organization.name}<br />
+        {organization.address.street}<br />
+        {organization.address.zip} {organization.address.city} <br />
+        {organization.address.phone}<br />
+        {organization.address.email}<br />
+    </p>
+
+</f:section>

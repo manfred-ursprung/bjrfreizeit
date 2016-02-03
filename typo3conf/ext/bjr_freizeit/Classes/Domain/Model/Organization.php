@@ -59,7 +59,31 @@ class Organization extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var \MUM\BjrFreizeit\Domain\Model\Contact
      */
     protected $contact = null;
-    
+
+
+    /* \TYPO3\CMS\Extbase\Domain\Model\FrontendUser */
+
+    /**
+     * Username zum Anmelden im FE
+     * @var \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
+     * @lazy
+     */
+    protected  $feusername;
+
+
+    /**
+     * @var int
+     */
+    protected $articleFolderPid;
+
+
+    /**
+     * @var boolean
+     */
+    protected $onlineAdministration;
+
+
+
     /**
      * Returns the name
      *
@@ -143,5 +167,55 @@ class Organization extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->contact = $contact;
     }
+
+    /**
+     * @return \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
+     */
+    public function getFeusername()
+    {
+        return $this->feusername;
+    }
+
+    /**
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $feusername
+     */
+    public function setFeusername($feusername)
+    {
+        $this->feusername = $feusername;
+    }
+
+    /**
+     * @return int
+     */
+    public function getArticleFolderPid()
+    {
+        return $this->articleFolderPid;
+    }
+
+    /**
+     * @param int $articleFolderPid
+     */
+    public function setArticleFolderPid($articleFolderPid)
+    {
+        $this->articleFolderPid = $articleFolderPid;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isOnlineAdministration()
+    {
+        return $this->onlineAdministration;
+    }
+
+
+    /**
+     * @param boolean $onlineAdministration
+     */
+    public function setOnlineAdministration($onlineAdministration)
+    {
+        $this->onlineAdministration = $onlineAdministration;
+    }
+
 
 }

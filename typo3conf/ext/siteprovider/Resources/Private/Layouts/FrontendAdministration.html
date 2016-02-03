@@ -1,0 +1,57 @@
+{namespace v=Tx_Vhs_ViewHelpers}
+<f:layout name="StartPage" />
+<!--
+<div class="artikellistestatic">
+    <strong>Artikelliste</strong>
+    <ul class="artiklelliste-list">
+        <li>GPS-Gerät<a href="#" title="Artikel von der Liste löschen"><i class="fa fa-times-circle-o pull-right delete"></i></a></span></li>
+        <li>DVD-Player<a href="#" title="Artikel von der Liste löschen"><i class="fa fa-times-circle-o pull-right delete"></i></a></span></li>
+        <li>Beamer<a href="#" title="Artikel von der Liste löschen"><i class="fa fa-times-circle-o pull-right delete"></i></a></span></li>
+        <li>Funkmikrofon Headset Mikrofon Shure<a href="#" title="Artikel von der Liste löschen"><i class="fa fa-times-circle-o pull-right delete"></i></a></span></li>
+    </ul>
+    <button type="button" class="btn btn-success">weiter</button>
+</div>
+  -->
+
+<v:page.header>
+    <f:render section="Resources" optional="TRUE" arguments="{_all}" />
+</v:page.header>
+
+<div id="wrap" class="container">
+
+<f:render section="Top" partial="PageObjects" arguments="{_all}" />
+
+    <!--TYPO3SEARCH_begin-->
+
+    <div class="" id="content">
+
+        <!-- row für layout -->
+        <div class="row content-layout">
+
+            <!-- sidebar -->
+            <div class="col-md-3 sidebar-left">
+                <f:render partial="PageObjects" section="Sidebar-left-FE" />
+            </div>
+            <!-- /.sidebar -->
+
+            <!-- hauptinhalt -->
+            <div class="col-md-9 hauptinhalt">
+
+                <!-- Startseite -->
+                <f:render section="Content" />
+            </div>
+            <!-- /.hauptinhalt-->
+
+
+
+        </div>
+        <!-- /.row für Layout -->
+    </div>
+    <!-- /.container #content-->
+    <!-- FOOTER
+    ================================================== -->
+    <f:render partial="Footer" section="Footer" />
+
+<!-- /.wrap -->
+<!--TYPO3SEARCH_end-->
+</div>

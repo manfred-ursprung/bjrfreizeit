@@ -1,0 +1,19 @@
+<f:layout name="Default" />
+
+<f:debug>{reservedDates}</f:debug>
+
+
+<f:section name="main">
+    <div class="reservations">
+        <h3>Reservierungen für Artikel {article.title}</h3>
+
+        <f:flashMessages renderMode="div" />
+
+
+        <f:form.hidden  name="reservedDates" id="reservedDates" value="{reservedDates}" />
+        <div class="row">
+            <div id="datepicker"></div>
+        </div>
+
+    </div>
+</f:section>

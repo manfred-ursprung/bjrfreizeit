@@ -1,0 +1,61 @@
+{namespace v=Tx_Vhs_ViewHelpers}
+<f:layout name="Default" />
+
+
+
+<f:section name="main">
+
+
+<f:flashMessages renderMode="div" />
+
+<table  class="tx_bjrfeadmin_off table table-striped table-bordered table-condensed table-hover" >
+	<tr>
+		<th colspan="2">
+			<span class="sortlink" style="float: left;">
+			<f:link.action action="list" arguments="{sortBy: 'issueStart', sortOrder: 'asc'}"><i class="fa fa-caret-up fa-lg"></i></f:link.action>
+         <br />
+         <f:link.action action="list" arguments="{sortBy: 'issueStart', sortOrder: 'desc'}"><i class="fa fa-caret-down fa-lg"></i></f:link.action>
+         </span>
+         <span class="sortlink-text" style="margin-top: 10px; margin-left: 10px; display: inline-block;">Reservierung von | bis</span>
+      </th>
+      <th>
+      	<span class="sortlink" style="float: left;">
+         <f:link.action action="list" arguments="{sortBy: 'article.title', sortOrder: 'asc'}"><i class="fa fa-caret-up fa-lg"></i></f:link.action>
+         <br />
+         <f:link.action action="list" arguments="{sortBy: 'article.title', sortOrder: 'desc'}"><i class="fa fa-caret-down fa-lg"></i></f:link.action>
+         </span>
+         <span class="sortlink-text"style="margin-top: 10px; margin-left: 10px; display: inline-block;">Artikel</span>
+      </th>
+      <th>
+      	<span class="sortlink" style="float: left;">
+         <f:link.action action="list" arguments="{sortBy: 'customerName', sortOrder: 'asc'}"><i class="fa fa-caret-up fa-lg"></i></f:link.action>
+         <br />
+         <f:link.action action="list" arguments="{sortBy: 'customerName', sortOrder: 'desc'}"><i class="fa fa-caret-down fa-lg"></i></f:link.action>
+         </span>
+         <span class="sortlink-text"style="margin-top: 10px; margin-left: 10px; display: inline-block;">Kunde</span>
+		</th>
+        <th><span class="sortlink-text"style="margin-top: 10px; margin-left: 10px; display: inline-block;">Status</span></th>
+        <th></th>
+        <th></th>
+	</tr>
+
+    <f:widget.paginate objects="{reservations}" as="paginatedReservations" configuration="{itemsPerPage: 10, insertAbove: 1, insertBelow: 0, maximumNumberOfLinks: 3}">
+        <f:for each="{paginatedReservations}" as="reservation" key="key" iteration="itemIteration">
+            <f:if condition="{itemIteration.isOdd }">
+                <f:then>
+                    <v:var.set name="class" value="odd"></v:var.set>
+                </f:then>
+                <f:else>
+                    <v:var.set name="class" value="even"></v:var.set>
+                </f:else>
+            </f:if>
+            <tr class="{class}">
+                <f:render partial="Reservation/Listproperties" arguments="{reservation:reservation, settings:settings}" />
+            </tr>
+        </f:for>
+    </f:widget.paginate>
+
+</table>
+
+<!-- <f:link.action action="new">New Order</f:link.action> -->
+</f:section>

@@ -1,0 +1,24 @@
+<f:layout name="Default" />
+
+
+<f:section name="main">
+
+
+    <f:flashMessages renderMode="div" />
+    <f:form action="readonly" name="feUser" object="{feUser}"  class="form-horizontal" additionalAttributes="{autocomplete: 'off'}" arguments="{feUser: feUser}">
+
+        <!-- username -->
+        <div class="row form-group">
+            <label class="col-sm-3 col-xs-12 control-label" for="username">User Name</label>
+            <div class="col-sm-6 col-xs-12">
+                <f:form.textfield property="username" value="{feUser.username}"  class=" form-control" additionalAttributes="{readonly: 'readonly', autocomplete: 'off'}" />
+            </div>
+        </div>
+
+
+    </f:form>
+
+
+
+
+</f:section>

@@ -1,0 +1,43 @@
+<f:layout name="Default" />
+
+
+<f:section name="main">
+
+
+    <f:flashMessages renderMode="div" />
+
+    <div class="form col-sm-7" role="form">
+        <h2>Anlegen eines neuen Frontend User</h2>
+        <f:render partial="FormErrors" arguments="{object:FrontendUser}"/>
+
+        <f:form action="create" name="feUser" object="{feUser}"  class="form-horizontal" additionalAttributes="{autocomplete: 'off'}" arguments="{feUser: feUser}">
+            <f:form.hidden name="creation" value="1" />
+
+            <!-- username -->
+            <div class="row form-group">
+                <label class="col-sm-3 col-xs-12 control-label" for="username">User Name</label>
+                <div class="col-sm-9 col-xs-12">
+                    <f:form.textfield property="username" value="{feUser.username}"  class=" form-control" additionalAttributes="{autocomplete: 'off'}" />
+                </div>
+            </div>
+            <!-- password -->
+            <div class="row form-group">
+                <label class="col-sm-3 col-xs-12 control-label" for="shortDescription">Passwort</label>
+                <div class="col-sm-9 col-xs-12">
+                    <f:form.password property="password" value="{feUser.password}"  class=" form-control" additionalAttributes="{autocomplete: 'off'}"/>
+                </div>
+            </div>
+
+            <!-- password repeat -->
+            <div class="row form-group">
+                <label class="col-sm-3 col-xs-12 control-label" for="shortDescription">Passwort wiederholen</label>
+                <div class="col-sm-9 col-xs-12">
+                    <f:form.password name="passwordConfirmation" value=""  class=" form-control "/>
+                </div>
+            </div>
+
+
+            <f:form.submit name="organizationUpdate" value="Speichern" />
+        </f:form>
+    </div>
+</f:section>
