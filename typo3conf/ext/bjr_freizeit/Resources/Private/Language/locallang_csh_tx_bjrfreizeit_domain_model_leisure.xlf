@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2016-01-29T18:22:52Z" product-name="bjr_freizeit">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-02-01T13:07:22Z" product-name="bjr_freizeit">
 		<header/>
 		<body>
 			<trans-unit id="title.description">
@@ -45,14 +45,17 @@
 			<trans-unit id="url.description">
 				<source>url</source>
 			</trans-unit>
+			<trans-unit id="start_date.description">
+				<source>startDate</source>
+			</trans-unit>
+			<trans-unit id="end_date.description">
+				<source>endDate</source>
+			</trans-unit>
 			<trans-unit id="country.description">
 				<source>country</source>
 			</trans-unit>
 			<trans-unit id="target_group.description">
 				<source>targetGroup</source>
-			</trans-unit>
-			<trans-unit id="leisure_period.description">
-				<source>leisurePeriod</source>
 			</trans-unit>
 			<trans-unit id="organization.description">
 				<source>organization</source>
@@ -62,6 +65,9 @@
 			</trans-unit>
 			<trans-unit id="holiday.description">
 				<source>holiday</source>
+			</trans-unit>
+			<trans-unit id="leisure_period.description">
+				<source>leisurePeriod</source>
 			</trans-unit>
 		</body>
 	</file>

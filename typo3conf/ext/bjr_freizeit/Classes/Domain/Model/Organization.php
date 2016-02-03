@@ -40,18 +40,18 @@ class Organization extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $name = '';
     
     /**
-     * address
-     *
-     * @var \MUM\BjrFreizeit\Domain\Model\Address
-     */
-    protected $address = null;
-    
-    /**
      * url
      *
      * @var string
      */
     protected $url = '';
+    
+    /**
+     * address
+     *
+     * @var \MUM\BjrFreizeit\Domain\Model\Address
+     */
+    protected $address = null;
     
     /**
      * contact

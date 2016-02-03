@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2016-01-29T18:22:52Z" product-name="bjr_freizeit">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-02-01T13:07:22Z" product-name="bjr_freizeit">
 		<header/>
 		<body>
 			<trans-unit id="tx_bjrfreizeit_domain_model_targetgroup">
@@ -35,15 +35,6 @@
 			</trans-unit>
 			<trans-unit id="tx_bjrfreizeit_domain_model_tags.name">
 				<source>Name</source>
-			</trans-unit>
-			<trans-unit id="tx_bjrfreizeit_domain_model_leisureperiod">
-				<source>Leisure Period</source>
-			</trans-unit>
-			<trans-unit id="tx_bjrfreizeit_domain_model_leisureperiod.start_period">
-				<source>Start Period</source>
-			</trans-unit>
-			<trans-unit id="tx_bjrfreizeit_domain_model_leisureperiod.end_period">
-				<source>End Period</source>
 			</trans-unit>
 			<trans-unit id="tx_bjrfreizeit_domain_model_leisure">
 				<source>Leisure</source>
@@ -90,14 +81,17 @@
 			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.url">
 				<source>Url</source>
 			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.start_date">
+				<source>Start date</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.end_date">
+				<source>End date</source>
+			</trans-unit>
 			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.country">
 				<source>Country</source>
 			</trans-unit>
 			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.target_group">
 				<source>Target Group</source>
-			</trans-unit>
-			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.leisure_period">
-				<source>Leisure Period</source>
 			</trans-unit>
 			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.organization">
 				<source>Organization</source>
@@ -143,6 +137,9 @@
 			</trans-unit>
 			<trans-unit id="tx_bjrfreizeit_domain_model_contact.address">
 				<source>Address</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.leisure_period">
+				<source>Leisure Period</source>
 			</trans-unit>
 		</body>
 	</file>

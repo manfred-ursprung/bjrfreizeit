@@ -395,6 +395,58 @@ class LeisureTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 	/**
 	 * @test
 	 */
+	public function getStartDateReturnsInitialValueForDateTime()
+	{
+		$this->assertEquals(
+			NULL,
+			$this->subject->getStartDate()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setStartDateForDateTimeSetsStartDate()
+	{
+		$dateTimeFixture = new \DateTime();
+		$this->subject->setStartDate($dateTimeFixture);
+
+		$this->assertAttributeEquals(
+			$dateTimeFixture,
+			'startDate',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getEndDateReturnsInitialValueForDateTime()
+	{
+		$this->assertEquals(
+			NULL,
+			$this->subject->getEndDate()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setEndDateForDateTimeSetsEndDate()
+	{
+		$dateTimeFixture = new \DateTime();
+		$this->subject->setEndDate($dateTimeFixture);
+
+		$this->assertAttributeEquals(
+			$dateTimeFixture,
+			'endDate',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
 	public function getCountryReturnsInitialValueForCountry()
 	{
 		$this->assertEquals(
@@ -471,62 +523,6 @@ class LeisureTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 		$this->inject($this->subject, 'targetGroup', $targetGroupObjectStorageMock);
 
 		$this->subject->removeTargetGroup($targetGroup);
-
-	}
-
-	/**
-	 * @test
-	 */
-	public function getLeisurePeriodReturnsInitialValueForLeisurePeriod()
-	{
-		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$this->assertEquals(
-			$newObjectStorage,
-			$this->subject->getLeisurePeriod()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function setLeisurePeriodForObjectStorageContainingLeisurePeriodSetsLeisurePeriod()
-	{
-		$leisurePeriod = new \MUM\BjrFreizeit\Domain\Model\LeisurePeriod();
-		$objectStorageHoldingExactlyOneLeisurePeriod = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$objectStorageHoldingExactlyOneLeisurePeriod->attach($leisurePeriod);
-		$this->subject->setLeisurePeriod($objectStorageHoldingExactlyOneLeisurePeriod);
-
-		$this->assertAttributeEquals(
-			$objectStorageHoldingExactlyOneLeisurePeriod,
-			'leisurePeriod',
-			$this->subject
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function addLeisurePeriodToObjectStorageHoldingLeisurePeriod()
-	{
-		$leisurePeriod = new \MUM\BjrFreizeit\Domain\Model\LeisurePeriod();
-		$leisurePeriodObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('attach'), array(), '', FALSE);
-		$leisurePeriodObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($leisurePeriod));
-		$this->inject($this->subject, 'leisurePeriod', $leisurePeriodObjectStorageMock);
-
-		$this->subject->addLeisurePeriod($leisurePeriod);
-	}
-
-	/**
-	 * @test
-	 */
-	public function removeLeisurePeriodFromObjectStorageHoldingLeisurePeriod()
-	{
-		$leisurePeriod = new \MUM\BjrFreizeit\Domain\Model\LeisurePeriod();
-		$leisurePeriodObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('detach'), array(), '', FALSE);
-		$leisurePeriodObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($leisurePeriod));
-		$this->inject($this->subject, 'leisurePeriod', $leisurePeriodObjectStorageMock);
-
-		$this->subject->removeLeisurePeriod($leisurePeriod);
 
 	}
 

@@ -158,46 +158,6 @@ CREATE TABLE tx_bjrfreizeit_domain_model_tags (
 );
 
 #
-# Table structure for table 'tx_bjrfreizeit_domain_model_leisureperiod'
-#
-CREATE TABLE tx_bjrfreizeit_domain_model_leisureperiod (
-
-	uid int(11) NOT NULL auto_increment,
-	pid int(11) DEFAULT '0' NOT NULL,
-
-	start_period varchar(255) DEFAULT '' NOT NULL,
-	end_period varchar(255) DEFAULT '' NOT NULL,
-
-	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
-	crdate int(11) unsigned DEFAULT '0' NOT NULL,
-	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
-	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
-	hidden tinyint(4) unsigned DEFAULT '0' NOT NULL,
-	starttime int(11) unsigned DEFAULT '0' NOT NULL,
-	endtime int(11) unsigned DEFAULT '0' NOT NULL,
-
-	t3ver_oid int(11) DEFAULT '0' NOT NULL,
-	t3ver_id int(11) DEFAULT '0' NOT NULL,
-	t3ver_wsid int(11) DEFAULT '0' NOT NULL,
-	t3ver_label varchar(255) DEFAULT '' NOT NULL,
-	t3ver_state tinyint(4) DEFAULT '0' NOT NULL,
-	t3ver_stage int(11) DEFAULT '0' NOT NULL,
-	t3ver_count int(11) DEFAULT '0' NOT NULL,
-	t3ver_tstamp int(11) DEFAULT '0' NOT NULL,
-	t3ver_move_id int(11) DEFAULT '0' NOT NULL,
-
-	sys_language_uid int(11) DEFAULT '0' NOT NULL,
-	l10n_parent int(11) DEFAULT '0' NOT NULL,
-	l10n_diffsource mediumblob,
-
-	PRIMARY KEY (uid),
-	KEY parent (pid),
-	KEY t3ver_oid (t3ver_oid,t3ver_wsid),
- KEY language (l10n_parent,sys_language_uid)
-
-);
-
-#
 # Table structure for table 'tx_bjrfreizeit_domain_model_leisure'
 #
 CREATE TABLE tx_bjrfreizeit_domain_model_leisure (
@@ -219,9 +179,10 @@ CREATE TABLE tx_bjrfreizeit_domain_model_leisure (
 	image int(11) unsigned NOT NULL default '0',
 	file int(11) unsigned NOT NULL default '0',
 	url varchar(255) DEFAULT '' NOT NULL,
+	start_date date DEFAULT '0000-00-00',
+	end_date date DEFAULT '0000-00-00',
 	country int(11) unsigned DEFAULT '0',
 	target_group int(11) unsigned DEFAULT '0' NOT NULL,
-	leisure_period int(11) unsigned DEFAULT '0' NOT NULL,
 	organization int(11) unsigned DEFAULT '0',
 	tags int(11) unsigned DEFAULT '0' NOT NULL,
 	holiday int(11) unsigned DEFAULT '0' NOT NULL,
@@ -382,19 +343,6 @@ CREATE TABLE tx_bjrfreizeit_domain_model_contact (
 # Table structure for table 'tx_bjrfreizeit_leisure_targetgroup_mm'
 #
 CREATE TABLE tx_bjrfreizeit_leisure_targetgroup_mm (
-	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-
-	KEY uid_local (uid_local),
-	KEY uid_foreign (uid_foreign)
-);
-
-#
-# Table structure for table 'tx_bjrfreizeit_leisure_leisureperiod_mm'
-#
-CREATE TABLE tx_bjrfreizeit_leisure_leisureperiod_mm (
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,

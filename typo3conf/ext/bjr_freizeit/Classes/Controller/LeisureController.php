@@ -47,8 +47,18 @@ class LeisureController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function listAction()
     {
-        $leisures = $this->leisureRepository->findAll();
+        //$leisures = $this->leisureRepository->findAll();
+        //$this->view->assign('leisures', $leisures);
+
+        $args = $this->request->getArguments();
+        if(isset($args['category'])){
+            $leisures = $this->leisureRepository->findAllSorting($this->settings['sorting'], $args['category']);
+        }else{
+            $leisures = $this->leisureRepository->findAllSorting($this->settings['sorting']);
+        }
         $this->view->assign('leisures', $leisures);
+        $this->view->assign('imagePath', $this->settings['leisureImagePath']);
+        $this->view->assign('detailPage', $this->settings['detailPage']);
     }
     
     /**

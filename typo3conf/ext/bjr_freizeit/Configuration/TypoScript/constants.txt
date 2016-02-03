@@ -10,6 +10,15 @@ plugin.tx_bjrfreizeit_display {
 	}
 	persistence {
 		# cat=plugin.tx_bjrfreizeit_display//a; type=string; label=Default storage PID
-		storagePid =
+		storagePid = 8
 	}
+	settings{
+    	    # cat=plugin.tx_bjrfreizeit/b; type=string; label=Pfad zu den Bildern für die Freizeiten
+    	    leisureImagePath = uploads/tx_bjrfreizeit/
+    	    # cat=plugin.tx_bjrlend/c type=string; label=PID der Seite für die Suchergebnisse
+            searchResultPid = 19
+
+            # cat=plugin.tx_bjrlend/c type=int; label=Anzahl der Suchergebnisse für die zufällig ausgewählten Freizeiten
+            numberRandomList = 4
+    }
 }

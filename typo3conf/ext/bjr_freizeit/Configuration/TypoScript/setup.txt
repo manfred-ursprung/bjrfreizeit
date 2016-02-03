@@ -8,38 +8,18 @@ plugin.tx_bjrfreizeit_display {
 	persistence {
 		storagePid = {$plugin.tx_bjrfreizeit_display.persistence.storagePid}
 	}
+
+	settings{
+        leisureImagePath        ={$plugin.tx_bjrlend.settings.leisureImagePath}
+        searchResultPid         ={$plugin.tx_bjrlend.settings.searchResultPid}
+        numberRandomList        ={$plugin.tx_bjrlend.settings.numberRandomList}
+    }
 }
-
-plugin.tx_bjrfreizeit._CSS_DEFAULT_STYLE (
-	textarea.f3-form-error {
-		background-color:#FF9F9F;
-		border: 1px #FF0000 solid;
-	}
-
-	input.f3-form-error {
-		background-color:#FF9F9F;
-		border: 1px #FF0000 solid;
-	}
-
-	.tx-bjr-freizeit table {
-		border-collapse:separate;
-		border-spacing:10px;
-	}
-
-	.tx-bjr-freizeit table th {
-		font-weight:bold;
-	}
-
-	.tx-bjr-freizeit table td {
-		vertical-align:top;
-	}
-
-	.typo3-messages .message-error {
-		color:red;
-	}
-
-	.typo3-messages .message-ok {
-		color:green;
-	}
-
-)
+bjrFreizeitAjax = PAGE
+bjrFreizeitAjax {
+    typeNum = 87654321
+    config.disableAllHeaderCode = 1
+    config.metaCharset = UTF-8
+    10 = COA
+    10 <  styles.content.get
+}

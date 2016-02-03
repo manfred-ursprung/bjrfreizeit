@@ -234,66 +234,6 @@
         {
             "config": {
                 "position": [
-                    60,
-                    530
-                ]
-            },
-            "name": "New Model Object",
-            "value": {
-                "actionGroup": {
-                    "_default0_list": false,
-                    "_default1_show": false,
-                    "_default2_new_create": false,
-                    "_default3_edit_update": false,
-                    "_default4_delete": false,
-                    "customActions": []
-                },
-                "name": "LeisurePeriod",
-                "objectsettings": {
-                    "addDeletedField": true,
-                    "addHiddenField": true,
-                    "addStarttimeEndtimeFields": true,
-                    "aggregateRoot": false,
-                    "categorizable": false,
-                    "description": "",
-                    "mapToTable": "",
-                    "parentClass": "",
-                    "sorting": false,
-                    "type": "Entity",
-                    "uid": "565757207863"
-                },
-                "propertyGroup": {
-                    "properties": [
-                        {
-                            "allowedFileTypes": "",
-                            "maxItems": "1",
-                            "propertyDescription": "",
-                            "propertyIsExcludeField": true,
-                            "propertyIsRequired": false,
-                            "propertyName": "startPeriod",
-                            "propertyType": "String",
-                            "uid": "1132773990039"
-                        },
-                        {
-                            "allowedFileTypes": "",
-                            "maxItems": "1",
-                            "propertyDescription": "",
-                            "propertyIsExcludeField": true,
-                            "propertyIsRequired": false,
-                            "propertyName": "endPeriod",
-                            "propertyType": "String",
-                            "uid": "548388856469"
-                        }
-                    ]
-                },
-                "relationGroup": {
-                    "relations": []
-                }
-            }
-        },
-        {
-            "config": {
-                "position": [
                     433,
                     306
                 ]
@@ -465,6 +405,26 @@
                             "propertyName": "url",
                             "propertyType": "String",
                             "uid": "126590238065"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsRequired": false,
+                            "propertyName": "startDate",
+                            "propertyType": "NativeDate",
+                            "uid": "1450656155440"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsRequired": false,
+                            "propertyName": "endDate",
+                            "propertyType": "NativeDate",
+                            "uid": "513860514197"
                         }
                     ]
                 },
@@ -489,16 +449,6 @@
                             "relationType": "manyToMany",
                             "relationWire": "[wired]",
                             "uid": "120703427717"
-                        },
-                        {
-                            "foreignRelationClass": "",
-                            "lazyLoading": false,
-                            "propertyIsExcludeField": true,
-                            "relationDescription": "",
-                            "relationName": "leisurePeriod",
-                            "relationType": "manyToMany",
-                            "relationWire": "[wired]",
-                            "uid": "1166775775926"
                         },
                         {
                             "foreignRelationClass": "",
@@ -688,7 +638,7 @@
             "config": {
                 "position": [
                     524,
-                    -48
+                    10
                 ]
             },
             "name": "New Model Object",
@@ -763,8 +713,8 @@
         },
         "extensionKey": "bjr_freizeit",
         "name": "Freizeiten anzeigen",
-        "originalExtensionKey": "",
-        "originalVendorName": "",
+        "originalExtensionKey": "bjr_freizeit",
+        "originalVendorName": "MUM",
         "persons": [
             {
                 "company": "Webapplikationen Ursprung",
@@ -789,7 +739,7 @@
     "wires": [
         {
             "src": {
-                "moduleId": 5,
+                "moduleId": 4,
                 "terminal": "relationWire_0",
                 "uid": "973087461165"
             },
@@ -801,7 +751,7 @@
         },
         {
             "src": {
-                "moduleId": 5,
+                "moduleId": 4,
                 "terminal": "relationWire_1",
                 "uid": "120703427717"
             },
@@ -813,20 +763,8 @@
         },
         {
             "src": {
-                "moduleId": 5,
-                "terminal": "relationWire_2",
-                "uid": "1166775775926"
-            },
-            "tgt": {
                 "moduleId": 4,
-                "terminal": "SOURCES",
-                "uid": "565757207863"
-            }
-        },
-        {
-            "src": {
-                "moduleId": 5,
-                "terminal": "relationWire_3",
+                "terminal": "relationWire_2",
                 "uid": "1421230121307"
             },
             "tgt": {
@@ -837,8 +775,8 @@
         },
         {
             "src": {
-                "moduleId": 5,
-                "terminal": "relationWire_4",
+                "moduleId": 4,
+                "terminal": "relationWire_3",
                 "uid": "693689276616"
             },
             "tgt": {
@@ -849,12 +787,12 @@
         },
         {
             "src": {
-                "moduleId": 5,
-                "terminal": "relationWire_5",
+                "moduleId": 4,
+                "terminal": "relationWire_4",
                 "uid": "256123062717"
             },
             "tgt": {
-                "moduleId": 6,
+                "moduleId": 5,
                 "terminal": "SOURCES",
                 "uid": "437253218977"
             }
@@ -866,19 +804,19 @@
                 "uid": "1140566429321"
             },
             "tgt": {
-                "moduleId": 7,
+                "moduleId": 6,
                 "terminal": "SOURCES",
                 "uid": "78569690987"
             }
         },
         {
             "src": {
-                "moduleId": 8,
+                "moduleId": 7,
                 "terminal": "relationWire_0",
                 "uid": "1168890020302"
             },
             "tgt": {
-                "moduleId": 7,
+                "moduleId": 6,
                 "terminal": "SOURCES",
                 "uid": "78569690987"
             }
@@ -890,14 +828,14 @@
                 "uid": "259121695917"
             },
             "tgt": {
-                "moduleId": 8,
+                "moduleId": 7,
                 "terminal": "SOURCES",
                 "uid": "1424350987449"
             }
         }
     ],
     "log": {
-        "last_modified": "2016-01-29 06:22",
+        "last_modified": "2016-02-01 01:07",
         "extension_builder_version": "7.6.0",
         "be_user": " (1)"
     }

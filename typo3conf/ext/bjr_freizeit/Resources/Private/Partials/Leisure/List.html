@@ -1,0 +1,53 @@
+{namespace fr = MUM\BjrFreizeit\ViewHelpers}
+
+
+<f:section name="List">
+    <f:for each="{leisures}" as="item" iteration="iteration">
+        <div class="well">
+            <div class="article-detail row">
+                <div class="article-image col-sm-2" data-article="{item.uid}" id="article-uid_{item.uid}">
+                    <a class="fancybox" href="{f:uri.page(pageUid: detailPage, additionalParams: '{tx_bjrfreizeit_display: {leisure: item.uid}}')}">
+
+                        <f:image class="img-responsive img-rounded" alt="Produktbild für Tablet - Apple iPad Air" src="{item.urlForImage}" width="260c" height="173c" title="Produktbild für Tablet - Apple iPad Air" />
+                    </a>
+                </div>
+                <div class="article-desc col-sm-6">
+                    <h3 class="art-title">{item.title}</h3>
+                    <p class="art-kategorie">
+                        <span class="art-label">{item.shortDescription}<br></span>
+                        <span class="hauptkategorie">
+                            <f:for each="{item.targetGroup}" as="target">
+                                {target.name}
+                            </f:for>
+                            <br></span>
+                        <span class="subkategorie">
+                            {item.organization.name}
+                        </span>
+                    </p>
+                </div>
+                <div class="article-action col-sm-4">
+                    <ul class="art-features">
+                        <li>
+                            <f:format.date date="{item.startDate}" format="d.m.Y" />
+                            - <f:format.date date="{item.endDate}" format="d.m.Y" />
+                        </li>
+                        <li>
+                            <f:format.currency currencySign="€" decimalSeparator="," thousandsSeparator="." prependCurrency="TRUE">
+                                {item.price}
+                            </f:format.currency>
+                        </li>
+                        <li class="wellx well-feature well-email">
+                            <a href="{f:uri.page(pageUid: detailPage, additionalParams: '{tx_bjrfreizeit_display: {leisure: item.uid}}')}"
+                               title="#" class="btn btn-default">
+                                Details &amp; Anmeldung
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </f:for>
+
+</f:section>

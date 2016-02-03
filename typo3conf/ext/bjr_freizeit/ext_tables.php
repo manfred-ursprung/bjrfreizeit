@@ -6,8 +6,12 @@ if (!defined('TYPO3_MODE')) {
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	'MUM.' . $_EXTKEY,
 	'Display',
-	'Listen'
+	'Freizeiten Listen'
 );
+
+$pluginSignature = str_replace('_','',$_EXTKEY) . '_display';
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform_display.xml');
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Freizeiten anzeigen');
 
@@ -22,9 +26,6 @@ if (!defined('TYPO3_MODE')) {
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_bjrfreizeit_domain_model_tags', 'EXT:bjr_freizeit/Resources/Private/Language/locallang_csh_tx_bjrfreizeit_domain_model_tags.xlf');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_bjrfreizeit_domain_model_tags');
-
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_bjrfreizeit_domain_model_leisureperiod', 'EXT:bjr_freizeit/Resources/Private/Language/locallang_csh_tx_bjrfreizeit_domain_model_leisureperiod.xlf');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_bjrfreizeit_domain_model_leisureperiod');
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_bjrfreizeit_domain_model_leisure', 'EXT:bjr_freizeit/Resources/Private/Language/locallang_csh_tx_bjrfreizeit_domain_model_leisure.xlf');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_bjrfreizeit_domain_model_leisure');

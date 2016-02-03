@@ -124,6 +124,23 @@ class Leisure extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $file = null;
     
     /**
+     * url
+     *
+     * @var string
+     */
+    protected $url = '';
+    
+    /**
+     * @var \DateTime
+     */
+    protected $startDate = null;
+
+    /**
+     * @var \DateTime
+     */
+    protected $endDate = null;
+
+    /**
      * country
      *
      * @var \MUM\BjrFreizeit\Domain\Model\Country
@@ -136,13 +153,6 @@ class Leisure extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\MUM\BjrFreizeit\Domain\Model\TargetGroup>
      */
     protected $targetGroup = null;
-    
-    /**
-     * leisurePeriod
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\MUM\BjrFreizeit\Domain\Model\LeisurePeriod>
-     */
-    protected $leisurePeriod = null;
     
     /**
      * organization
@@ -164,13 +174,6 @@ class Leisure extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\MUM\BjrFreizeit\Domain\Model\Holiday>
      */
     protected $holiday = null;
-    
-    /**
-     * url
-     *
-     * @var string
-     */
-    protected $url = '';
     
     /**
      * Returns the title
@@ -465,7 +468,6 @@ class Leisure extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected function initStorageObjects()
     {
         $this->targetGroup = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->leisurePeriod = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->tags = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->holiday = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
@@ -532,49 +534,6 @@ class Leisure extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setTargetGroup(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $targetGroup)
     {
         $this->targetGroup = $targetGroup;
-    }
-    
-    /**
-     * Adds a LeisurePeriod
-     *
-     * @param \MUM\BjrFreizeit\Domain\Model\LeisurePeriod $leisurePeriod
-     * @return void
-     */
-    public function addLeisurePeriod(\MUM\BjrFreizeit\Domain\Model\LeisurePeriod $leisurePeriod)
-    {
-        $this->leisurePeriod->attach($leisurePeriod);
-    }
-    
-    /**
-     * Removes a LeisurePeriod
-     *
-     * @param \MUM\BjrFreizeit\Domain\Model\LeisurePeriod $leisurePeriodToRemove The LeisurePeriod to be removed
-     * @return void
-     */
-    public function removeLeisurePeriod(\MUM\BjrFreizeit\Domain\Model\LeisurePeriod $leisurePeriodToRemove)
-    {
-        $this->leisurePeriod->detach($leisurePeriodToRemove);
-    }
-    
-    /**
-     * Returns the leisurePeriod
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\MUM\BjrFreizeit\Domain\Model\LeisurePeriod> $leisurePeriod
-     */
-    public function getLeisurePeriod()
-    {
-        return $this->leisurePeriod;
-    }
-    
-    /**
-     * Sets the leisurePeriod
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\MUM\BjrFreizeit\Domain\Model\LeisurePeriod> $leisurePeriod
-     * @return void
-     */
-    public function setLeisurePeriod(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $leisurePeriod)
-    {
-        $this->leisurePeriod = $leisurePeriod;
     }
     
     /**
@@ -704,5 +663,58 @@ class Leisure extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->url = $url;
     }
+    
+    /**
+     * Returns the startDate
+     *
+     * @return \DateTime
+     */
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+    
+    /**
+     * Sets the startDate
+     *
+     * @param \DateTime $startDate
+     */
+    public function setStartDate($startDate)
+    {
+        $this->startDate = $startDate;
+    }
+    
+    /**
+     * Returns the endDate
+     *
+     * @return \DateTime
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+    
+    /**
+     * Sets the endDate
+     *
+     * @param \DateTime $endDate
+     */
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
+    }
 
+
+
+
+    public function getUrlForImage(){
+        if(is_a($this->image, '\TYPO3\CMS\Extbase\Domain\Model\FileReference')){
+            $path = $this->image->getOriginalResource()->getPublicUrl();
+        }else{
+            //default path
+            $path = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath('bjr_freizeit') .'Resources/Public/Images/defaultArticle.png';
+
+        }
+        return $path;
+    }
 }

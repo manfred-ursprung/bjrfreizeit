@@ -19,14 +19,14 @@ return array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'searchFields' => 'title,short_description,description,price,service_specification,minimum_participants,partner,cooperation,location,leader,referent,image,file,url,country,target_group,leisure_period,organization,tags,holiday,',
+		'searchFields' => 'title,short_description,description,price,service_specification,minimum_participants,partner,cooperation,location,leader,referent,image,file,url,start_date,end_date,country,target_group,organization,tags,holiday,',
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('bjr_freizeit') . 'Resources/Public/Icons/tx_bjrfreizeit_domain_model_leisure.gif'
 	),
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, short_description, description, price, service_specification, minimum_participants, partner, cooperation, location, leader, referent, image, file, url, country, target_group, leisure_period, organization, tags, holiday',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, short_description, description, price, service_specification, minimum_participants, partner, cooperation, location, leader, referent, image, file, url, start_date, end_date, country, target_group, organization, tags, holiday',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, short_description;;;richtext:rte_transform[mode=ts_links], description;;;richtext:rte_transform[mode=ts_links], price, service_specification;;;richtext:rte_transform[mode=ts_links], minimum_participants, partner, cooperation, location, leader, referent, image, file, url, country, target_group, leisure_period, organization, tags, holiday, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, short_description;;;richtext:rte_transform[mode=ts_links], description;;;richtext:rte_transform[mode=ts_links], price, service_specification;;;richtext:rte_transform[mode=ts_links], minimum_participants, partner, cooperation, location, leader, referent, image, file, url, start_date, end_date, country, target_group, organization, tags, holiday, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -366,6 +366,30 @@ return array(
 				'eval' => 'trim'
 			),
 		),
+		'start_date' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:bjr_freizeit/Resources/Private/Language/locallang_db.xlf:tx_bjrfreizeit_domain_model_leisure.start_date',
+			'config' => array(
+				'dbType' => 'date',
+				'type' => 'input',
+				'size' => 7,
+				'eval' => 'date',
+				'checkbox' => 0,
+				'default' => '0000-00-00'
+			),
+		),
+		'end_date' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:bjr_freizeit/Resources/Private/Language/locallang_db.xlf:tx_bjrfreizeit_domain_model_leisure.end_date',
+			'config' => array(
+				'dbType' => 'date',
+				'type' => 'input',
+				'size' => 7,
+				'eval' => 'date',
+				'checkbox' => 0,
+				'default' => '0000-00-00'
+			),
+		),
 		'country' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:bjr_freizeit/Resources/Private/Language/locallang_db.xlf:tx_bjrfreizeit_domain_model_leisure.country',
@@ -411,47 +435,6 @@ return array(
 						'icon' => 'add.gif',
 						'params' => array(
 							'table' => 'tx_bjrfreizeit_domain_model_targetgroup',
-							'pid' => '###CURRENT_PID###',
-							'setValue' => 'prepend'
-						),
-					),
-				),
-			),
-		),
-		'leisure_period' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:bjr_freizeit/Resources/Private/Language/locallang_db.xlf:tx_bjrfreizeit_domain_model_leisure.leisure_period',
-			'config' => array(
-				'type' => 'select',
-				'renderType' => 'selectMultipleSideBySide',
-				'foreign_table' => 'tx_bjrfreizeit_domain_model_leisureperiod',
-				'MM' => 'tx_bjrfreizeit_leisure_leisureperiod_mm',
-				'size' => 10,
-				'autoSizeMax' => 30,
-				'maxitems' => 9999,
-				'multiple' => 0,
-				'wizards' => array(
-					'_PADDING' => 1,
-					'_VERTICAL' => 1,
-					'edit' => array(
-						'module' => array(
-							'name' => 'wizard_edit',
-						),
-						'type' => 'popup',
-						'title' => 'Edit',
-						'icon' => 'edit2.gif',
-						'popup_onlyOpenIfSelected' => 1,
-						'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
-						),
-					'add' => Array(
-						'module' => array(
-							'name' => 'wizard_add',
-						),
-						'type' => 'script',
-						'title' => 'Create new',
-						'icon' => 'add.gif',
-						'params' => array(
-							'table' => 'tx_bjrfreizeit_domain_model_leisureperiod',
 							'pid' => '###CURRENT_PID###',
 							'setValue' => 'prepend'
 						),
@@ -554,4 +537,4 @@ return array(
 		),
 		
 	),
-);
+);## EXTENSION BUILDER DEFAULTS END TOKEN - Everything BEFORE this line is overwritten with the defaults of the extension builder

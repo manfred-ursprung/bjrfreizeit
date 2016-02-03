@@ -7,7 +7,7 @@ if (!defined('TYPO3_MODE')) {
 	'MUM.' . $_EXTKEY,
 	'Display',
 	array(
-		'Leisure' => 'list, show',
+		'Leisure' => 'list, show, search',
 		
 	),
 	// non-cacheable actions
