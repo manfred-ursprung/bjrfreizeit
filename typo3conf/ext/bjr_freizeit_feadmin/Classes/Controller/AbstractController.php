@@ -36,13 +36,6 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
 
     /**
-     * @var \Bjr\BjrLend\Utility\UserSession
-     * @inject
-     */
-    protected $userSession;
-
-
-    /**
      * organizationRepository
      *
      * @var \MUM\BjrFreizeit\Domain\Repository\OrganizationRepository

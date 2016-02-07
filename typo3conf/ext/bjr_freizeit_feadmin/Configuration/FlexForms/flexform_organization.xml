@@ -19,11 +19,11 @@
                                         <numIndex index="1"></numIndex>
                                     </numIndex>
                                     <numIndex index="1" type="array">
-                                        <numIndex index="0">LLL:EXT:bjr_feadmin/Resources/Private/Language/locallang.xlf:tx_bjrfeadmin_flex_organisation.defaultAction.I.1</numIndex>
+                                        <numIndex index="0">LLL:EXT:bjr_freizeit_feadmin/Resources/Private/Language/locallang.xlf:tx_bjrfreizeitfeadmin_flex_organisation.defaultAction.I.1</numIndex>
                                         <numIndex index="1">1</numIndex>
                                     </numIndex>
                                     <numIndex index="2" type="array">
-                                        <numIndex index="0">LLL:EXT:bjr_feadmin/Resources/Private/Language/locallang.xlf:tx_bjrfeadmin_flex_organisation.defaultAction.I.2</numIndex>
+                                        <numIndex index="0">LLL:EXT:bjr_freizeit_feadmin/Resources/Private/Language/locallang.xlf:tx_bjrfreizeitfeadmin_flex_organisation.defaultAction.I.2</numIndex>
                                         <numIndex index="1">2</numIndex>
                                     </numIndex>
 
@@ -37,7 +37,7 @@
                     <settings.pidOrganizationFolder>
                         <TCEforms>
                             <exclude>1</exclude>
-                            <label>Folder mit Ausleihstellen</label>
+                            <label>Seite mit Ausleihstellen</label>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>
@@ -53,7 +53,7 @@
                     <settings.pidOrganizationEdit>
                         <TCEforms>
                             <exclude>1</exclude>
-                            <label>Seite für Bearbeiten / Anlegen Funktion</label>
+                            <label>Seite für Bearbeiten / Anlegen einer Organisation</label>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>
@@ -66,10 +66,10 @@
                             </config>
                         </TCEforms>
                     </settings.pidOrganizationEdit>
-                    <settings.pidArticleList>
+                    <settings.pidLeisureList>
                         <TCEforms>
                             <exclude>1</exclude>
-                            <label>Seite für Artikelliste</label>
+                            <label>Seite für Liste der Freizeiten</label>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>
@@ -81,7 +81,7 @@
 
                             </config>
                         </TCEforms>
-                    </settings.pidArticleList>
+                    </settings.pidLeisureList>
 				</el>
 			</ROOT>
 		</sDEF>

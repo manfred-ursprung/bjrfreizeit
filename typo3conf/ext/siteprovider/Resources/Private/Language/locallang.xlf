@@ -18,6 +18,16 @@
 			<trans-unit id="flux.example.fields.settings.helloWorld">
 				<source>Example input</source>
 			</trans-unit>
+
+			<trans-unit id="flux.frontendadministration">
+				<source>Frontend Administration Seite</source>
+			</trans-unit>
+			<trans-unit id="flux.frontendadministration.description">
+				<source></source>
+			</trans-unit>
+			<trans-unit id="flux.administration">
+				<source>Frontend Administration Seite</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

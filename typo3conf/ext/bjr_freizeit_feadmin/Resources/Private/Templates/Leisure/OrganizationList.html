@@ -1,9 +1,13 @@
-{namespace v=Tx_Vhs_ViewHelpers}
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+     xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+     xmlns:flux="http://typo3.org/ns/FluidTYPO3/Flux/ViewHelpers">
+
 <f:layout name="Default" />
 
 <f:section name="main">
 
-<h1>Artikelliste für Ausleihstelle <br />{organization.name}</h1>
+<h1>Freizeitenliste für Organisation <br />{organization.name}</h1>
 
 <f:flashMessages renderMode="div" />
 
@@ -11,26 +15,26 @@
     <thead>
     <tr>
         <th>Id</th>
-        <th>Artikelname </th>
-        <th>Kategorie</th>
-        <th>Unter-<br />kategorie</th>
+        <th>Freizeit Titel </th>
+        <th>Tags</th>
+
         <th>Gebühr</th>
         <th>Eintragungs-<br />datum</th>
         <th>Aktion</th>
     </tr>
     </thead>
-
-    <f:for each="{articles}" as="article" key="key" iteration="itemIteration">
+<f:debug>{settings}</f:debug>
+    <f:for each="{leisures}" as="leisure" key="key" iteration="itemIteration">
         <f:if condition="{itemIteration.isOdd }">
             <f:then>
-                <v:var.set name="class" value="odd"></v:var.set>
+                <v:variable.set name="class" value="odd"></v:variable.set>
             </f:then>
             <f:else>
-                <v:var.set name="class" value="even"></v:var.set>
+                <v:variable.set name="class" value="even"></v:variable.set>
             </f:else>
         </f:if>
         <tr class="{class}">
-            <f:render partial="Article/Listproperties" arguments="{article:article}" />
+            <f:render partial="Leisure/Listproperties" arguments="{leisure:leisure}" />
         </tr>
     </f:for>
 

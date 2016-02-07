@@ -1,5 +1,5 @@
 <?php
-namespace Bjr\BjrFreizeitFeadmin\Controller;
+namespace MUM\BjrFreizeitFeadmin\Controller;
 
 /***************************************************************
  *  Copyright notice
@@ -34,6 +34,8 @@ namespace Bjr\BjrFreizeitFeadmin\Controller;
  */
 use TYPO3\CMS\Core\Exception;
 use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use MUM\BjrFreizeit\Domain\Model\Organization;
+use MUM\BjrFreizeit\Domain\Model\Leisure;
 
 class LeisureController extends AbstractController {
 
@@ -53,14 +55,6 @@ class LeisureController extends AbstractController {
      * @inject
      */
     protected $tagsRepository;
-
-
-
-    /**
-     * @var \Bjr\BjrLend\Utility\UserSession
-     * @inject
-     */
-    protected $userSession;
 
 
     /**
@@ -128,9 +122,9 @@ class LeisureController extends AbstractController {
 	 */
 	public function listAction() {
         $organization = $this->findOrganizationBySession();
-        if(!is_a($organization, '\Bjr\BjrLend\Domain\Model\Organization')){
+        if(!is_a($organization, '\MUM\BjrFreizeit\Domain\Model\Organization')){
             $organization = $this->findOrganizationByLogin();
-            if(is_a($organization, '\Bjr\BjrLend\Domain\Model\Organization')){
+            if(is_a($organization, '\MUM\BjrFreizeit\Domain\Model\Organization')){
                 $this->redirect('organizationList', 'Leisure', NULL, array('organization' => $organization));
             }else{
                 $this->setFlashMessage('Es konnte keine zugehörige Ausleihstelle zu Ihrem Account gefunden werden.');
@@ -141,10 +135,12 @@ class LeisureController extends AbstractController {
 
 	}
 
-
+    /**
+     * @param Organization $organization
+     */
     public function organizationListAction(\MUM\BjrFreizeit\Domain\Model\Organization $organization){
         $leisures = $this->leisureRepository->findByOrganization($organization);
-        $this->userSession->setKey('organization', $organization->getUid());
+        $GLOBALS['TSFE']->fe_user->setKey('ses',  'organization', $organization->getUid());
         $js = $this->jsForDeleteArticle();
         $GLOBALS['TSFE']->getPageRenderer()->addJsFooterInlineCode('organizationList', $js, false);
 
@@ -157,6 +153,7 @@ class LeisureController extends AbstractController {
             'leisures' => $leisures,
             'organization' => $organization,
             'currentPageId' => $GLOBALS['TSFE']->id,
+            'settings'      => $this->settings,
         );
         $this->view->assignMultiple($params);
 
@@ -176,8 +173,8 @@ class LeisureController extends AbstractController {
         $tagList[] = $this->tagsRepository->findAll();
         //$tagList[] = $leisure->getCategory()->getFirstParent();->getChilds()->toArray();
 
-        if(($leisure->getCategory()->getFirstParent()) && ($leisure->getCategory()->getFirstParent()->hasChildren())){
-            $tagList[] = $leisure->getCategory()->getFirstParent()->getChilds()->toArray();
+        if($leisure->hasTags()){
+            $tagList[] = $leisure->getTags()->toArray();
         }
         $params = array(
             'leisure' => $leisure,
@@ -186,7 +183,7 @@ class LeisureController extends AbstractController {
                     $this->typoScript['plugin.']['tx_bjr_lend.']['settings.']['leisureImagePath'] :
                     'uploads/tx_bjrfreizeit/'),
             'categoryList' => $tagList,
-            'firstParent'   => $leisure->getCategory()->getFirstParent(),
+            'firstParent'   => $leisure->getTags()->next(),
             'currentPageId' => $GLOBALS['TSFE']->id,
         );
         //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($leisure->getCategory()->getFirstParent());
@@ -210,7 +207,7 @@ class LeisureController extends AbstractController {
         if($leisure->_isDirty() || $leisure->_isNew()){
             if($leisure->_isNew()){
                 $organization = $this->findOrganizationBySession();
-                if(!is_a($organization, '\Bjr\BjrLend\Domain\Model\Organization')){
+                if(!is_a($organization, '\MUM\BjrFreizeit\Domain\Model\Organization')){
                     $organization = 'Error';
                     $GLOBALS['TSFE']->fe_user->setKey("ses","leisureChange",'Der Artikel konnte nicht angelegt werden. Errorcode: 1413190651');
                 }else{
@@ -364,7 +361,7 @@ class LeisureController extends AbstractController {
     protected  function findOrganization(){
         /** @var  $organization \Bjr\BjrLend\Domain\Model\Organization */
         $organization = $this->findOrganizationBySession();
-        if(!is_a($organization, '\Bjr\BjrLend\Domain\Model\Organization')) {
+        if(!is_a($organization, '\MUM\BjrFreizeit\Domain\Model\Organization')) {
             $organization = $this->findOrganizationByLogin();
         }
         return $organization;
@@ -373,10 +370,10 @@ class LeisureController extends AbstractController {
     /**
      * @return \Bjr\BjrLend\Domain\Model\Organization
      */
- /*   protected function findOrganizationBySession(){
+    protected function findOrganizationBySession(){
         //$user = $GLOBALS['TSFE']->fe_user->user;
-        /** @var  $organization \Bjr\BjrLend\Domain\Model\Organization
-        $organization =  $this->userSession->get('organization');
+        /** @var  $organization Organization */
+        $organization =  $GLOBALS['TSFE']->fe_user->getKey('ses',  'organization');
         if(is_int($organization)){
             $organization = $this->organizationRepository->findByUid($organization);
         }
@@ -387,7 +384,7 @@ class LeisureController extends AbstractController {
 
     protected function findOrganizationByLogin(){
         $feUserId = $GLOBALS['TSFE']->fe_user->user['uid'];
-        /** @var  $organization  \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
+        /** @var  $organization  \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult */
         $organization = $this->organizationRepository->findByFeusername($feUserId);
         if($organization->count() > 0){
             return $organization->getFirst();
@@ -396,7 +393,7 @@ class LeisureController extends AbstractController {
         }
     }
 
-  */
+
     protected function jsForDeleteArticle(){
         $js = <<<EOT
 

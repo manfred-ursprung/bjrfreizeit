@@ -1,46 +1,37 @@
 <div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label required" for ="name">Artikelname:</label>
+    <label class="col-sm-3 col-xs-12 control-label required" for ="name">Titel der Freizeit:</label>
     <div class="col-sm-9 col-xs-12">
-        <f:form.textfield property="title" value="{article.title}" class="form-control" required="1"/>
+        <f:form.textfield property="title" value="{leisure.title}" class="form-control" required="1"/>
     </div>
 </div>
 <!-- Kategorie -->
 <div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label required" for ="name">Kategorie</label>
+    <label class="col-sm-3 col-xs-12 control-label required" for ="name">Tags</label>
     <div class="col-sm-9 col-xs-12">
         <f:form.hidden name="currentPageId" value="{currentPageId}" id="currentPageId" />
+        <f:for each="{leisure.tags}" as="tag" key="key" iteration="itemIteration">
+            {tag.name}<br />
+        </f:for>
 
-        <f:form.select name="parentCategory" options="{categoryList.0}" optionValueField="uid" optionLabelField="title"
-                       prependOptionLabel="Kategorien" value="{firstParent}" class=" form-control" id="selectKat"
-                       additionalAttributes="{required: 'required'}" />
     </div>
 </div>
 
-<!-- Unter Kategorie -->
-<div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label required" for="name">Unterkategorie</label>
-    <div class="col-sm-9 col-xs-12">
 
-        <f:form.select property="category" options="{categoryList.1}" optionValueField="uid" optionLabelField="title"
-                       prependOptionLabel="Unterkategorien" value="{article.category.uid}" class=" form-control" id="selectSubkat"
-                       additionalAttributes="{required: 'required'}" />
-    </div>
-</div>
 <!-- Bild -->
 <div class="row form-group">
     <label class="col-sm-3 col-xs-12 control-label" for="name">Bild</label>
     <div class="col-sm-9 col-xs-12">
         <f:form.upload name="image"  class="form-control"/>
-        <f:image src="{article.image.originalResource.publicUrl}" width="200" alt="Produktbild" treatIdAsReference="TRUE"/>
+        <f:image src="{leisure.image.originalResource.publicUrl}" width="200" alt="Produktbild" treatIdAsReference="TRUE"/>
 
-        <f:form.hidden property="image" value="{article.image}" />
+        <f:form.hidden property="image" value="{leisure.image}" />
     </div>
 </div>
 <!-- Gebühr in Euro ab -->
 <div class="row form-group">
     <label class="col-sm-3 col-xs-12 control-label required" for="fee">Gebühr in Euro ab </label>
     <div class="col-sm-9 col-xs-12">
-        <f:form.textfield property="fee" value="{article.fee}" class="form-control" required="1"/>
+        <f:form.textfield property="price" value="{leisure.price}" class="form-control" required="1"/>
     </div>
 </div>
 
@@ -49,7 +40,7 @@
     <label class="col-sm-3 col-xs-12 control-label required" for="shortDescription">Kurzbeschreibung</label>
     <div class="col-sm-9 col-xs-12">
         <f:form.textarea  cols="20" rows="5" property="shortDescription"
-                          value="{article.shortDescription ->f:format.html(parseFuncTSPath: 'lib.parseFunc')}"  class=" form-control "
+                          value="{leisure.shortDescription ->f:format.raw()}"  class=" form-control "
                           additionalAttributes="{required: 'required'}" />
     </div>
 </div>
@@ -59,86 +50,44 @@
     <label class="col-sm-3 col-xs-12 control-label" for="name">Beschreibung</label>
     <div class="col-sm-9 col-xs-12">
         <f:form.textarea  cols="20" rows="5" property="description"
-                          value="{article.description ->f:format.html(parseFuncTSPath: 'lib.parseFunc')}"  class=" form-control "/>
+                          value="{leisure.description ->f:format.raw()}"  class=" form-control "/>
     </div>
 </div>
 
-<!-- Ausleihbedingung pro Artikel-->
-<div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label" for ="name">Ausleihbedingung speziell für Artikel</label>
-    <div class="col-sm-9 col-xs-12">
-        <f:form.textarea  cols="20" rows="5" property="lendConditions"
-                          value="{article.lendConditions  ->f:format.html(parseFuncTSPath: 'lib.parseFunc')}"  class=" form-control "/>
 
-
-    </div>
-</div>
 <!-- online buchbar wurde entfernt, Funktionalität über Ausleihstelle -> onlineAdministration -->
 
 
-<!-- telefonisch buchbar-->
-<div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label" for="name">Artikel telefonisch buchbar</label>
-    <div class="col-sm-9 col-xs-12">
-        <f:form.checkbox   property="bookingPhone"
-                           value="bookingPhone"  class=" form-control "/>
-    </div>
-</div>
-
 <!-- per email buchbar-->
 <div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label" for="name">Artikel per Email buchbar</label>
+    <label class="col-sm-3 col-xs-12 control-label" for="name">Zielgruppe</label>
     <div class="col-sm-9 col-xs-12">
-        <f:form.checkbox   property="byEmail"
-                           value="byEmail"  class=" form-control "/>
+        <f:form.select property="targetGroup" options="{regions}" optionValueField="uid" optionLabelField="name"
+                       value="{leisure.targetGroup}" class=" form-control" additionalAttributes="{required: 'required'}"/>
     </div>
 </div>
 
 <!-- Ausleihbedingung wird nicht gebraucht, kann eingeblendet werden von Ausleihstelle-->
 <div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label" for ="name">Ausleihbedingung</label>
+    <label class="col-sm-3 col-xs-12 control-label" for ="name">Ferienzeit</label>
     <div class="col-sm-9 col-xs-12">
-        <f:form.textarea  cols="20" rows="5" name="organization.lendConditions" additionalAttributes="{readonly: 'readonly'}"
-                          value="{organization.lendConditions  ->f:format.html(parseFuncTSPath: 'lib.parseFunc')}"  class=" form-control "/>
-
+        <f:form.select property="holiday" options="{regions}" optionValueField="uid" optionLabelField="name"
+                       value="{leisure.holiday}" class=" form-control" additionalAttributes="{required: 'required'}"/>
 
     </div>
 </div>
 
 <!-- INFO : siehe Ausleihbedingung  -->
 <div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label" for ="name">Info</label>
+    <label class="col-sm-3 col-xs-12 control-label" for ="name">Land</label>
     <div class="col-sm-9 col-xs-12">
 
-            <f:form.textarea  cols="20" rows="5" name="organization.info" additionalAttributes="{readonly: 'readonly'}"
-                          value="{organization.info ->f:format.html(parseFuncTSPath: 'lib.parseFunc')}"  class=" form-control "/>
-        <f:comment>
-            <div class="form-control">
-                <f:format.raw>{organization.info}</f:format.raw>
-            </div>
-        </f:comment>
-    </div>
-</div>
-
-<!-- AGB : siehe Ausleihbedingung  -->
-<div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label" for ="name">AGB</label>
-    <div class="col-sm-9 col-xs-12">
-        <f:form.textarea  cols="20" rows="5" name="organization.agb " additionalAttributes="{readonly: 'readonly'}"
-                          value="{organization.agb  ->f:format.html(parseFuncTSPath: 'lib.parseFunc')}"  class=" form-control "/>
+        <f:form.select property="country" options="{regions}" optionValueField="uid" optionLabelField="name"
+                       value="{leisure.country.name}" class=" form-control" additionalAttributes="{required: 'required'}"/>
 
     </div>
 </div>
 
-<!-- Öffnungszeiten : siehe Ausleihbedingung  -->
-<div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label" for ="name">Öffnungszeiten</label>
-    <div class="col-sm-9 col-xs-12">
-        <f:form.textarea  cols="20" rows="5" name="organization.openingTimes" additionalAttributes="{readonly: 'readonly'}"
-                          value="{organization.openingTimes  ->f:format.html(parseFuncTSPath: 'lib.parseFunc')}"  class=" form-control "/>
-
-    </div>
-</div>
 
 
 <f:form.validationResults>

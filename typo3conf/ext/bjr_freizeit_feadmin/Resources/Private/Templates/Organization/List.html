@@ -13,7 +13,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 <f:section name="main">
 <h1>Kundenliste</h1>
-
+<f:debug>{settings}</f:debug>
     <f:flashMessages renderMode="div" />
     <f:link.action action="new" pageUid="{settings.pidOrganizationEdit}" class="btn btn-primary" style="margin-bottom: 20px;"><i class="fa fa-plus-circle"></i> Neue Ausleihstelle</f:link.action><br/>
 
@@ -22,9 +22,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
         <tr>
             <th>Id</th>
             <th>Ausleihstelle </th>
-            <th>Region</th>
-            <th>Online-<br />verwaltung</th>
-            <th>Regionale<br />Ausleihstelle</th>
+            <th></th>
             <th>Aktion</th>
         </tr>
     </thead>

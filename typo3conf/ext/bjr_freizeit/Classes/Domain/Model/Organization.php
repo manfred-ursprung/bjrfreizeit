@@ -74,7 +74,7 @@ class Organization extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * @var int
      */
-    protected $articleFolderPid;
+    protected $leisureFolderPid;
 
 
     /**
@@ -187,18 +187,21 @@ class Organization extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * @return int
      */
-    public function getArticleFolderPid()
+    public function getLeisureFolderPid()
     {
-        return $this->articleFolderPid;
+        return $this->leisureFolderPid;
     }
 
     /**
-     * @param int $articleFolderPid
+     * @param int $leisureFolderPid
      */
-    public function setArticleFolderPid($articleFolderPid)
+    public function setLeisureFolderPid($leisureFolderPid)
     {
-        $this->articleFolderPid = $articleFolderPid;
+        $this->leisureFolderPid = $leisureFolderPid;
     }
+
+
+
 
     /**
      * @return boolean

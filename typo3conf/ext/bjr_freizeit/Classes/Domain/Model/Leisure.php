@@ -141,6 +141,12 @@ class Leisure extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $endDate = null;
 
     /**
+     * @var \int
+     */
+    protected $crdate;
+
+
+    /**
      * country
      *
      * @var \MUM\BjrFreizeit\Domain\Model\Country
@@ -705,6 +711,16 @@ class Leisure extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
 
+    /**
+     * @return int
+     */
+    public function getCrdate()
+    {
+        return $this->crdate;
+    }
+
+
+
 
 
     public function getUrlForImage(){
@@ -716,5 +732,19 @@ class Leisure extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
         }
         return $path;
+    }
+
+    public function getAllTagsAsString(){
+        $allTags = [];
+        /** @var  $tag Tags */
+        foreach($this->getTags() as $tag){
+           $allTags[] = $tag->getName();
+        }
+        return implode(',', $allTags);
+    }
+
+
+    public function hasTags(){
+        return count($this->tags) > 0;
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2016-02-01T13:07:22Z" product-name="bjr_freizeit">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-02-01T14:10:15Z" product-name="bjr_freizeit">
 		<header/>
 		<body>
 			<trans-unit id="tx_bjrfreizeit_domain_model_targetgroup">
@@ -29,6 +29,12 @@
 			</trans-unit>
 			<trans-unit id="tx_bjrfreizeit_domain_model_organization.contact">
 				<source>Contact</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_organization.leisure_folder_pid">
+				<source>Seite mit den Freizeiten</source>
+			</trans-unit>
+			<trans-unit id="tx_bjrfreizeit_domain_model_organization.feusername">
+				<source>User mit Anlegen / Bearbeiten und Löschen Rechten</source>
 			</trans-unit>
 			<trans-unit id="tx_bjrfreizeit_domain_model_tags">
 				<source>Tags</source>

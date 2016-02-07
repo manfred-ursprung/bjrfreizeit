@@ -1,17 +1,5 @@
-{namespace v=Tx_Vhs_ViewHelpers}
-<f:layout name="StartPage" />
-<!--
-<div class="artikellistestatic">
-    <strong>Artikelliste</strong>
-    <ul class="artiklelliste-list">
-        <li>GPS-Gerät<a href="#" title="Artikel von der Liste löschen"><i class="fa fa-times-circle-o pull-right delete"></i></a></span></li>
-        <li>DVD-Player<a href="#" title="Artikel von der Liste löschen"><i class="fa fa-times-circle-o pull-right delete"></i></a></span></li>
-        <li>Beamer<a href="#" title="Artikel von der Liste löschen"><i class="fa fa-times-circle-o pull-right delete"></i></a></span></li>
-        <li>Funkmikrofon Headset Mikrofon Shure<a href="#" title="Artikel von der Liste löschen"><i class="fa fa-times-circle-o pull-right delete"></i></a></span></li>
-    </ul>
-    <button type="button" class="btn btn-success">weiter</button>
-</div>
-  -->
+<f:layout name="FrontendAdministration" />
+
 
 <v:page.header>
     <f:render section="Resources" optional="TRUE" arguments="{_all}" />
@@ -19,7 +7,42 @@
 
 <div id="wrap" class="container">
 
-<f:render section="Top" partial="PageObjects" arguments="{_all}" />
+    <!-- Wrap all page content here -->
+    <header>
+        <f:render section="headerslides" />
+    </header>
+    <div class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="" >
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <nav class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li> <a class="logo" href="#"> Startseite </a> </li>
+                    <li class="dropdown dropdown"> <a data-toggle="dropdown" class="dropdown-toggle" title="So funktioniert es" href="#"> So funktioniert es<b class="caret"></b> </a>
+                        <ul class="dropdown-menu">
+                            <li> <a title="Du möchtest etwas ausleihen?" href="#"> Du möchtest dich zu einer Freizeit anmelden? </a> </li>
+                            <li> <a title="Kurzinfo für Verleihstellen" href="#"> Kurzinfo für Anbieter </a> </li>
+                            <li> <a title="Hilfe" href="#"> Hilfe </a> </li>
+                        </ul>
+                    </li>
+                    <li> <a title="Über diesen Service" href="#"> Über diesen Service </a> </li>
+                </ul>
+                <div class="clearfix visible-sm"></div>
+                <!-- Artikelliste -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li> <a href="#" class=""> Kontakt </a> </li>
+                </ul>
+            </nav>
+            <!--/.nav-collapse -->
+
+        </div>
+    </div>
 
     <!--TYPO3SEARCH_begin-->
 
@@ -30,7 +53,9 @@
 
             <!-- sidebar -->
             <div class="col-md-3 sidebar-left">
-                <f:render partial="PageObjects" section="Sidebar-left-FE" />
+                <f:comment>
+                    <f:render partial="PageObjects" section="Sidebar-left-FE" />
+                </f:comment>
             </div>
             <!-- /.sidebar -->
 
@@ -50,7 +75,9 @@
     <!-- /.container #content-->
     <!-- FOOTER
     ================================================== -->
-    <f:render partial="Footer" section="Footer" />
+    <f:comment>
+        <f:render partial="Footer" section="Footer" />
+    </f:comment>
 
 <!-- /.wrap -->
 <!--TYPO3SEARCH_end-->

@@ -23,10 +23,10 @@
 			<trans-unit id="tx_bjrfeadmin_domain_model_order">
 				<source>Order</source>
 			</trans-unit>
-			<trans-unit id="tx_bjrfeadmin_flex_organisation.defaultAction.I.1">
+			<trans-unit id="tx_bjrfreizeitfeadmin_flex_organisation.defaultAction.I.1">
                 <source>Liste mit allen anzeigen</source>
             </trans-unit>
-            <trans-unit id="tx_bjrfeadmin_flex_organisation.defaultAction.I.2">
+            <trans-unit id="tx_bjrfreizeitfeadmin_flex_organisation.defaultAction.I.2">
                 <source>Bearbeiten einer Ausleihstelle</source>
             </trans-unit>
 		</body>

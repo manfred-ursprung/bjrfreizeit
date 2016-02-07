@@ -182,14 +182,15 @@ class LeisureRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
 
     /**
-     * @param \Bjr\BjrLend\Domain\Model\Organization $organization
+     * @param \MUM\BjrFreizeit\Domain\Model\Organization
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      * find all articles for pid which belongs to organization
      */
-    public function findByOrganization(\Bjr\BjrLend\Domain\Model\Organization $organization){
-        $pid = $organization->getArticleFolderPid();
+    public function findByOrganization(\MUM\BjrFreizeit\Domain\Model\Organization $organization){
+        $pid = $organization->getLeisureFolderPid();
         $querySettings = $this->createQuery()->getQuerySettings();
         $querySettings->setStoragePageIds(array($pid));
+
         $this->setDefaultQuerySettings($querySettings);
         return $this->findByPid($pid);
     }
@@ -214,29 +215,29 @@ class LeisureRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     /**
      * Save an image with FAL
      * @param \TYPO3\CMS\Core\Resource\File $fileObject
-     * @param \Bjr\BjrLend\Domain\Model\Article $article
+     * @param \MUM\BjrFreizeit\Domain\Model\Leisure $leisure
      * @param $pid
      * @return int last insert id
      *
      */
-    public function saveImage(\TYPO3\CMS\Core\Resource\File $fileObject, \Bjr\BjrLend\Domain\Model\Article $article){
+    public function saveImage(\TYPO3\CMS\Core\Resource\File $fileObject, \MUM\BjrFreizeit\Domain\Model\Leisure $leisure){
         //$dateiname = $filename; // Dateinamen auslesen
-        $tabellenName = 'tx_bjrlend_domain_model_article';
+        $tabellenName = 'tx_bjrfreizeit_domain_model_leisure';
         $feldName = 'image';
 
         $data = array(
             'uid_local' => $fileObject->getUid(),
-            'uid_foreign' => $article->getUid(), // uid Inhaltselement oder Datensatz
+            'uid_foreign' => $leisure->getUid(), // uid Inhaltselement oder Datensatz
             'tablenames' => $tabellenName,
             'fieldname' => $feldName,
-            'pid' => $article->getPid(), // Seite wo der Datensatz lliegt
+            'pid' => $leisure->getPid(), // Seite wo der Datensatz lliegt
             'table_local' => 'sys_file',
             'tstamp' => time(),
             'crdate' => time(),
             'cruser_id' => 100
         );
         $where = 'deleted ="0" AND hidden ="0" AND tablenames ="' . $tabellenName
-            . '" AND uid_foreign=' . (int)$article->getUid() . ' AND table_local="sys_file"'
+            . '" AND uid_foreign=' . (int)$leisure->getUid() . ' AND table_local="sys_file"'
             . ' AND fieldname ="' . $feldName . '"';
         $row = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow('*',
             'sys_file_reference',

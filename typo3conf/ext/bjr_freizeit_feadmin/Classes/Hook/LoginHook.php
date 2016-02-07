@@ -59,9 +59,7 @@ class LoginHook {
         $GLOBALS['TSFE']->fe_user->removeSessionData();
         $this->objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
 
-        /** @var  $userSession \Bjr\BjrLend\Utility\UserSession */
-        $userSession = $this->objectManager->get('Bjr\\BjrLend\\Utility\\UserSession');
-        $userSession->setKey('organization', $this->findOrganizationByLogin());
+        $GLOBALS['TSFE']->fe_user->setKey('organization', $this->findOrganizationByLogin());
     }
 
 

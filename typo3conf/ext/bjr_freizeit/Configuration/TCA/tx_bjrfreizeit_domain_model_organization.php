@@ -23,10 +23,10 @@ return array(
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('bjr_freizeit') . 'Resources/Public/Icons/tx_bjrfreizeit_domain_model_organization.gif'
 	),
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, url, address, contact, feusername, article_folder_pid, online_administration',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, url, address, contact, feusername, leisure_folder_pid, online_administration',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, name, url, address, contact, online_administration, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime, feusername, article_folder_pid'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, name, url, address, contact, online_administration, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime, feusername, leisure_folder_pid'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -181,27 +181,29 @@ return array(
 				'multiple' => 0,
 			),
 		),
-		'article_folder_pid' => array(
+		'leisure_folder_pid' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:bjr_freizeit/Resources/Private/Language/locallang_db.xlf:tx_bjrfreizeit_domain_model_organization.article_folder_pid',
+			'label' => 'LLL:EXT:bjr_freizeit/Resources/Private/Language/locallang_db.xlf:tx_bjrfreizeit_domain_model_organization.leisure_folder_pid',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
 				'eval' => 'trim',
-				"wizards"  => array(
-					"_PADDING" => 2,
-					"link"     => array(
-						"type"         => "popup",
-						"title"        => "Link",
-						"icon"         => "link_popup.gif",
-						"script"       => "browse_links.php?mode=wizard&act=folder",
-						"JSopenParams" =>  "height=300,width=500,status=0,menubar=0,scrollbars=1",
-						'params' => array (
-							'blindLinkOptions' => 'page'
-						)
+				'wizards' => array(
+					'_PADDING' => 2,
+					'link' => array(
+						'type' => 'popup',
+						'title' => 'Link',
+						'icon' => 'EXT:example/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
+						'module' => array(
+							'name' => 'wizard_element_browser',
+							'urlParameters' => array(
+								'mode' => 'wizard'
+							) ,
+						) ,
+						'JSopenParams' => 'height=600,width=500,status=0,menubar=0,scrollbars=1'
 					)
-				)
-			)
+				),
+			),
 
 		),
 		'online_administration' => array(

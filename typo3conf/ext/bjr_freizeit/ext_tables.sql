@@ -89,7 +89,7 @@ CREATE TABLE tx_bjrfreizeit_domain_model_organization (
 	address int(11) unsigned DEFAULT '0',
 	contact int(11) unsigned DEFAULT '0',
 	feusername int(11) unsigned DEFAULT '0' NOT NULL,
-	article_folder_pid int(11) unsigned DEFAULT '0' NOT NULL,
+	leisure_folder_pid int(11) unsigned DEFAULT '0' NOT NULL,
 	online_administration tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,

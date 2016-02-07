@@ -101,19 +101,20 @@ class OrganizationController extends AbstractController {
 	public function listAction() {
         if(isset($this->settings['defaultAction']) && ($this->settings['defaultAction'] == 2)){
             $organization = $this->findOrganizationBySession();
-            if(!is_a($organization, '\Bjr\BjrLend\Domain\Model\Organization')){
+            if(!is_a($organization, '\MUM\BjrFreizeit\Domain\Model\Organization')){
                 $organization = $this->findOrganizationByLogin();
-                if(!is_a($organization, '\Bjr\BjrLend\Domain\Model\Organization')){
+                if(!is_a($organization, '\MUM\BjrFreizeit\Domain\Model\Organization')){
                     $this->setFlashMessage('Es konnte keine zugehörige Ausleihstelle zu Ihrem Account gefunden werden.', '', \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
                 }
             }
-            if(is_a($organization, '\Bjr\BjrLend\Domain\Model\Organization')) {
+            if(is_a($organization, '\MUM\BjrFreizeit\Domain\Model\Organization')) {
                 $this->forward('edit', 'Organization', NULL, array('organization' => $organization));
             }else{
                 $this->forward('edit', 'Organization');
             }
         }else {
-            $organizations = $this->organizationRepository->findAll();
+            $pid = empty($this->settings['pidOrganizationFolder']) ? -1 : $this->settings['pidOrganizationFolder'];
+            $organizations = $this->organizationRepository->findAll($pid);
 
             $this->view->assign('organizations', $organizations);
         }
@@ -123,7 +124,7 @@ class OrganizationController extends AbstractController {
             $this->setFlashMessage($flashMessage);
         }
         $GLOBALS['TSFE']->fe_user->setKey("ses", "listInfo", '');
-
+        $this->view->assign('settings', $this->settings);
 	}
 
 	/**

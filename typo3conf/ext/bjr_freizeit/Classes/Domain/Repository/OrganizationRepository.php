@@ -32,7 +32,17 @@ namespace MUM\BjrFreizeit\Domain\Repository;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
+
+use MUM\BjrFreizeitFeadmin\Utility\LoadTypoScript;
+
 class OrganizationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+
+
+    public function initializeObject() {
+        $this->setStoragePid();
+
+    }
+
 
 
     /**
@@ -40,12 +50,39 @@ class OrganizationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
      * @return \MUM\BjrFreizeit\Domain\Model\Organization
      */
     public function findByLeisure(\MUM\BjrFreizeit\Domain\Model\Leisure $leisure){
+
         $query = $this->createQuery();
-        $organization = $query->matching($query->equals('articleFolderPid', $leisure->getPid()))->execute()->getFirst();
+        $organization = $query->matching($query->equals('leisureFolderPid', $leisure->getPid()))->execute()->getFirst();
         return $organization;
     }
 
 
-    
+
+    public function findAll($pid = -1){
+        if($pid > 0){
+            $this->setStoragePid($pid);
+        }
+        return parent::findAll();
+    }
+
+
+    protected function setStoragePid($pid = -1)
+    {
+
+        /** @var $querySettings \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings */
+        $querySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+
+        $querySettings->setRespectStoragePage(FALSE);
+        if($pid > 0){
+            $tsref['persistence.']['storagePid'] = $pid;
+        }else{
+            $tsref = LoadTypoScript::loadTypoScript('tx_bjrfreizeit_display');
+        }
+        // neue Storage IDs
+        $querySettings->setStoragePageIds(array($tsref['persistence.']['storagePid']));
+
+        $this->setDefaultQuerySettings($querySettings);
+    }
+
 }
 ?>

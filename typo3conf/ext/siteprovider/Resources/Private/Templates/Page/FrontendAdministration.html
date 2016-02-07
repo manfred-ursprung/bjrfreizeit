@@ -1,31 +1,32 @@
-{namespace v=Tx_Vhs_ViewHelpers}
-{namespace flux=Tx_Flux_ViewHelpers}
-<f:layout name="FrontendAdministration" />
 <div xmlns="http://www.w3.org/1999/xhtml"
      xmlns:flux="http://fedext.net/ns/flux/ViewHelpers"
      xmlns:v="http://fedext.net/ns/vhs/ViewHelpers"
      xmlns:f="http://typo3.org/ns/fluid/ViewHelpers">
-<f:section name="Configuration">
-	<flux:flexform id="frontendadministration" label="Frontend Administration" icon="{f:uri.resource(path: 'Icons/bjr-frontendAdmin.png')}">
-		<!-- Insert fields, sheets, grid, form section objects etc. here, in this flux:flexform tag -->
-        <!-- Input field for Fluid variable 'pageClass' -->
-        <flux:flexform.field.input name="settings.pageClass" default="some-css-class"/>
 
-        <!-- Backend layout grid (TYPO3 6.x and greater only) -->
-        <flux:flexform.grid>
-            <flux:flexform.grid.row>
-                <flux:flexform.grid.column colPos="0" name="Content" style="width: 100%" colspan="3"/>
 
-            </flux:flexform.grid.row>
-            <flux:flexform.grid.row>
-                <flux:flexform.grid.column colPos="5" name="Footer 1" style="width: 30%"/>
-                <flux:flexform.grid.column colPos="6" name="Footer 2" style="width: 30%"/>
-                <flux:flexform.grid.column colPos="7" name="Footer 3" style="width: 30%"/>
-            </flux:flexform.grid.row>
-        </flux:flexform.grid>
+    <f:layout name="FrontendAdministrati" />
 
-    </flux:flexform>
-</f:section>
+    <f:section name="Configuration">
+        <flux:form id="frontendAdministration"  >
+            <!-- Insert fields, sheets, grid, form section objects etc. here, in this flux:flexform tag -->
+            <!-- Input field for Fluid variable 'pageClass' -->
+            <flux:field.input name="settings.pageClass" default="some-css-class"/>
+
+            <!-- Backend layout grid (TYPO3 6.x and greater only) -->
+            <flux:grid>
+                <flux:grid.row>
+                    <flux:grid.column colPos="0" name="Content" style="width: 100%" colspan="3"/>
+
+                </flux:grid.row>
+                <flux:grid.row>
+                    <flux:flexform.grid.column colPos="5" name="Footer 1" style="width: 30%"/>
+                    <flux:flexform.grid.column colPos="6" name="Footer 2" style="width: 30%"/>
+                    <flux:flexform.grid.column colPos="7" name="Footer 3" style="width: 30%"/>
+                </flux:grid.row>
+            </flux:grid>
+
+        </flux:form>
+    </f:section>
 
     <f:section name="Resources">
         <f:render partial="PageObjects" section="SharedResources" />
@@ -33,12 +34,10 @@
 
 
     <f:section name="Content">
+        Frontend Administration
         <!-- Render colPos=0 in this section -->
         <v:content.render column="0"/>
 
     </f:section>
-
-
-
 
 </div>
