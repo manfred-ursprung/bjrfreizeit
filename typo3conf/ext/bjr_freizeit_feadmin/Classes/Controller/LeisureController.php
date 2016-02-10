@@ -58,6 +58,34 @@ class LeisureController extends AbstractController {
 
 
     /**
+     * TargetGroupRepository
+     *
+     * @var \MUM\BjrFreizeit\Domain\Repository\TargetGroupRepository
+     * @inject
+     */
+    protected $targetGroupRepository;
+
+    /**
+     * CountryRepository
+     *
+     * @var \MUM\BjrFreizeit\Domain\Repository\CountryRepository
+     * @inject
+     */
+    protected $countryRepository;
+
+
+    /**
+     * HolidayRepository
+     *
+     * @var \MUM\BjrFreizeit\Domain\Repository\HolidayRepository
+     * @inject
+     */
+    protected $holidayRepository;
+
+
+
+
+    /**
      * @var array
      */
     private $typoScript;
@@ -168,23 +196,34 @@ class LeisureController extends AbstractController {
 	 */
 	public function editAction(\MUM\BjrFreizeit\Domain\Model\Leisure $leisure) {
 
-        //category select list
-        $tagList = array();
-        $tagList[] = $this->tagsRepository->findAll();
+        //tags select list
+        $tagList = $this->tagsRepository->findAll()->toArray();
+        $targetGroupList = $this->targetGroupRepository->findAll()->toArray();
+        $countryList     = $this->countryRepository->findAll()->toArray();
+        $holidayList     = $this->holidayRepository->findAll()->toArray();
+    /*    print '<pre>';
+        print_r($tagList);
+        print '</pre>';
+        exit;
+    */
         //$tagList[] = $leisure->getCategory()->getFirstParent();->getChilds()->toArray();
 
-        if($leisure->hasTags()){
+    /*/    if($leisure->hasTags()){
             $tagList[] = $leisure->getTags()->toArray();
         }
+    */
         $params = array(
             'leisure' => $leisure,
             'organization' => $this->organizationRepository->findByLeisure($leisure),
             'articleImagePath' => (isset($this->typoScript['plugin.']['tx_bjrfreizeit.']['settings.']['leisureImagePath']) ?
                     $this->typoScript['plugin.']['tx_bjr_lend.']['settings.']['leisureImagePath'] :
                     'uploads/tx_bjrfreizeit/'),
-            'categoryList' => $tagList,
-            'firstParent'   => $leisure->getTags()->next(),
-            'currentPageId' => $GLOBALS['TSFE']->id,
+            'tagList'           => $tagList,
+            'targetGroupList'   => $targetGroupList,
+            'countryList'       => $countryList,
+            'holidayList'       => $holidayList,
+            'firstParent'       => $leisure->getTags()->next(),
+            'currentPageId'     => $GLOBALS['TSFE']->id,
         );
         //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($leisure->getCategory()->getFirstParent());
         $this->view->assignMultiple($params);
@@ -224,27 +263,36 @@ class LeisureController extends AbstractController {
             //it is not persistent already, we have to do it!
 
             $persistenceManager->persistAll();
-            DebuggerUtility::var_dump($_FILES['tx_bjrfeadmin_article']['name']['image'], 'FILES INhalt: ');
+            DebuggerUtility::var_dump($_FILES['tx_bjrfreizeitfeadmin_leisure']['name']['image'], 'FILES INhalt: ');
 
 
 
         }
-        if(strlen($_FILES['tx_bjrfeadmin_article']['name']['image']) > 0) {
-            $referenceUid = $this->doUploadImage($leisure);
+        if(strlen($_FILES['tx_bjrfreizeitfeadmin_leisure']['name']['image']) > 0) {
+            $success = $this->doUploadImage($leisure);
 
             //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($imageFileName);
-            if($referenceUid) {
-                $leisure->setImage(1);  //we allow  only one image
+            if($success) {
+                /** @var  $fileRepository \TYPO3\CMS\Core\Resource\FileRepository  */
+             /*   $fileRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Resource\\FileRepository');
+                $fileReferenceObject = $fileRepository->findFileReferenceByUid($referenceUid);
+
+                $leisure->setImage($fileReferenceObject);
+             */
                 $this->leisureRepository->update($leisure);
                 $persistenceManager->persistAll();
             }
-
+            DebuggerUtility::var_dump($leisure, 'Leisure');
+            exit;
         }
-        /*$fileObject = \TYPO3\CMS\Core\Resource\ResourceFactory::getInstance()->getFileReferenceObject(1)->getOriginalFile();
+    /*    DebuggerUtility::var_dump($_FILES, '_Files');
+        $fileObject = \TYPO3\CMS\Core\Resource\ResourceFactory::getInstance()->getFileReferenceObject(1)->getOriginalFile();
         $fileReferenceData = $GLOBALS['TSFE']->sys_page->checkRecord('sys_file_reference', 1);
         DebuggerUtility::var_dump($fileObject, 'Fileobject');
         DebuggerUtility::var_dump($fileReferenceData, 'Filereference');
-        */
+
+        exit;
+    */
         $redirectParams['leisure'] = $leisure;
         $this->redirect('successUpdate', 'Leisure', NULL, $redirectParams);
 
@@ -305,22 +353,41 @@ class LeisureController extends AbstractController {
      * @return int
      */
     private function doUploadImage(\MUM\BjrFreizeit\Domain\Model\Leisure $leisure){
+        $success = false;
         /** @var  $storageRepository \TYPO3\CMS\Core\Resource\StorageRepository */
         $storageRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Resource\\StorageRepository');
         /** @var  $storage \TYPO3\CMS\Core\Resource\ResourceStorage */
-        $storage = $storageRepository->findByUid(2);
+        $storage = $storageRepository->findByUid(1);
         /** @var  $folder \TYPO3\CMS\Core\Resource\Folder */
-        $folder = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Resource\\Folder', $storage, '/', 'bjrlend');
-        $fileObject = $folder->addFile($_FILES['tx_bjrfeadmin_article']['tmp_name']['image'], $_FILES['tx_bjrfeadmin_article']['name']['image'],'changeName');
+    //    $folder = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Resource\\Folder', $storage, '/', 'bjrfreizeit');
+    //    $fileObject = $folder->addFile($_FILES['tx_bjrfreizeitfeadmin_leisure']['tmp_name']['image'], $_FILES['tx_bjrfreizeitfeadmin_leisure']['name']['image'],'changeName');
+        try {
+            $targetFolder = $storage->createFolder('bjrfreizeit');
+        }catch(\TYPO3\CMS\Core\Resource\Exception\ExistingTargetFolderException $e){
+            $targetFolder = $storage->getFolder('bjrfreizeit');
+            /*    print '<pre>';
+                    print_r($targetFolder);
+                    print '</pre>';
+                    exit;
+            */
+        }
+        $originalFilePath = $_FILES['tx_bjrfreizeitfeadmin_leisure']['tmp_name']['image'];
+        $newFileName      = $_FILES['tx_bjrfreizeitfeadmin_leisure']['name']['image'];
+
+        if (file_exists($originalFilePath)) {
+            $movedNewFile = $storage->addFile($originalFilePath, $targetFolder, $newFileName);
+            $newFileReference = $this->objectManager->get('MUM\\BjrFreizeit\\Domain\\Model\\FileReference');
+            $newFileReference->setFile($movedNewFile);
+            $leisure->setImage($newFileReference);
+            $success = true;
+        }
+
 
         //$fileObject = $storage->addFile('/tmp/myfile', $storage->getRootLevelFolder(), 'newFile', );
-        DebuggerUtility::var_dump($fileObject, 'FileObject'); // Should output "/newFile"
+        //DebuggerUtility::var_dump($fileObject, 'FileObject'); // Should output "/newFile"
+        //$fileReferenceUid = $this->leisureRepository->saveImage($fileObject, $leisure);
 
-        //2. Part
-        $leisure->setImage($fileObject->getIdentifier());
-        $res = $this->leisureRepository->saveImage($fileObject, $leisure);
-
-        return $res;
+        return $success;
 
     }
 
@@ -338,13 +405,18 @@ class LeisureController extends AbstractController {
         $GLOBALS['TSFE']->fe_user->setKey("ses","leisureChange", '');
         $params = array(
             'leisure' => $leisure,
-            'organization' => $this->organizationRepository->findByArticle($leisure),
+            'organization' => $this->organizationRepository->findByLeisure($leisure),
             'leisureImagePath' => (isset($typoScript['plugin.']['tx_bjr_lend.']['settings.']['leisureImagePath']) ?
                     $typoScript['plugin.']['tx_bjr_lend.']['settings.']['leisureImagePath'] :
                     'uploads/tx_bjrlend/'),
-            'parentCategory' => $leisure->getCategory()->getFirstParent(),
+          /*  'parentCategory' => $leisure->getCategory()->getFirstParent(),
             'firstParent'   => $leisure->getCategory()->getFirstParent(),
-            'currentPageId' => $GLOBALS['TSFE']->id,
+          */
+            'tagList'       => $this->tagsRepository->findAll()->toArray(),
+            'targetGroupList'   => $this->targetGroupRepository->findAll()->toArray(),
+            'countryList'       => $this->countryRepository->findAll()->toArray(),
+            'holidayList'       => $this->holidayRepository->findAll()->toArray(),
+            'currentPageId'     => $GLOBALS['TSFE']->id,
         );
         $this->view->assignMultiple($params);
 

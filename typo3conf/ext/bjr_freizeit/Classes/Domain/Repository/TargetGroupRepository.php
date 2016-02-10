@@ -32,7 +32,7 @@ namespace MUM\BjrFreizeit\Domain\Repository;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class TagsRepository extends AbstractRepository {
+class TargetGroupRepository extends AbstractRepository {
 
 
 

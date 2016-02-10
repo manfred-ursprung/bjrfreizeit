@@ -5,7 +5,7 @@ namespace MUM\BjrFreizeit\Domain\Repository;
  *  Copyright notice
  *
  *  (c) 2016 Manfred Ursprung <manfred@manfred-ursprung.de>, Webapplikationen Ursprung
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -32,9 +32,36 @@ namespace MUM\BjrFreizeit\Domain\Repository;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class TagsRepository extends AbstractRepository {
 
+use MUM\BjrFreizeitFeadmin\Utility\LoadTypoScript;
+
+class AbstractRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+{
+
+
+    public function initializeObject()
+    {
+        $this->setStoragePid();
+
+    }
+
+    protected function setStoragePid($pid = -1)
+    {
+
+        /** @var $querySettings \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings */
+        $querySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+
+        $querySettings->setRespectStoragePage(FALSE);
+        if($pid > 0){
+            $tsref['persistence.']['storagePid'] = $pid;
+        }else{
+            $tsref = LoadTypoScript::loadTypoScript('tx_bjrfreizeit_display');
+        }
+        // neue Storage IDs
+        $querySettings->setStoragePageIds(array($tsref['persistence.']['storagePid']));
+
+        $this->setDefaultQuerySettings($querySettings);
+    }
 
 
 }
-?>

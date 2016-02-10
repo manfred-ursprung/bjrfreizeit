@@ -23,3 +23,22 @@ bjrFreizeitAjax {
     10 = COA
     10 <  styles.content.get
 }
+
+config.tx_extbase {
+	persistence {
+		classes {
+			MUM\BjrFreizeit\Domain\Model\FileReference {
+				mapping {
+					tableName = sys_file_reference
+					columns {
+						uid_local.mapOnProperty = originalFileIdentifier
+					}
+				}
+			}
+		}
+		objects {
+			TYPO3\CMS\Extbase\Domain\Model\FileReference.className = MUM\BjrFreizeit\Domain\Model\FileReference
+		}
+		updateReferenceIndex = 1
+	}
+}

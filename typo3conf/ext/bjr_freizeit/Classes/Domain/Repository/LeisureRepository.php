@@ -29,7 +29,7 @@ namespace MUM\BjrFreizeit\Domain\Repository;
 /**
  * The repository for Leisures
  */
-class LeisureRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class LeisureRepository extends AbstractRepository
 {
     const SORTING_ALFABETICAL = 0;
     const SORTING_CREATIONDATE = 1;
@@ -217,7 +217,7 @@ class LeisureRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @param \TYPO3\CMS\Core\Resource\File $fileObject
      * @param \MUM\BjrFreizeit\Domain\Model\Leisure $leisure
      * @param $pid
-     * @return int last insert id
+     * @return int last insert id, file reference uid
      *
      */
     public function saveImage(\TYPO3\CMS\Core\Resource\File $fileObject, \MUM\BjrFreizeit\Domain\Model\Leisure $leisure){
@@ -226,15 +226,15 @@ class LeisureRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $feldName = 'image';
 
         $data = array(
-            'uid_local' => $fileObject->getUid(),
-            'uid_foreign' => $leisure->getUid(), // uid Inhaltselement oder Datensatz
-            'tablenames' => $tabellenName,
-            'fieldname' => $feldName,
-            'pid' => $leisure->getPid(), // Seite wo der Datensatz lliegt
-            'table_local' => 'sys_file',
-            'tstamp' => time(),
-            'crdate' => time(),
-            'cruser_id' => 100
+            'uid_local'     => $fileObject->getUid(),
+            'uid_foreign'   => $leisure->getUid(), // uid Inhaltselement oder Datensatz
+            'tablenames'    => $tabellenName,
+            'fieldname'     => $feldName,
+            'pid'           => $leisure->getPid(), // Seite wo der Datensatz lliegt
+            'table_local'   => 'sys_file',
+            'tstamp'        => time(),
+            'crdate'        => time(),
+            'cruser_id'     => 100
         );
         $where = 'deleted ="0" AND hidden ="0" AND tablenames ="' . $tabellenName
             . '" AND uid_foreign=' . (int)$leisure->getUid() . ' AND table_local="sys_file"'

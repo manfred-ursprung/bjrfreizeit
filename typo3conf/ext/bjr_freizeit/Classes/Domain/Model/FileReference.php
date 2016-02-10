@@ -1,11 +1,11 @@
 <?php
-namespace MUM\BjrFreizeit\Domain\Repository;
+namespace MUM\BjrFreizeit\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2016 Manfred Ursprung <manfred@manfred-ursprung.de>, Webapplikationen Ursprung
- *  
+ *  (c) 2014 Helmut Hummel
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -26,41 +26,38 @@ namespace MUM\BjrFreizeit\Domain\Repository;
  ***************************************************************/
 
 /**
+ * Class FileReference
  *
- *
- * @package bjr_freizeit
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
+ * This class  is important for saving images
  */
-
-
-
-class OrganizationRepository extends AbstractRepository {
-
-
-
+class FileReference extends \TYPO3\CMS\Extbase\Domain\Model\FileReference {
 
     /**
-     * @param \MUM\BjrFreizeit\Domain\Model\Leisure $leisure
-     * @return \MUM\BjrFreizeit\Domain\Model\Organization
+     * uid of a sys_file
+     *
+     * @var integer
      */
-    public function findByLeisure(\MUM\BjrFreizeit\Domain\Model\Leisure $leisure){
+    protected $originalFileIdentifier;
 
-        $query = $this->createQuery();
-        $organization = $query->matching($query->equals('leisureFolderPid', $leisure->getPid()))->execute()->getFirst();
-        return $organization;
+    /**
+     * setOriginalResource
+     *
+     * @param \TYPO3\CMS\Core\Resource\FileReference $originalResource
+     * @return void
+     */
+    public function setOriginalResource(\TYPO3\CMS\Core\Resource\FileReference $originalResource) {
+        $this->originalResource = $originalResource;
+        $this->originalFileIdentifier = (int)$originalResource->getOriginalFile()->getUid();
     }
 
-
-
-    public function findAll($pid = -1){
-        if($pid > 0){
-            $this->setStoragePid($pid);
-        }
-        return parent::findAll();
+    /**
+     * setFile
+     *
+     * @param \TYPO3\CMS\Core\Resource\File $falFile
+     * @return void
+     */
+    public function setFile(\TYPO3\CMS\Core\Resource\File $falFile) {
+        $this->originalFileIdentifier = (int)$falFile->getUid();
     }
-
-
 
 }
-?>

@@ -10,9 +10,9 @@
 
     <f:render partial="FormErrors" arguments="{object:Article}"/>
 
-    <f:form action="update" name="article" object="{leisure}" class="form-horizontal" additionalAttributes="{autocomplete: 'off'}"
+    <f:form action="update" name="leisure" object="{leisure}" class="form-horizontal" additionalAttributes="{autocomplete: 'off'}"
             enctype="multipart/form-data" arguments="{leisure: leisure}">
-        <f:render partial="Leisure/FormFields" arguments="{all}" />
+        <f:render partial="Leisure/FormFields" arguments="{_all}" />
         <f:link.action action="list" class="btn btn-default btn-form-back-left"> Zurück </f:link.action>
         <f:form.submit name="leisureUpdate" value="Ändern" class="btn btn-default"/>
     </f:form>

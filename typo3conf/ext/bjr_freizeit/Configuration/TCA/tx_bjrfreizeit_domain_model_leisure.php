@@ -21,7 +21,7 @@ return array(
 		),
 		'searchFields' => 'title,short_description,description,price,service_specification,minimum_participants,partner,cooperation,location,leader,referent,image,file,url,start_date,end_date,country,target_group,organization,tags,holiday,',
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('bjr_freizeit') . 'Resources/Public/Icons/tx_bjrfreizeit_domain_model_leisure.gif'
-	),
+	),## EXTENSION BUILDER DEFAULTS END TOKEN - Everything BEFORE this line is overwritten with the defaults of the extension builder
 	'interface' => array(
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, short_description, description, price, service_specification, minimum_participants, partner, cooperation, location, leader, referent, image, file, url, start_date, end_date, country, target_group, organization, tags, holiday',
 	),
@@ -307,7 +307,12 @@ return array(
 							--palette--;;filePalette'
 						)
 					),
-					'maxitems' => 1
+					'maxitems' => 1,
+					'foreign_match_fields' => array(
+						'fieldname' => 'image',
+						'tablenames' => 'tx_bjrfreizeit_domain_model_leisure',
+						'table_local' => 'sys_file',
+					),
 				),
 				$GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
 			),
@@ -353,7 +358,12 @@ return array(
 							--palette--;;filePalette'
 						)
 					),
-					'maxitems' => 1
+					'maxitems' => 1,
+					'foreign_match_fields' => array(
+						'fieldname' => 'image',
+						'tablenames' => 'tx_bjrfreizeit_domain_model_leisure',
+						'table_local' => 'sys_file',
+					),
 				)
 			),
 		),
@@ -537,4 +547,4 @@ return array(
 		),
 		
 	),
-);## EXTENSION BUILDER DEFAULTS END TOKEN - Everything BEFORE this line is overwritten with the defaults of the extension builder
+);

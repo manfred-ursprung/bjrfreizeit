@@ -1,16 +1,18 @@
-<div class="row form-group">
+<div class="row form-group" xmlns:f="http://www.w3.org/1999/html" xmlns:f="http://www.w3.org/1999/html"
+     xmlns:f="http://www.w3.org/1999/html">
     <label class="col-sm-3 col-xs-12 control-label required" for ="name">Titel der Freizeit:</label>
     <div class="col-sm-9 col-xs-12">
         <f:form.textfield property="title" value="{leisure.title}" class="form-control" required="1"/>
     </div>
 </div>
-<!-- Kategorie -->
+<!-- Tags -->
+
 <div class="row form-group">
     <label class="col-sm-3 col-xs-12 control-label required" for ="name">Tags</label>
     <div class="col-sm-9 col-xs-12">
         <f:form.hidden name="currentPageId" value="{currentPageId}" id="currentPageId" />
-        <f:for each="{leisure.tags}" as="tag" key="key" iteration="itemIteration">
-            {tag.name}<br />
+        <f:for each="{tagList}" as="tag" key="key" iteration="itemIteration">
+            <f:form.checkbox property="tags" value="{tag.uid}" multiple="1" />&nbsp{tag.name}
         </f:for>
 
     </div>
@@ -31,7 +33,8 @@
 <div class="row form-group">
     <label class="col-sm-3 col-xs-12 control-label required" for="fee">Gebühr in Euro ab </label>
     <div class="col-sm-9 col-xs-12">
-        <f:form.textfield property="price" value="{leisure.price}" class="form-control" required="1"/>
+        <f:form.textfield property="price" value="{leisure.price}" class="form-control" required="1" additionalAttributes="{size: 10}"/>
+        <f:comment> -> f:format.currency(thousandsSeparator: '.',  currencySign: ' €')}</f:comment>
     </div>
 </div>
 
@@ -50,7 +53,7 @@
     <label class="col-sm-3 col-xs-12 control-label" for="name">Beschreibung</label>
     <div class="col-sm-9 col-xs-12">
         <f:form.textarea  cols="20" rows="5" property="description"
-                          value="{leisure.description ->f:format.raw()}"  class=" form-control "/>
+                          value="{leisure.description}"  class=" form-control "/>
     </div>
 </div>
 
@@ -58,21 +61,33 @@
 <!-- online buchbar wurde entfernt, Funktionalität über Ausleihstelle -> onlineAdministration -->
 
 
-<!-- per email buchbar-->
+<!-- Zielgruppe-->
 <div class="row form-group">
     <label class="col-sm-3 col-xs-12 control-label" for="name">Zielgruppe</label>
     <div class="col-sm-9 col-xs-12">
-        <f:form.select property="targetGroup" options="{regions}" optionValueField="uid" optionLabelField="name"
+        <f:for each="{targetGroupList}" as="target" key="key" iteration="itemIteration">
+            <f:form.checkbox property="targetGroup" value="{target.uid}" multiple="1" />&nbsp{target.name}
+        </f:for>
+        <f:comment>
+            <f:form.select property="targetGroup" options="{targetGroupList}" optionValueField="uid" optionLabelField="name"
+                       prependOptionLabel="-- Zielgruppe --"  multiple="1"
                        value="{leisure.targetGroup}" class=" form-control" additionalAttributes="{required: 'required'}"/>
+        </f:comment>
     </div>
 </div>
 
-<!-- Ausleihbedingung wird nicht gebraucht, kann eingeblendet werden von Ausleihstelle-->
+<!-- Ferienzeit-->
 <div class="row form-group">
     <label class="col-sm-3 col-xs-12 control-label" for ="name">Ferienzeit</label>
     <div class="col-sm-9 col-xs-12">
-        <f:form.select property="holiday" options="{regions}" optionValueField="uid" optionLabelField="name"
+        <f:for each="{holidayList}" as="item" key="key" iteration="itemIteration">
+            <f:form.checkbox property="holiday" value="{item.uid}" multiple="1" />&nbsp{item.name}
+        </f:for>
+        <f:comment>
+            <f:form.select property="holiday" options="{holidayList}" optionValueField="uid" optionLabelField="name"
+                       prependOptionLabel="-- Ferienzeiten --" multiple="1"
                        value="{leisure.holiday}" class=" form-control" additionalAttributes="{required: 'required'}"/>
+        </f:comment>
 
     </div>
 </div>
@@ -82,8 +97,9 @@
     <label class="col-sm-3 col-xs-12 control-label" for ="name">Land</label>
     <div class="col-sm-9 col-xs-12">
 
-        <f:form.select property="country" options="{regions}" optionValueField="uid" optionLabelField="name"
-                       value="{leisure.country.name}" class=" form-control" additionalAttributes="{required: 'required'}"/>
+        <f:form.select property="country" options="{countryList}" optionValueField="uid" optionLabelField="name"
+                       prependOptionLabel="-- Land --"
+                       class=" form-control" additionalAttributes="{required: 'required'}"/>
 
     </div>
 </div>
