@@ -33,6 +33,7 @@ namespace MUM\BjrFreizeitFeadmin\Controller;
  *
  */
 use TYPO3\CMS\Core\Exception;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use MUM\BjrFreizeit\Domain\Model\Organization;
 use MUM\BjrFreizeit\Domain\Model\Leisure;
@@ -83,6 +84,13 @@ class LeisureController extends AbstractController {
     protected $holidayRepository;
 
 
+    /**
+     * FileReferenceRepository
+     *
+     * @var \MUM\BjrFreizeit\Domain\Repository\FileReferenceRepository
+     * @inject
+     */
+    protected $fileReferenceRepository;
 
 
     /**
@@ -96,47 +104,45 @@ class LeisureController extends AbstractController {
         $js = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($this->request->getControllerExtensionKey())
             .'Resources/Public/Scripts/feadminLib.js';
         $GLOBALS['TSFE']->getPageRenderer()->addJsFooterFile($js);
+
+        $css = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($this->request->getControllerExtensionKey())
+            .'Resources/Public/Css/bjrfreizeitfeadmin.css';
+        $GLOBALS['TSFE']->getPageRenderer()->addCssFile($css, 'stylesheet', 'all', $title = 'bjrfreizeitfeadmin', true, true);
     }
 
 
-    public function initializeUpdateAction() {
-        if ($this->arguments->hasArgument('leisure')) {
-            $args = $this->request->getArguments();
-        /*    if( (empty($args['leisure']['category'])) || !is_numeric(intval($args['leisure']['category']))){
-                $GLOBALS['TSFE']->fe_user->setKey("ses","leisureList",'Die Freizeit konnte nicht angelegt werden, da keine Unterkategorie angegeben war.');
-                //DebuggerUtility::var_dump($this->arguments->getArgument('leisure'), '$this->arguments');
-                //DebuggerUtility::var_dump($this->request->getArguments(), 'request->getArguments');
-                //exit();
-                $this->redirect('list');
-            }
-        */
-        }
-    }
-
-
+    /**
+     * @param Leisure|NULL $leisure
+     * Create a new leisure
+     */
     public function newAction(\MUM\BjrFreizeit\Domain\Model\Leisure $leisure = NULL){
-        //category select list
-        $tagList = array();
-        $tagList[] = $this->tagsRepository->findAll();
+        $tagList = $this->tagsRepository->findAll()->toArray();
+        $targetGroupList = $this->targetGroupRepository->findAll()->toArray();
+        $countryList     = $this->countryRepository->findAll()->toArray();
+        $holidayList     = $this->holidayRepository->findAll()->toArray();
 
-        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS['TSFE'], 'TSFE ');
+        //$organizationUid = $GLOBALS['TSFE']->fe_user->getKey('ses',  'organization');
+
+        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump('Organization UID: ' . $organizationUid);
         //exit();
         $organization = $this->findOrganization();
         if(!is_a($organization, '\MUM\BjrFreizeit\Domain\Model\Organization')){
             $organization = 'Error';
         }
-        $js = $this->jsForNewLeisure();
-        $GLOBALS['TSFE']->getPageRenderer()->addJsFooterInlineCode('newleisure', $js, false);
 
+        //$leisure = GeneralUtility::makeInstance('MUM\\BjrFreizeit\\Domain\Model\\Leisure');
         $params = array(
             'leisure' => $leisure,
             'organization' => $organization,
-            'leisureImagePath' => (isset($this->typoScript['plugin.']['tx_bjr_lend.']['settings.']['leisureImagePath']) ?
-                    $this->typoScript['plugin.']['tx_bjr_lend.']['settings.']['leisureImagePath'] :
-                    'uploads/tx_bjrlend/'),
-            'categoryList' => $tagList,
-            //'firstParent'   => $leisure->getCategory()->getFirstParent(),
-            'currentPageId' => $GLOBALS['TSFE']->id,
+        //    'articleImagePath' => (isset($this->typoScript['plugin.']['tx_bjrfreizeit.']['settings.']['leisureImagePath']) ?
+        //        $this->typoScript['plugin.']['tx_bjr_lend.']['settings.']['leisureImagePath'] :
+        //        'uploads/tx_bjrfreizeit/'),
+            'tagList'           => $tagList,
+            'targetGroupList'   => $targetGroupList,
+            'countryList'       => $countryList,
+            'holidayList'       => $holidayList,
+        //    'firstParent'       => $leisure->getTags()->next(),
+            'currentPageId'     => $GLOBALS['TSFE']->id,
         );
         //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($params, 'Parameter');
 
@@ -196,7 +202,6 @@ class LeisureController extends AbstractController {
 	 */
 	public function editAction(\MUM\BjrFreizeit\Domain\Model\Leisure $leisure) {
 
-        //tags select list
         $tagList = $this->tagsRepository->findAll()->toArray();
         $targetGroupList = $this->targetGroupRepository->findAll()->toArray();
         $countryList     = $this->countryRepository->findAll()->toArray();
@@ -229,6 +234,19 @@ class LeisureController extends AbstractController {
         $this->view->assignMultiple($params);
 	}
 
+
+    public function initializeUpdateAction() {
+        if ($this->arguments->hasArgument('leisure')) {
+            $this->arguments['leisure']
+                ->getPropertyMappingConfiguration()
+                ->forProperty('*')
+                ->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter',
+                    \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
+
+        }
+    }
+
+
     /**
      * action update
      * @param \MUM\BjrFreizeit\Domain\Model\Leisure $leisure
@@ -250,7 +268,8 @@ class LeisureController extends AbstractController {
                     $organization = 'Error';
                     $GLOBALS['TSFE']->fe_user->setKey("ses","leisureChange",'Der Artikel konnte nicht angelegt werden. Errorcode: 1413190651');
                 }else{
-                    $leisure->copyDataFromOrganization($organization);
+                    //$leisure->copyDataFromOrganization($organization);
+                    $leisure->setPid($organization->getLeisureFolderPid());
                     $this->leisureRepository->add($leisure);
 
                     //now organization ist persistent
@@ -269,6 +288,10 @@ class LeisureController extends AbstractController {
 
         }
         if(strlen($_FILES['tx_bjrfreizeitfeadmin_leisure']['name']['image']) > 0) {
+            if($leisure->hasImage){
+                $leisure->setImage(null);
+                $persistenceManager->persistAll();
+            }
             $success = $this->doUploadImage($leisure);
 
             //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($imageFileName);
@@ -282,8 +305,8 @@ class LeisureController extends AbstractController {
                 $this->leisureRepository->update($leisure);
                 $persistenceManager->persistAll();
             }
-            DebuggerUtility::var_dump($leisure, 'Leisure');
-            exit;
+            //DebuggerUtility::var_dump($leisure, 'Leisure');
+            //exit;
         }
     /*    DebuggerUtility::var_dump($_FILES, '_Files');
         $fileObject = \TYPO3\CMS\Core\Resource\ResourceFactory::getInstance()->getFileReferenceObject(1)->getOriginalFile();
@@ -375,6 +398,7 @@ class LeisureController extends AbstractController {
         $newFileName      = $_FILES['tx_bjrfreizeitfeadmin_leisure']['name']['image'];
 
         if (file_exists($originalFilePath)) {
+            $this->removeLeisureImage($leisure);
             $movedNewFile = $storage->addFile($originalFilePath, $targetFolder, $newFileName);
             $newFileReference = $this->objectManager->get('MUM\\BjrFreizeit\\Domain\\Model\\FileReference');
             $newFileReference->setFile($movedNewFile);
@@ -391,6 +415,24 @@ class LeisureController extends AbstractController {
 
     }
 
+    /**
+     * @param Leisure $leisure
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     *
+     * Image remove from sys_file_reference
+     */
+    protected function removeLeisureImage(Leisure $leisure){
+        $image = $leisure->getImage();
+        //foreach ($images as $img) {
+        if(is_a($image, '\\TYPO3\CMS\Extbase\Domain\Model\FileReference')){
+            //remove the file reference
+            $reference = $this->fileReferenceRepository->findByUid($image->getUid());
+            $this->fileReferenceRepository->remove($reference);
+
+            //remove the image in model (only one image allowed)
+            $leisure->setImage(null);
+        }
+    }
 
 
     /**
@@ -440,7 +482,7 @@ class LeisureController extends AbstractController {
     }
 
     /**
-     * @return \Bjr\BjrLend\Domain\Model\Organization
+     * @return \Bjr\BjrFreizeit\Domain\Model\Organization
      */
     protected function findOrganizationBySession(){
         //$user = $GLOBALS['TSFE']->fe_user->user;
@@ -538,60 +580,6 @@ EOT;
         return $js;
 
     }
-
-
-    /**
-     * @return string
-     */
-    protected function jsForNewLeisure(){
-        $js = <<<EOT
-
-        $(document).ready(function(){
-            var pageId = $('#currentPageId').val();
-
-            $(document).on('click', '#selectKat', function(){
-                $('#selectSubkat').html('');
-                var category = $('#selectKat option:selected').val();
-                $.ajax({
-                    async: 'true',
-                    url: 'index.php',
-                    type: 'POST',
-                    data: {
-                        eID: "bjrlend",
-                        request: {
-                            pluginName:  'Pi1',
-                            controller:  'Category',
-                            action:      'subCategory',
-                            arguments: {
-                                'pageId': pageId,
-                                'category': category
-                            }
-                        }
-
-                    },
-                    //dataType: "json",
-                    dataType: 'html',
-
-                    success: function(result) {
-                        console.log(result);
-                        $('#selectSubkat').html(result);
-
-                    },
-                    error: function(error) {
-                        console.log(error);
-                        $('#selectSubkat').html((error.responseText));
-                    }
-                });
-            });
-        });
-
-EOT;
-        return $js;
-
-    }
-
-
-
 
 }
 ?>

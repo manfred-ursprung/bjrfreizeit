@@ -428,9 +428,17 @@ class Leisure extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
      * @return void
      */
-    public function setImage( \TYPO3\CMS\Extbase\Domain\Model\FileReference $image)
+    public function setImage( \TYPO3\CMS\Extbase\Domain\Model\FileReference $image = NULL)
     {
-        $this->image = $image;
+        if(!is_null($image)) {
+            $this->image = $image;
+        }
+    }
+
+
+
+    public function hasImage(){
+        return !is_null($this->image);
     }
     
     /**

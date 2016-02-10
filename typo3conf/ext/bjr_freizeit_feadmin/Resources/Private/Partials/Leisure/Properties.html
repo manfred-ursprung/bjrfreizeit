@@ -1,5 +1,5 @@
 <div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label" for ="name">Artikelname:</label>
+    <label class="col-sm-3 col-xs-12 control-label" for ="name">Freizeit Titel:</label>
     <div class="col-sm-9 col-xs-12">
         <f:form.textfield property="title"  class="form-control" additionalAttributes="{readonly: 'readonly'}" />
     </div>
@@ -57,6 +57,81 @@
                           class=" form-control "/>
     </div>
 </div>
+
+<!-- Service specification -->
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for="name">Beschreibung</label>
+    <div class="col-sm-9 col-xs-12">
+        <f:form.textarea  cols="20" rows="5" property="serviceSpecification" additionalAttributes="{readonly: 'readonly'}"
+                          class=" form-control "/>
+    </div>
+</div>
+
+<!-- Minimum participants -->
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for="name">Mindesteilnehmer Anzahl</label>
+    <div class="col-sm-9 col-xs-12">
+        <f:form.textfield property="minimumParticipants"  class="form-control" additionalAttributes="{readonly: 'readonly'}" />
+    </div>
+</div>
+
+
+<!-- Partner -->
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for="name">Partner</label>
+    <div class="col-sm-9 col-xs-12">
+        <f:form.textfield property="partner"  class="form-control"  additionalAttributes="{readonly: 'readonly'}" />
+    </div>
+</div>
+
+
+<!-- Kooperationen -->
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for="name">Kooperation</label>
+    <div class="col-sm-9 col-xs-12">
+        <f:form.textfield property="cooperation"  class="form-control"  additionalAttributes="{readonly: 'readonly'}" />
+    </div>
+</div>
+
+<!-- Location -->
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for="name">Lokation</label>
+    <div class="col-sm-9 col-xs-12">
+        <f:form.textfield property="location"  class="form-control"  additionalAttributes="{readonly: 'readonly'}" />
+    </div>
+</div>
+
+<!-- Leader -->
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for="name">Leiter</label>
+    <div class="col-sm-9 col-xs-12">
+        <f:form.textfield property="leader"  class="form-control"  additionalAttributes="{readonly: 'readonly'}" />
+    </div>
+</div>
+
+
+<!-- Referent -->
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for="name">Referent</label>
+    <div class="col-sm-9 col-xs-12">
+        <f:form.textfield property="referent"  class="form-control"  additionalAttributes="{readonly: 'readonly'}" />
+    </div>
+</div>
+
+
+    <!-- Start Datum -->
+    <div class="row form-group">
+        <label class="col-sm-3 col-xs-12 control-label" for="startDate">Von - Bis</label>
+        <div class="col-sm-9 col-xs-12">
+            <f:form.textfield property="startDate" value="{f:format.date(date: leisure.startDate, format: 'd.m.y')}"
+                              class="form-control date-field"  additionalAttributes="{readonly: 'readonly'}" size="8"/>
+            <span> - </span>
+            <f:form.textfield property="endDate" value="{f:format.date(date: leisure.endDate, format: 'd.m.y')}"
+                              class="form-control date-field"  additionalAttributes="{readonly: 'readonly'}" size="8"/>
+        </div>
+
+    </div>
+
 
 
 <!-- Zielgruppe-->
