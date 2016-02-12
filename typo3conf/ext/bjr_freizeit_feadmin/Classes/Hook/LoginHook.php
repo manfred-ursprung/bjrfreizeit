@@ -1,10 +1,10 @@
 <?php
-namespace Bjr\BjrFeadmin\Hook;
+namespace MUM\BjrFreizeitFeadmin\Hook;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 Manfred Ursprung <manfred@manfred-ursprung.de>, Webapplikationen Ursprung
+ *  (c) 2016 Manfred Ursprung <manfred@manfred-ursprung.de>, Webapplikationen Ursprung
  *
  *  All rights reserved
  *
@@ -28,12 +28,14 @@ namespace Bjr\BjrFeadmin\Hook;
 /**
  *
  *
- * @package bjr_feadmin
+ * @package bjr_freizeitfeadmin
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
 
+use \MUM\BjrFreizeit\Domain\Repository\OrganizationRepository;
 use  \TYPO3\CMS\Core\Utility\GeneralUtility;
+
 
 class LoginHook {
 
@@ -68,7 +70,8 @@ class LoginHook {
      */
     protected function findOrganizationByLogin(){
         $feUserId = $GLOBALS['TSFE']->fe_user->user['uid'];
-        $organizationRepository = $this->objectManager->get('Bjr\\BjrLend\\Domain\\Repository\\OrganizationRepository');
+        /** @var  $organizationRepository OrganizationRepository */
+        $organizationRepository = $this->objectManager->get('MUM\\BjrFreizeit\\Domain\\Repository\\OrganizationRepository');
         /** @var  $organization  \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult */
         $organization = $organizationRepository->findByFeusername($feUserId);
         if($organization->count() > 0){

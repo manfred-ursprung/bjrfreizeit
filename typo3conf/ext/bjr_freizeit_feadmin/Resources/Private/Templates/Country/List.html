@@ -1,0 +1,39 @@
+<f:layout name="Default" />
+
+
+
+<f:section name="main">
+<h1>Länder</h1>
+
+<f:flashMessages renderMode="div"  />
+
+<table  class="tx_bjrfreizeitfeadmin country table table-striped table-bordered table-condensed table-hover" >
+	<tr>
+		<th>Name</th>
+		<th colspan="2">Aktionen</th>
+
+	</tr>
+
+	<f:for each="{countries}" as="country">
+		<tr>
+			<td>
+                <f:format.html>{country.name}</f:format.html>
+            </td>
+			<td>
+                <f:link.action action="edit" arguments="{country : country}"><i class="fa fa-pencil"></i></f:link.action>
+                <f:link.action action="delete" arguments="{country : country}" class="btn btn-default btn-xs" title="löschen">
+                    <i class="fa fa-trash-o"></i>
+                </f:link.action>
+
+            </td>
+		</tr>
+	</f:for>
+</table>
+    <f:form.hidden name="currentPageId" value="{currentPageId}" id="currentPageId" />
+
+<f:link.action action="new">Neues Land</f:link.action>
+    <div id="dialog" title="Land löschen bestätigen" >
+        Are you sure about this?
+    </div>
+
+</f:section>

@@ -1,0 +1,39 @@
+<f:layout name="Default" />
+
+
+
+<f:section name="main">
+<h1>Zielgruppen</h1>
+
+<f:flashMessages renderMode="div"  />
+
+<table  class="tx_bjrfreizeitfeadmin tags table table-striped table-bordered table-condensed table-hover" >
+	<tr>
+		<th>Name</th>
+		<th colspan="2">Aktionen</th>
+
+	</tr>
+
+	<f:for each="{targetGroups}" as="targetGroup">
+		<tr>
+			<td>
+                <f:format.html>{targetGroup.name}</f:format.html>
+            </td>
+			<td>
+                <f:link.action action="edit" arguments="{targetGroup : targetGroup}"><i class="fa fa-pencil"></i></f:link.action>
+                <f:link.action action="delete" arguments="{targetGroup : targetGroup}" class="btn btn-default btn-xs" title="löschen">
+                    <i class="fa fa-trash-o"></i>
+                </f:link.action>
+
+            </td>
+		</tr>
+	</f:for>
+</table>
+    <f:form.hidden name="currentPageId" value="{currentPageId}" id="currentPageId" />
+
+<f:link.action action="new">Neue Zielgruppe</f:link.action>
+    <div id="dialog" title="Ferienzeit löschen bestätigen" >
+        Are you sure about this?
+    </div>
+
+</f:section>

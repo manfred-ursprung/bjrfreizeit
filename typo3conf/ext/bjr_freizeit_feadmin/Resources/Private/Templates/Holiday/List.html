@@ -1,0 +1,39 @@
+<f:layout name="Default" />
+
+
+
+<f:section name="main">
+<h1>Ferienzeiten</h1>
+
+<f:flashMessages renderMode="div"  />
+
+<table  class="tx_bjrfreizeitfeadmin tags table table-striped table-bordered table-condensed table-hover" >
+	<tr>
+		<th>Name</th>
+		<th colspan="2">Aktionen</th>
+
+	</tr>
+
+	<f:for each="{holidays}" as="holiday">
+		<tr>
+			<td>
+                <f:format.html>{holiday.name}</f:format.html>
+            </td>
+			<td>
+                <f:link.action action="edit" arguments="{holiday : holiday}"><i class="fa fa-pencil"></i></f:link.action>
+                <f:link.action action="delete" arguments="{holiday : holiday}" class="btn btn-default btn-xs" title="löschen">
+                    <i class="fa fa-trash-o"></i>
+                </f:link.action>
+
+            </td>
+		</tr>
+	</f:for>
+</table>
+    <f:form.hidden name="currentPageId" value="{currentPageId}" id="currentPageId" />
+
+<f:link.action action="new">Neue Ferienzeit</f:link.action>
+    <div id="dialog" title="Ferienzeit löschen bestätigen" >
+        Are you sure about this?
+    </div>
+
+</f:section>

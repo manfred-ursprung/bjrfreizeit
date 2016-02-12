@@ -1,0 +1,25 @@
+<f:layout name="Default" />
+
+
+<f:section name="main">
+    <h1>Neues Land anlegen</h1>
+
+    <f:flashMessages renderMode="div" />
+
+    <f:render partial="FormErrors" arguments="{object:Country}"/>
+
+    <f:form action="update" name="country" object="{country}" class="form-horizontal" additionalAttributes="{autocomplete: 'off'}"
+            enctype="multipart/form-data" arguments="{country: country}">
+
+        <div class="row form-group">
+            <label class="col-sm-3 col-xs-12 control-label" for="name">Name</label>
+            <div class="col-sm-9 col-xs-12">
+                <f:form.textfield property="name" value="{country.name}" class="form-control"  />
+            </div>
+        </div>
+
+        <f:link.action action="list" class="btn btn-default btn-form-back-left"> Zurück </f:link.action>
+        <f:form.submit name="countryUpdate" value="Anlegen" class="btn btn-default"/>
+    </f:form>
+
+</f:section>

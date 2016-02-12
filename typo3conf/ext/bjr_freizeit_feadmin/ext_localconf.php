@@ -29,6 +29,19 @@ if (!defined('TYPO3_MODE')) {
     )
 );
 
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'MUM.' . $_EXTKEY,
+	'Tags',
+	array(
+		'Tags' => 'list, edit, update, successUpdate, new, delete',
+
+	),
+	// non-cacheable actions
+	array(
+		'Tags' => 'list, edit, update, new, delete',
+
+	)
+);
 
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
@@ -42,6 +55,48 @@ if (!defined('TYPO3_MODE')) {
 	array(
 		'Leisure' => 'list, edit, update, successUpdate, new, create, organizationList, delete, showReservations, error',
 		
+	)
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'MUM.' . $_EXTKEY,
+	'Holiday',
+	array(
+		'Holiday' => 'list, edit, update, successUpdate, new, delete',
+
+	),
+	// non-cacheable actions
+	array(
+		'Holiday' => 'list, edit, update, successUpdate, new, delete',
+
+	)
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'MUM.' . $_EXTKEY,
+	'Country',
+	array(
+		'Country' => 'list, edit, update, successUpdate, new, delete',
+
+	),
+	// non-cacheable actions
+	array(
+		'Country' => 'list, edit, update, successUpdate, new, delete',
+
+	)
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'MUM.' . $_EXTKEY,
+	'TargetGroup',
+	array(
+		'TargetGroup' => 'list, edit, update, successUpdate, new, delete',
+
+	),
+	// non-cacheable actions
+	array(
+		'TargetGroup' => 'list, edit, update, successUpdate, new, delete',
+
 	)
 );
 

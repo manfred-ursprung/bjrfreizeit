@@ -2,3 +2,6 @@
     width: 80px;
     display: inline-block;
 }
+.sidebar-left ul ul{
+    margin-left: 10px;
+}

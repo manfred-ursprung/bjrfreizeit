@@ -1,0 +1,26 @@
+<f:layout name="Default" />
+
+
+<f:section name="main">
+
+
+    <f:flashMessages renderMode="div" />
+
+    <div class="form col-sm-7" role="form">
+        <h2>Ändern der Ferienzeit {country.name}</h2>
+        <f:render partial="FormErrors" arguments="{object:Country}"/>
+
+        <f:form action="update" name="country" object="{country}"  class="form-horizontal"  arguments="{country: country}">
+            <div class="row form-group">
+                <label class="col-sm-3 col-xs-12 control-label" for ="name">Name</label>
+                <div class="col-sm-9 col-xs-12">
+                    <f:form.textfield property="name" value="{country.name}" class="form-control"  />
+                </div>
+            </div>
+
+            <f:link.action action="list" class="btn btn-default btn-form-back-left"> Zurück </f:link.action>
+            <f:form.submit name="countryUpdate" value="Ändern" class="btn btn-default"/>
+
+        </f:form>
+    </div>
+</f:section>

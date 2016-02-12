@@ -1,4 +1,4 @@
-plugin.tx_bjrfeadmin {
+plugin.tx_bjrfreizeitfeadmin {
 	view {
 		templateRootPath = {$plugin.tx_bjrfeadmin.view.templateRootPath}
 		partialRootPath = {$plugin.tx_bjrfeadmin.view.partialRootPath}
@@ -17,8 +17,8 @@ plugin.tx_bjrfeadmin {
         pidFrontendUser         = {$plugin.tx_bjrfeadmin.settings.pidFrontendUser}
 	    frontendUserGroup       = {$plugin.tx_bjrfeadmin.settings.frontendUserGroup}
         loginPid                = {$plugin.tx_bjrfeadmin.settings.loginPid}
-        pidArticleList          = {$plugin.tx_bjrfeadmin.settings.pidArticleList}
-        orderSenderEmail        = {$plugin.tx_bjrlend.settings.orderSenderEmail}
+        pidFreizeitList          = {$plugin.tx_bjrfeadmin.settings.pidLeisureList}
+
 	}
 }
 

@@ -18,6 +18,15 @@
         <!-- Assets sind in Typoscript ausgelagert , in siteprovider/Configuration/Typoscript/setup.txt -->
     </f:section>
 
+    <f:section name="Sidebar-left-FE">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Menü</div>
+            <div class="panel-body">
+                <f:cObject typoscriptObjectPath="lib.left_menu_fe" />
+            </div>
+        </div>
+    </f:section>
+
 <f:comment>
     <f:section name="MainNav">
         <div class="navbar navbar-default navbar-static-top" role="navigation">

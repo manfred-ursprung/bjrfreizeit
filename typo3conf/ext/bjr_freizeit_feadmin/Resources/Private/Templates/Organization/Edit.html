@@ -12,7 +12,7 @@
             <f:render partial="FormErrors" arguments="{object:Organization}"/>
 
             <f:form action="update" name="organization" object="{organization}"  class="form-horizontal" additionalAttributes="{autocomplete: 'off'}" arguments="{organization: organization}">
-                <f:render partial="Organization/FormFields" arguments="{all}" />
+                <f:render partial="Organization/FormFields" arguments="{_all}" />
                 <f:link.action action="list" pageUid="{settings.pidOrganization}" class="btn btn-default btn-form-back-left"> Zurück </f:link.action>
                 <f:form.submit name="organizationUpdate" value="Speichern" class="btn btn-default"/>
             </f:form>

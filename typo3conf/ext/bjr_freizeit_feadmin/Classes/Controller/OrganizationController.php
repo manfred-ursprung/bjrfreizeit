@@ -26,6 +26,7 @@ namespace MUM\BjrFreizeitFeadmin\Controller;
  ***************************************************************/
 use TYPO3\CMS\Core\Exception;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  *
@@ -135,11 +136,11 @@ class OrganizationController extends AbstractController {
      * @ignorevalidation $organization
 	 */
 	public function editAction(\MUM\BjrFreizeit\Domain\Model\Organization $organization = NULL) {
-        $regions = $this->regionRepository->findAll();
+        //$regions = $this->regionRepository->findAll();
 
         if(is_null($organization)){
             //$organization = $this->findOrganizationBySession();
-            if(!is_a($organization, '\Bjr\BjrLend\Domain\Model\Organization')) {
+            if(!is_a($organization, '\MUM\BjrFreizeit\Domain\Model\Organization')) {
                 $organization = $this->findOrganizationByLogin();
             }
         }
@@ -155,7 +156,7 @@ class OrganizationController extends AbstractController {
 
         $this->view->assign('pageList', $this->getArticlePagesList());
         $this->view->assign('organization', $organization);
-        $this->view->assign('regions', $regions);
+        //$this->view->assign('regions', $regions);
         $this->view->assign('superuser', $this->isAdministratorMode());
         $this->view->assign('source', 'edit');
 	}
@@ -166,10 +167,9 @@ class OrganizationController extends AbstractController {
      */
     public function newAction(\MUM\BjrFreizeit\Domain\Model\Organization $organization = NULL){
         if($this->isAdministratorMode()) {
-            $regions = $this->regionRepository->findAll();
 
             $this->view->assign('organization', $organization);
-            $this->view->assign('regions', $regions);
+
             $this->view->assign('feUserList', $this->getFeUserList());
             $this->view->assign('superuser', $this->isAdministratorMode());
             $this->view->assign('creation', 1);
@@ -208,7 +208,8 @@ class OrganizationController extends AbstractController {
      * action update
      * @param \MUM\BjrFreizeit\Domain\Model\Organization $organization
      * @return void
-     * @validate \Bjr\BjrLend\Validation\Organization
+     *
+     * @ignorevalidate   \MUM\BjrFreizeit\Validation\Validator\Organization
      */
     public function updateAction(\MUM\BjrFreizeit\Domain\Model\Organization $organization) {
         $redirectParams = array();  //array('passwordChange' => '',    'organization' => $organization,'organizationChange' => ''       );
@@ -238,7 +239,7 @@ class OrganizationController extends AbstractController {
             }
             //select Field value is not set in organization, do it manually
             if($this->isAdministratorMode()) {
-                $organization->setArticleFolderPid($this->request->getArgument('articleFolderPid'));
+                $organization->setLeisureFolderPid($this->request->getArgument('leisureFolderPid'));
             }
             if(($this->request->hasArgument('creation')) && ($this->request->getArgument('creation') == 1)){
                 $organization->setPid($this->settings['pidOrganizationFolder']);
@@ -351,19 +352,19 @@ class OrganizationController extends AbstractController {
         if($this->settings['pidOrganizationFolder'] > 0){
             
             $organizations = $this->organizationRepository->findAll();
-            $usedArticleFolderPids = array();
-            /** @var  $organization \Bjr\BjrLend\Domain\Model\Organization $organization */
+            $usedLeisureFolderPids = array();
+            /** @var  $organization \MUM\BjrFreizeit\Domain\Model\Organization $organization */
             foreach($organizations as $organization){
-                $usedArticleFolderPids[] = $organization->getArticleFolderPid();
+                $usedLeisureFolderPids[] = $organization->getLeisureFolderPid();
             }
             $ret = $this->pageRepository->getMenu($this->settings['pidOrganizationFolder']);
             foreach($ret as $pageUid => $row){
-                if(!in_array($pageUid, $usedArticleFolderPids)){
+                if(!in_array($pageUid, $usedLeisureFolderPids)){
                     $pageList[$pageUid] = $row['title'];
                 }
             }
         }else{
-            throw new Exception('PID für Seite mit Ausleihstellen ist nicht gesetzt.' );
+            throw new Exception('PID für Seite mit Anbieter ist nicht gesetzt.' );
         }
         return $pageList;
     }
@@ -373,8 +374,8 @@ class OrganizationController extends AbstractController {
      */
     protected function findOrganizationBySession(){
 
-        /** @var  $organization \Bjr\BjrLend\Domain\Model\Organization */
-        $organization =  $this->userSession->get('organization');
+        /** @var  $organization \MUM\BjrFreizeit\Domain\Model\Organization */
+        $organization =  $GLOBALS['TSFE']->fe_user->getKey('ses',  'organization');
         if(is_int($organization)){
             $organization = $this->organizationRepository->findByUid($organization);
         }
@@ -401,10 +402,10 @@ class OrganizationController extends AbstractController {
     protected function validateOrganization($args){
         $valid = true;
         $errors = array();
-        /** @var  $validator \Bjr\BjrLend\Validation\Validator\OrganizationValidator */
-        $validator = $this->objectManager->create('Bjr\\BjrLend\\Validation\\Validator\\OrganizationValidator');
+        /** @var  $validator \MUM\BjrFreizeit\Validation\Validator\OrganizationValidator */
+        $validator = GeneralUtility::makeInstance('MUM\\BjrFreizeit\\Validation\\Validator\\OrganizationValidator');
         
-        $valid =  $validator->isValid($args);
+        $valid =  $validator->validate($args);
         if(!$valid){
             $_errors = $validator->getErrors();
             foreach($_errors as $error){

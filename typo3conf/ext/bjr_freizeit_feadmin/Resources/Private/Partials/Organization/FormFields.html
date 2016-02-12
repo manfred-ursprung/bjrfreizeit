@@ -44,7 +44,7 @@
 <div class="row form-group">
     <label class="col-sm-3 col-xs-12 control-label required" for ="name">Adresse</label>
     <div class="col-sm-9 col-xs-12">
-        <f:form.textfield property="address.street" value="{organization.address.street}" class="form-control" required="1"/>
+        <f:form.textfield property="address.street"  class="form-control" required="1"/>
     </div>
 </div>
 
@@ -52,14 +52,14 @@
 <div class="row form-group">
     <label class="col-sm-3 col-xs-12 control-label required" for ="name">Telefon</label>
     <div class="col-sm-9 col-xs-12">
-        <f:form.textfield property="address.phone" value="{organization.address.phone}" class="form-control" required="1"/>
+        <f:form.textfield property="address.phone"  class="form-control" required="1"/>
     </div>
 </div>
-<!-- Mobil -->
+<!-- Mobile -->
 <div class="row form-group">
     <label class="col-sm-3 col-xs-12 control-label" for ="name">Mobiltelefon</label>
     <div class="col-sm-9 col-xs-12">
-        <f:form.textfield property="address.mobil" value="{organization.address.mobil}" class="form-control"/>
+        <f:form.textfield property="address.mobile"  class="form-control"/>
 
     </div>
 </div>
@@ -67,51 +67,11 @@
 <div class="row form-group">
     <label class="col-sm-3 col-xs-12 control-label required" for ="name">Email</label>
     <div class="col-sm-9 col-xs-12">
-        <f:form.textfield property="address.email" value="{organization.address.email}" class="form-control" required="1"/>
+        <f:form.textfield property="address.email"  class="form-control" required="1"/>
     </div>
 </div>
 <!-- WWWW -->
 
-<!-- Region -->
-<div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label required" for ="name">Zugeordnete Region</label>
-    <div class="col-sm-9 col-xs-12">
-        <f:form.select property="region" options="{regions}" optionValueField="uid" optionLabelField="name"
-                       value="{organization.region}" class=" form-control" additionalAttributes="{required: 'required'}"/>
-    </div>
-</div>
-
-<!-- Bedingungen lend_conditions -->
-<div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label" for ="name">Bedingungen</label>
-    <div class="col-sm-9 col-xs-12">
-        <f:form.textarea  cols="20" rows="5" property="lendConditions" value="{organization.lendConditions}"  class=" form-control"  />
-    </div>
-</div>
-
-<!-- Info -->
-<div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label" for ="name">Info</label>
-    <div class="col-sm-9 col-xs-12">
-        <f:form.textarea  cols="20" rows="5" property="info" value="{organization.info}"  class=" form-control "/>
-    </div>
-</div>
-
-<!-- AGB -->
-<div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label" for ="name">AGB</label>
-    <div class="col-sm-9 col-xs-12">
-        <f:form.textarea  cols="20" rows="7" property="agb" value="{organization.agb}"  class=" form-control "/>
-    </div>
-</div>
-
-<!-- Öffnungszeiten -->
-<div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label required" for ="name">Öffnungszeiten</label>
-    <div class="col-sm-9 col-xs-12">
-        <f:form.textarea  cols="20" rows="3" property="openingTimes" value="{organization.openingTimes}"  class=" form-control" additionalAttributes="{required: 'required'}"/>
-    </div>
-</div>
 
 <!-- Online-Verwaltung -->
 <div class="row form-group">
@@ -121,35 +81,29 @@
                            value="onlineAdministration"  class=" form-control "/>
     </div>
 </div>
-<!-- Nur für regionale Ausleihe -->
-<div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label" for="name">Nur regionale Ausleihe</label>
-    <div class="col-sm-2 col-xs-12">
-        <f:form.checkbox   property="localOnly"
-                           value="localOnly"  class=" form-control "/>
-    </div>
-</div>
 
-<!-- Folder für Artikel -->
+
+<!-- Folder für Freizeiten -->
 <f:if condition="{source} == 'new' " >
     <f:then>
     <div class="row form-group">
         <label class="col-sm-3 col-xs-12 control-label required" for="articleFolderPid">Seite für Artikel</label>
         <div class="col-sm-2 col-xs-12">
-            <f:form.select name="articleFolderPid" options="{pageList}"  value="{organization.articleFolderPid}" class=" form-control "
-                           prependOptionLabel="--Bitte wählen Sie --" additionalAttributes="{style: 'width: 250px', required: 'required'}" />
+            <f:form.select name="leisureFolderPid" options="{pageList}"  class=" form-control "
+                           prependOptionLabel="--Bitte wählen Sie --"
+                           additionalAttributes="{style: 'width: 250px', required: 'required'}" />
         </div>
     </div>
     </f:then>
     <f:else>
-        <f:form.hidden name="articleFolderPid" value="{organization.articleFolderPid}" />
+        <f:form.hidden name="leisureFolderPid" value="{organization.leisureFolderPid}" />
     </f:else>
 </f:if>
 
 
 <!-- Kontaktperson  2. Formular -->
 <div class="row form-group">
-    <h3>Kontaktperson für die Ausleihe</h3>
+    <h3>Kontaktperson für die Freizeit</h3>
 </div>
 <!-- Kontaktperson Name -->
 <div class="row form-group">

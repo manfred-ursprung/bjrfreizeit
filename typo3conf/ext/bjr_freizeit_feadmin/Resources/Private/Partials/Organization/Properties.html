@@ -1,4 +1,4 @@
-<h4> Ausleihstelle </h4>
+<h4> Anbieter </h4>
 <div class="row form-group">
     <label class="col-sm-3 col-xs-12 control-label">Name :</label>
     <div class="col-sm-9 col-xs-12">
@@ -31,7 +31,7 @@
 <div class="row form-group">
     <label class="col-sm-3 col-xs-12 control-label" >Mobil : </label>
     <div class="col-sm-9 col-xs-12">
-        {organization.address.mobil}
+        {organization.address.mobile}
     </div>
 </div>
 <!-- Email -->
@@ -43,45 +43,6 @@
 </div>
 <!-- WWWW -->
 
-<!-- Region -->
-<div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label" >Region :</label>
-    <div class="col-sm-9 col-xs-12">
-        {organization.region.name}
-    </div>
-</div>
-
-<!-- Bedingungen lend_conditions -->
-<div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label" >Ausleihbedingung :</label>
-    <div class="col-sm-9 col-xs-12">
-        {organization.lendConditions}
-    </div>
-</div>
-
-<!-- Info -->
-<div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label" >Info</label>
-    <div class="col-sm-9 col-xs-12">
-        {organization.info}
-    </div>
-</div>
-
-<!-- AGB -->
-<div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label" >AGB</label>
-    <div class="col-sm-9 col-xs-12">
-        {organization.agb}
-    </div>
-</div>
-
-<!-- Öffnungszeiten -->
-<div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label" >Öffnungszeiten :</label>
-    <div class="col-sm-9 col-xs-12">
-        {organization.openingTimes}
-    </div>
-</div>
 
 <!-- Online-Verwaltung -->
 <div class="row form-group">
@@ -91,20 +52,13 @@
                            value="1"  class="form-control" disabled="disabled" />
     </div>
 </div>
-<!-- Nur für regionale Ausleihe -->
-<div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label" for="name">Nur lokale Ausleihe</label>
-    <div class="col-sm-2 col-xs-12">
-        <f:form.checkbox   property="localOnly"
-                           value="1"  class="form-control" disabled="disabled" />
-    </div>
-</div>
 
-<!-- Folder für Artikel -->
+
+<!-- Folder für Freizeiten -->
 <div class="row form-group">
     <label class="col-sm-3 col-xs-12 control-label">Seite für Artikel :</label>
     <div class="col-sm-2 col-xs-12">
-        {organization.articleFolderPidTitle}
+        {organization.leisureFolderPidTitle}
     </div>
 </div>
 

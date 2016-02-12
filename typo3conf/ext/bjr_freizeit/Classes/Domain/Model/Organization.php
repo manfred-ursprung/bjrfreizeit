@@ -29,6 +29,9 @@ namespace MUM\BjrFreizeit\Domain\Model;
 /**
  * Organization
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
+
 class Organization extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
@@ -200,7 +203,17 @@ class Organization extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->leisureFolderPid = $leisureFolderPid;
     }
 
+    /**
+     * @return mixed Page title of folder with leisures for organization, needed in view
+     */
+    public function getLeisureFolderPidTitle(){
+        $objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+        /** @var  $pageRepository    \TYPO3\CMS\Frontend\Page\PageRepository */
+        $pageRepository = $objectManager->get('TYPO3\\CMS\\Frontend\\Page\\PageRepository');
+        $row = $pageRepository->getPage($this->getLeisureFolderPid());
 
+        return $row['title'];
+    }
 
 
     /**

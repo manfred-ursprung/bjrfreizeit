@@ -8,22 +8,22 @@ plugin.tx_bjrfeadmin {
 		layoutRootPath = EXT:bjr_feadmin/Resources/Private/Layouts/
 	}
 	persistence {
-		# cat=plugin.tx_bjrfeadmin//a; type=string; label=Default storage PID for Articles
-		storagePid = 12,15,16,17
+		# cat=plugin.tx_bjrfeadmin//a; type=string; label=Default storage PID for Leisures
+		storagePid = 15
 	}
 	settings{
-	    # cat=plugin.tx_bjrfeadmin//b; type=string; label=Default storage PID for Organization overview administration
-	   	    pidOrganization = 50
-	    # cat=plugin.tx_bjrfeadmin//c; type=string; label=Folder for storing Organizations
-            pidOrganizationFolder = 12
-        # cat=plugin.tx_bjrfeadmin//d; type=string; label=Default storage PID for Frontend User
-            pidFrontendUser = 49
-        # cat=plugin.tx_bjrfeadmin//d; type=string; label=Frontend User Group for Organizations
+	    # cat=plugin.tx_bjrfreizeitfeadmin//b; type=string; label=Default storage PID for Organization overview administration
+	   	    pidOrganization = 13
+	    # cat=plugin.tx_bjrfreizeitfeadmin//c; type=string; label=Folder for storing Organizations
+            pidOrganizationFolder = 8
+        # cat=plugin.tx_bjrfreizeitfeadmin//d; type=string; label=Default storage PID for Frontend User
+            pidFrontendUser = 11
+        # cat=plugin.tx_bjrfreizeitfeadmin//d; type=string; label=Frontend User Group for Organizations
             frontendUserGroup = 2
-        # cat=plugin.tx_bjrfeadmin//d; type=string; label=PID for Login Page
-            loginPid = 51
-        # cat=plugin.tx_bjrfeadmin//e; type=string; label=PID for Article list of Organization
-            pidArticleList = 52
+        # cat=plugin.tx_bjrfreizeitfeadmin//d; type=string; label=PID for Login Page
+            loginPid = 12
+        # cat=plugin.tx_bjrfreizeitfeadmin//e; type=string; label=PID for Leisure list of single Organization
+            pidLeisureList = 14
 
 
 

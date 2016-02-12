@@ -1,0 +1,25 @@
+<f:layout name="Default" />
+
+
+<f:section name="main">
+    <h1>Neue Zielguppe anlegen</h1>
+
+    <f:flashMessages renderMode="div" />
+
+    <f:render partial="FormErrors" arguments="{object:TargetGroup}"/>
+
+    <f:form action="update" name="targetGroup" object="{targetGroup}" class="form-horizontal" additionalAttributes="{autocomplete: 'off'}"
+            enctype="multipart/form-data" arguments="{targetGroup: targetGroup}">
+
+        <div class="row form-group">
+            <label class="col-sm-3 col-xs-12 control-label" for="name">Name</label>
+            <div class="col-sm-9 col-xs-12">
+                <f:form.textfield property="name" value="{targetGroup.name}" class="form-control"  />
+            </div>
+        </div>
+
+        <f:link.action action="list" class="btn btn-default btn-form-back-left"> Zurück </f:link.action>
+        <f:form.submit name="targetGroupUpdate" value="Anlegen" class="btn btn-default"/>
+    </f:form>
+
+</f:section>
