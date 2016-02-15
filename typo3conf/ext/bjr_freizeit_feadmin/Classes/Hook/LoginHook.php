@@ -53,7 +53,7 @@ class LoginHook {
 
     public function afterLogin($param, &$parent){
         if($this->debug) {
-            echo "hallo afteer Login";
+            echo "hallo after Login";
             var_dump($param);
             exit();
         }
@@ -61,7 +61,7 @@ class LoginHook {
         $GLOBALS['TSFE']->fe_user->removeSessionData();
         $this->objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
 
-        $GLOBALS['TSFE']->fe_user->setKey('organization', $this->findOrganizationByLogin());
+        $GLOBALS['TSFE']->fe_user->setKey('ses', 'organization', $this->findOrganizationByLogin());
     }
 
 

@@ -105,5 +105,5 @@ if (!defined('TYPO3_MODE')) {
 $TYPO3_CONF_VARS['FE']['eID_include']['bjrfreizeitfeadmin'] = 'EXT:' . $_EXTKEY . '/Classes/Ajax/AjaxDispatcher.php';
 
 //Hook after Login
-$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['felogin']['login_confirmed'][] = 'EXT:' . $_EXTKEY . '/Classes/Hook/LoginHook.php:Bjr\BjrFeadmin\Hook\LoginHook->afterLogin';
+$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['felogin']['login_confirmed'][] = 'EXT:' . $_EXTKEY . '/Classes/Hook/LoginHook.php:MUM\BjrFreizeitFeadmin\Hook\LoginHook->afterLogin';
 ?>

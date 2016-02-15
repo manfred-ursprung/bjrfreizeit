@@ -12,8 +12,13 @@
 		<flux:grid>
 			<!-- Edit this grid to change the "backend layout" structure -->
 			<flux:grid.row>
-				<flux:grid.column colPos="0" colspan="3" name="main" />
-				<flux:grid.column colPos="1" name="right" />
+				<flux:grid.column colPos="0" colspan="3" name="main" label="Main Spalte" />
+				<flux:grid.column colPos="1" name="right" label="Rechte Spaalte"/>
+			</flux:grid.row>
+			<flux:grid.row>
+				<flux:grid.column colPos="5" name="Footer1" style="width: 30%" label="Footer 1 "/>
+				<flux:grid.column colPos="6" name="Footer2" style="width: 30%" label="Footer 2"/>
+				<flux:grid.column colPos="7" name="Footer3" style="width: 30%" label="Footer 3"/>
 			</flux:grid.row>
 		</flux:grid>
 	</f:section>

@@ -9,6 +9,21 @@
 			<trans-unit id="flux.standard.description">
 				<source>Keine Unterscheidung zwischen Startseite und Folgeseite</source>
 			</trans-unit>
+			<trans-unit id="flux.standard.fields.settings.main">
+				<source>Content Spalte</source>
+			</trans-unit>
+			<trans-unit id="flux.standard.fields.settings.right">
+				<source>Rechte Spalte</source>
+			</trans-unit>
+			<trans-unit id="flux.standard.fields.settings.Footer1">
+				<source>Footer Spalte 1</source>
+			</trans-unit>
+			<trans-unit id="flux.standard.fields.settings.Footer2">
+				<source>Footer Spalte 2</source>
+			</trans-unit>
+			<trans-unit id="flux.standard.fields.settings.Footer3">
+				<source>Footer Spalte 3</source>
+			</trans-unit>
 			<trans-unit id="flux.example">
 				<source>Example element</source>
 			</trans-unit>
@@ -19,14 +34,18 @@
 				<source>Example input</source>
 			</trans-unit>
 
-			<trans-unit id="flux.frontendadministration">
-				<source>Frontend Administration Seite</source>
-			</trans-unit>
-			<trans-unit id="flux.frontendadministration.description">
-				<source></source>
-			</trans-unit>
+
 			<trans-unit id="flux.administration">
 				<source>Frontend Administration Seite</source>
+			</trans-unit>
+			<trans-unit id="flux.administration.fields.settings.Footer1">
+				<source>Footer Spalte 1</source>
+			</trans-unit>
+			<trans-unit id="flux.administration.fields.settings.Footer2">
+				<source>Footer Spalte 2</source>
+			</trans-unit>
+			<trans-unit id="flux.administration.fields.settings.Footer3">
+				<source>Footer Spalte 3</source>
 			</trans-unit>
 		</body>
 	</file>

@@ -481,31 +481,6 @@ class LeisureController extends AbstractController {
         return $organization;
     }
 
-    /**
-     * @return \Bjr\BjrFreizeit\Domain\Model\Organization
-     */
-    protected function findOrganizationBySession(){
-        //$user = $GLOBALS['TSFE']->fe_user->user;
-        /** @var  $organization Organization */
-        $organization =  $GLOBALS['TSFE']->fe_user->getKey('ses',  'organization');
-        if(is_int($organization)){
-            $organization = $this->organizationRepository->findByUid($organization);
-        }
-        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($organization, 'Organization in findOrganizationBySession');
-        return $organization;
-    }
-
-
-    protected function findOrganizationByLogin(){
-        $feUserId = $GLOBALS['TSFE']->fe_user->user['uid'];
-        /** @var  $organization  \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult */
-        $organization = $this->organizationRepository->findByFeusername($feUserId);
-        if($organization->count() > 0){
-            return $organization->getFirst();
-        }else{
-            return null;
-        }
-    }
 
 
     protected function jsForDeleteArticle(){

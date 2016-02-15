@@ -79,9 +79,8 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * @return \MUM\BjrFreizeit\Domain\Model\Organization
      */
     protected function findOrganizationBySession(){
-        //$user = $GLOBALS['TSFE']->fe_user->user;
-        /** @var  $organization \Bjr\BjrLend\Domain\Model\Organization */
-        $organization =  $this->userSession->get('organization');
+        /** @var  $organization Organization */
+        $organization =  $GLOBALS['TSFE']->fe_user->getKey('ses',  'organization');
         if(is_int($organization)){
             $organization = $this->organizationRepository->findByUid($organization);
         }
