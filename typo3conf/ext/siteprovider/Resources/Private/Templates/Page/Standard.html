@@ -13,7 +13,7 @@
 			<!-- Edit this grid to change the "backend layout" structure -->
 			<flux:grid.row>
 				<flux:grid.column colPos="0" colspan="3" name="main" label="Main Spalte" />
-				<flux:grid.column colPos="1" name="right" label="Rechte Spaalte"/>
+
 			</flux:grid.row>
 			<flux:grid.row>
 				<flux:grid.column colPos="5" name="Footer1" style="width: 30%" label="Footer 1 "/>
@@ -52,17 +52,10 @@
 	</f:section>
 
 	<f:section name="Content">
-		<h1>I am a page template!</h1>
-		<p>
-			My template file is EXT:siteprovider/Resources/Private/Page/Standard.html.
-		</p>
 		<div style="float: left; width: 75%;">
-			<h2>Content main</h2>
+
 			<v:content.render column="0" />
 		</div>
-		<div style="float: left; width: 25%;">
-			<h2>Content right</h2>
-			<v:content.render column="1" />
-		</div>
+
 	</f:section>
 </div>

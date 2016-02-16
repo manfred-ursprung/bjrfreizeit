@@ -1,4 +1,6 @@
+{namespace bjr = MUM\BjrFreizeit\ViewHelpers}
 
+<f:comment>
 <table class="tx-bjr-freizeit" >
 	<tr>
 		<td>
@@ -131,3 +133,155 @@
 		</td>
 	</tr>
 </table>
+</f:comment>
+
+
+<f:section name="Detail">
+
+
+	<!-- Detail -->
+	<div class="well">
+		<div class="article-detail row">
+			<div class="article-image col-sm-3" data-article="{leisure.uid}" id="leisure-uid">
+				<a class="fancybox" href="{leisure.urlForImage}" >
+
+					<f:image src="{leisure.urlForImage}" treatIdAsReference="FALSE" width="200c" height="150c" alt="Produktbild für {leisure.title}" class="img-responsive img-rounded"/>
+				</a>
+			</div>
+			<div class="article-desc col-sm-5">
+				<h3 class="art-title">{leisure.title}</h3>
+				<p class="art-traveling-time">
+					<span class="art-label">Reisedauer: </span>
+					<span class="traveling-time">{leisure.startDate -> f:format.date()} - {leisure.endDate -> f:format.date()}</span>
+				</p>
+
+				<p class="art-location">
+					<span class="art-label">Lokation: </span>
+					<span class="location">{leisure.location}</span>
+				</p>
+				<p class="art-target-group">
+					<span class="art-label">Leiter: </span>
+					<span class="leader">{leisure.leader}</span>
+				</p>
+				<p class="art-target-group">
+					<span class="art-label">Anbieter: </span>
+					<span class="target-group">{leisure.organization.name}</span>
+				</p>
+				<p class="art-partner">
+					<span class="art-label">Partner: </span>
+					<span class="partner">{leisure.partner}</span></p>
+				<f:if condition="{leisure.cooperation}">
+					<p class="art-cooperation">
+						<span class="art-label">Kooperation: </span>
+						<span class="cooperation">{leisure.cooperation}</span>
+					</p>
+				</f:if>
+				<p class="art-target-group">
+					<span class="art-label">Altersgruppe: </span>
+					<span class="target-group">
+						<f:for each="{leisure.targetGroup}" as="target">
+							{target.name}<br />
+						</f:for></span>
+				</p>
+				<p class="art-holiday">
+					<span class="art-label">Ferienzeit: </span>
+					<span class="holiday">
+						<f:for each="{leisure.holiday}" as="holiday">
+							{holiday.name}<br />
+						</f:for></span>
+				</p>
+				<p class="art-tags">
+					<span class="art-label">Tags: </span>
+					<span class="tags">
+						<f:for each="{leisure.tags}" as="tag">
+							{tag.name}<br />
+						</f:for></span>
+				</p>
+				<p class="art-country">
+					<span class="art-label">Land: </span>
+					<span class="participants">{leisure.country.name}</span>
+				</p>
+				<f:if condition="{leisure.referent}">
+					<p class="art-referent">
+						<span class="art-label">Referent: </span>
+						<span class="region">{leisure.referent}</span>
+					</p>
+				</f:if>
+
+				<p class="art-paricipants">
+					<span class="art-label">Mindestteilnehmerzahl: </span>
+					<span class="participants">{leisure.minimumParticipants}</span>
+				</p>
+
+				<p class="art-kosten">
+					<span class="art-label">Preis: </span>
+					<span class="kosten"><f:format.currency currencySign="€" decimalSeparator="," thousandsSeparator=".">{leisure.price}</f:format.currency></span>
+				</p>
+				<f:if condition="{leisure.url}">
+					<p class="art-url">
+						<span class="art-label">URL zur Anbieterseite: </span>
+						<span class="url">
+							<f:link.external uri="{leisure.url}" target="_blank">{leisure.url}
+							</f:link.external>
+						</span>
+					</p>
+				</f:if>
+
+				<p class="art-description">
+					<span class="art-label">Beschreibung: </span>
+					<span class="participants">{leisure.description}</span>
+				</p>
+			</div>
+
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</f:section>
+
+<div class="well">
+	<div class="article-detail row">
+		<div class="article-image col-sm-3" data-article="293" id="article-uid">
+			<a class="fancybox" href="uploads/tx_bjrlend/Bungee-Run.jpg">
+
+				<img class="img-responsive img-rounded" alt="Produktbild für Bungee-Run" src="uploads/tx_bjrlend/_processed_/csm_Bungee-Run_0ddb24671c.jpg" width="200" height="150" title="Produktbild für Bungee-Run">
+			</a>
+		</div>
+		<div class="article-desc col-sm-5">
+			<h3 class="art-title">Bungee-Run</h3>
+			<p class="art-kategorie">
+				<span class="art-label">Kategorie: </span>
+				<span class="hauptkategorie">Großspielgeräte</span>
+				<span class="subkategorie">Hüpfburgen</span></p>
+			<p class="art-region">
+				<span class="art-label">Region: </span>
+				<span class="region">Schweinfurt</span>
+			</p>
+			<p class="art-organization">
+				<span class="art-label">Anbieter: </span>
+				<span class="region">Stadtjugendring Schweinfurt</span>
+			</p>
+			<p class="art-kosten">
+				<span class="art-label">Gebühr: </span>
+				<span class="kosten">siehe Kurzbeschreibung</span>
+			</p>
+		</div>
+		<div class="article-action col-sm-4">
+			<ul class="art-features">
+
+
+
+				<li class="well well-feature well-phone">
+					<i class="fa fa-phone-square fa-fw fa-lg"></i>
+					09721 517862
+				</li>
+
+
+				<li class="well well-feature well-email">
+					<i class="fa fa-envelope fa-fw fa-lg"></i>
+					<a href="mailto:post@sjr-schweinfurt.de?subject=Anfrage Bungee-Run" title="per E-mail anfragen">per E-Mail anfragen</a></li>
+
+			</ul>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</div>

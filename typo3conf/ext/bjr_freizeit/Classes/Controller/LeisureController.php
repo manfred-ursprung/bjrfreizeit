@@ -60,7 +60,22 @@ class LeisureController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $this->view->assign('imagePath', $this->settings['leisureImagePath']);
         $this->view->assign('detailPage', $this->settings['detailPage']);
     }
-    
+
+
+    /**
+     * @return void
+     */
+    public function listNewestAction(){
+        $args = $this->request->getArguments();
+        if(isset($args['category'])){
+
+        }else{
+            $leisures = $this->leisureRepository->findNewestSorting($this->settings['sorting'], $this->settings['limit']);
+        }
+        $this->view->assign('leisures', $leisures);
+        $this->view->assign('imagePath', $this->settings['leisureImagePath']);
+        $this->view->assign('detailPage', $this->settings['detailPage']);
+    }
     /**
      * action show
      *

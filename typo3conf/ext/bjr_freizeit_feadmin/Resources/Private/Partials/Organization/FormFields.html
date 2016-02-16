@@ -87,8 +87,8 @@
 <f:if condition="{source} == 'new' " >
     <f:then>
     <div class="row form-group">
-        <label class="col-sm-3 col-xs-12 control-label required" for="articleFolderPid">Seite für Artikel</label>
-        <div class="col-sm-2 col-xs-12">
+        <label class="col-sm-3 col-xs-12 control-label required" for="leisureFolderPid">Seite für Artikel</label>
+        <div class="col-sm-9 col-xs-12">
             <f:form.select name="leisureFolderPid" options="{pageList}"  class=" form-control "
                            prependOptionLabel="--Bitte wählen Sie --"
                            additionalAttributes="{style: 'width: 250px', required: 'required'}" />
@@ -97,6 +97,13 @@
     </f:then>
     <f:else>
         <f:form.hidden name="leisureFolderPid" value="{organization.leisureFolderPid}" />
+        <div class="row form-group">
+            <label class="col-sm-3 col-xs-12 control-label required" for="leisureFolderPid">Seite für Artikel</label>
+            <div class="col-sm-9 col-xs-12">
+
+            {organization.leisureFolderPidTitle}
+            </div>
+        </div>
     </f:else>
 </f:if>
 

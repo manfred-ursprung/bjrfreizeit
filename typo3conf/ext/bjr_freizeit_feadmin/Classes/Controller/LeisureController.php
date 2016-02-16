@@ -242,6 +242,9 @@ class LeisureController extends AbstractController {
                 ->forProperty('*')
                 ->setTypeConverterOption('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter',
                     \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
+            $this->arguments['leisure']
+                ->getPropertyMappingConfiguration()->forProperty('price')
+                ->setTypeConverter( $this->objectManager->get( 'MUM\\BjrFreizeit\\TypeConverter\\FloatConverter' ) );
 
         }
     }

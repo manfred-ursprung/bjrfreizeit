@@ -36,7 +36,7 @@
 <div class="row form-group">
     <label class="col-sm-3 col-xs-12 control-label" for="price">Gebühr in Euro ab </label>
     <div class="col-sm-9 col-xs-12">
-        <f:form.textfield property="price" class="form-control" readonly="readonly"/>
+        <f:form.textfield property="price" class="form-control" value="{leisure.price -> f:format.number(decimals:2, decimalSeparator:',', thousandsSeparator:'')}" readonly="readonly"/>
     </div>
 </div>
 

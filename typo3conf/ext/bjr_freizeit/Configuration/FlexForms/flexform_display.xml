@@ -25,6 +25,10 @@
 										<numIndex index="0">Freizeiten im Detail darstellen</numIndex>
 										<numIndex index="1">Leisure->show;Leisure->list</numIndex>
 									</numIndex>
+									<numIndex index="4">
+										<numIndex index="0">Neuesten Artikel</numIndex>
+										<numIndex index="1">Leisure->listNewest</numIndex>
+									</numIndex>
 								</items>
 							</config>
 						</TCEforms>
@@ -45,6 +49,19 @@
 							</config>
 						</TCEforms>
 					</settings.storagePage>
+					<settings.limit>
+						<TCEforms>
+							<exclude>0</exclude>
+							<label>Anzahl der Elemente für neueste Artikel</label>
+							<displayCond>FIELD:switchableControllerActions:=:Leisure->listNewest</displayCond>
+							<config>
+								<type>input</type>
+								<size>5</size>
+								<eval>trim</eval>
+
+							</config>
+						</TCEforms>
+					</settings.limit>
 				</el>
 			</ROOT>
 		</sDEF>

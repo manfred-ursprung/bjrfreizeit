@@ -4,55 +4,9 @@
 
 
 <f:section name="main">
-<h1>Listing for Leisure</h1>
 
 <f:flashMessages />
 
-<f:comment>
-	<table  class="tx_bjrfreizeit" >
-		<tr>
-			<th><f:translate key="tx_bjrfreizeit_domain_model_leisure.title" /></th>
-			<th><f:translate key="tx_bjrfreizeit_domain_model_leisure.short_description" /></th>
-			<th><f:translate key="tx_bjrfreizeit_domain_model_leisure.description" /></th>
-			<th><f:translate key="tx_bjrfreizeit_domain_model_leisure.price" /></th>
-			<th><f:translate key="tx_bjrfreizeit_domain_model_leisure.service_specification" /></th>
-			<th><f:translate key="tx_bjrfreizeit_domain_model_leisure.minimum_participants" /></th>
-			<th><f:translate key="tx_bjrfreizeit_domain_model_leisure.partner" /></th>
-			<th><f:translate key="tx_bjrfreizeit_domain_model_leisure.cooperation" /></th>
-			<th><f:translate key="tx_bjrfreizeit_domain_model_leisure.location" /></th>
-			<th><f:translate key="tx_bjrfreizeit_domain_model_leisure.leader" /></th>
-			<th><f:translate key="tx_bjrfreizeit_domain_model_leisure.referent" /></th>
-			<th><f:translate key="tx_bjrfreizeit_domain_model_leisure.image" /></th>
-			<th><f:translate key="tx_bjrfreizeit_domain_model_leisure.file" /></th>
-			<th><f:translate key="tx_bjrfreizeit_domain_model_leisure.url" /></th>
-			<th> </th>
-			<th> </th>
-		</tr>
-
-		<f:for each="{leisures}" as="leisure">
-			<tr>
-				<td><f:link.action action="show" arguments="{leisure : leisure}"> {leisure.title}</f:link.action></td>
-				<td><f:link.action action="show" arguments="{leisure : leisure}"> {leisure.shortDescription}</f:link.action></td>
-				<td><f:link.action action="show" arguments="{leisure : leisure}"> {leisure.description}</f:link.action></td>
-				<td><f:link.action action="show" arguments="{leisure : leisure}"> {leisure.price}</f:link.action></td>
-				<td><f:link.action action="show" arguments="{leisure : leisure}"> {leisure.serviceSpecification}</f:link.action></td>
-				<td><f:link.action action="show" arguments="{leisure : leisure}"> {leisure.minimumParticipants}</f:link.action></td>
-				<td><f:link.action action="show" arguments="{leisure : leisure}"> {leisure.partner}</f:link.action></td>
-				<td><f:link.action action="show" arguments="{leisure : leisure}"> {leisure.cooperation}</f:link.action></td>
-				<td><f:link.action action="show" arguments="{leisure : leisure}"> {leisure.location}</f:link.action></td>
-				<td><f:link.action action="show" arguments="{leisure : leisure}"> {leisure.leader}</f:link.action></td>
-				<td><f:link.action action="show" arguments="{leisure : leisure}"> {leisure.referent}</f:link.action></td>
-				<td><f:link.action action="show" arguments="{leisure : leisure}"> {leisure.image.originalResource.name}</f:link.action></td>
-				<td><f:link.action action="show" arguments="{leisure : leisure}"> {leisure.file.originalResource.name}</f:link.action></td>
-				<td><f:link.action action="show" arguments="{leisure : leisure}"> {leisure.url}</f:link.action></td>
-				<td><f:link.action action="edit" arguments="{leisure : leisure}">Edit</f:link.action></td>
-				<td><f:link.action action="delete" arguments="{leisure : leisure}">Delete</f:link.action></td>
-			</tr>
-		</f:for>
-	</table>
-
-	<f:link.action action="new">New Leisure</f:link.action>
-</f:comment>
 
 	<!-- Freizeit Übersicht -->
 	<div class="panel panel-default">

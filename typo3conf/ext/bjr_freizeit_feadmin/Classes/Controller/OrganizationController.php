@@ -194,10 +194,10 @@ class OrganizationController extends AbstractController {
         list($validToRemove, $messages) = $organization->validToRemove();
         if($validToRemove) {
             $this->organizationRepository->remove($organization);
-            $GLOBALS['TSFE']->fe_user->setKey("ses", "listInfo", 'Die Ausleihstelle wurde gelöscht.');
+            $GLOBALS['TSFE']->fe_user->setKey("ses", "listInfo", 'Der Anbieter wurde gelöscht.');
         }else{
             $mesStr = implode('. ', $messages);
-            $GLOBALS['TSFE']->fe_user->setKey("ses", "listInfo", 'Die Ausleihstelle wurde nicht gelöscht.' . $mesStr);
+            $GLOBALS['TSFE']->fe_user->setKey("ses", "listInfo", 'Der Anbieter wurde nicht gelöscht.' . $mesStr);
         }
         $this->redirect('list', 'Organization', NULL);
 
@@ -357,7 +357,7 @@ class OrganizationController extends AbstractController {
             foreach($organizations as $organization){
                 $usedLeisureFolderPids[] = $organization->getLeisureFolderPid();
             }
-            $ret = $this->pageRepository->getMenu($this->settings['pidOrganizationFolder']);
+            $ret = $this->pageRepository->getMenu($this->settings['pidOrganizationFolder'], '*', 'sorting', 'AND deleted =0 AND hidden = 0');
             foreach($ret as $pageUid => $row){
                 if(!in_array($pageUid, $usedLeisureFolderPids)){
                     $pageList[$pageUid] = $row['title'];

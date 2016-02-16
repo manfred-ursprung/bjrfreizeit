@@ -234,4 +234,33 @@ class Organization extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
 
+    /**
+     * @return bool
+     */
+    public function hasArticles(){
+        /** @var  $objectManager \TYPO3\CMS\Extbase\Object\ObjectManager */
+        $objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+        /** @var  $leisureRepository ArticleRepository */
+        $leisureRepository = $objectManager->get('MUM\\BjrFreizeit\\Domain\\Repository\\LeisureRepository');
+        /** @var  $leisures \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult */
+        $leisures = $leisureRepository->findByOrganization($this);
+
+        return $leisures->count() > 0;
+
+    }
+
+    /**
+     * @return array
+     */
+    public function validToRemove(){
+        $valid = true;
+        $messages = array();
+
+        if($this->hasArticles()){
+            $valid = false;
+            $messages[] = "Es gibt noch Freizeiten für diesen Anbieter";
+        }
+        return array($valid, $messages);
+    }
+
 }

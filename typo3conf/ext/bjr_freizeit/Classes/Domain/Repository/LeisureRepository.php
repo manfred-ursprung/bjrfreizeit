@@ -69,7 +69,7 @@ class LeisureRepository extends AbstractRepository
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      * Searches for all articles, taking sorting into consideration
      */
-    public function findNewestSorting($sorting){
+    public function findNewestSorting($sorting, $limit = 3){
         $query = $this->createQuery();
 
         switch($sorting){
@@ -90,7 +90,7 @@ class LeisureRepository extends AbstractRepository
                 $sorting = array('title' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING);
         }
         $query->setOrderings($sorting);
-        $result = $query->setLimit(4)->execute();
+        $result = $query->setLimit((int)$limit)->execute();
         return $result;
     }
 
