@@ -10,11 +10,34 @@ plugin.tx_bjrfreizeit_display {
 	}
 
 	settings{
-        leisureImagePath        ={$plugin.tx_bjrlend.settings.leisureImagePath}
-        searchResultPid         ={$plugin.tx_bjrlend.settings.searchResultPid}
-        numberRandomList        ={$plugin.tx_bjrlend.settings.numberRandomList}
+        leisureImagePath        ={$plugin.tx_bjrfreizeit_display.settings.leisureImagePath}
+        searchResultPid         ={$plugin.tx_bjrfreizeit_display.settings.searchResultPid}
+        numberRandomList        ={$plugin.tx_bjrfreizeit_display.settings.numberRandomList}
+
     }
+
 }
+
+plugin.tx_bjrfreizeit_search {
+	view {
+		templateRootPaths.0 = {$plugin.tx_bjrfreizeit_display.view.templateRootPath}
+		partialRootPaths.0 = {$plugin.tx_bjrfreizeit_display.view.partialRootPath}
+		layoutRootPaths.0 = {$plugin.tx_bjrfreizeit_display.view.layoutRootPath}
+	}
+	persistence {
+		storagePid = {$plugin.tx_bjrfreizeit_display.persistence.storagePid}
+	}
+
+	settings{
+        quickSearch{
+            searchCategories    ={$plugin.tx_bjrfreizeit_display.settings.searchCategories}
+        }
+        stylesheet = {$plugin.tx_bjrfreizeit_display.settings.stylesheet}
+    }
+
+}
+
+
 bjrFreizeitAjax = PAGE
 bjrFreizeitAjax {
     typeNum = 87654321
@@ -42,3 +65,4 @@ config.tx_extbase {
 		updateReferenceIndex = 1
 	}
 }
+

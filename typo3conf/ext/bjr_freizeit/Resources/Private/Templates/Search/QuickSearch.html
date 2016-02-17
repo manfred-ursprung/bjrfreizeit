@@ -1,0 +1,288 @@
+{namespace fr = MUM\BjrFreizeit\ViewHelpers}
+
+<f:layout name="Default" />
+
+
+
+<f:section name="main">
+
+    <f:flashMessages />
+
+
+    <!-- Quicksearch -->
+
+    <f:for each="{categories}" as="category" iteration="iteration">
+        <p class="hauptkategorie">
+            <a href="#" class="" data-toggle="collapse" data-target=".subkategorien.kat{iteration.index}">
+                {category.name}
+            </a>
+        </p>
+        <ul class="nav nav-pills subkategorien kat{iteration.index} xhidden-xs xhidden-sm collapse">
+            <f:for each="{category.options}"  as="option" iteration="innerIterator">
+                <li>
+                    <a href="#">{option.name}
+                        <span class="badge hidden-md pull-right">{option.number}</span>
+                    </a>
+                </li>
+
+            </f:for>
+        </ul>
+    </f:for>
+
+</f:section>
+
+<f:section name="HTML-Vorlagen">
+    <f:comment>
+        <div class="col-md-3 sidebar-left">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">Schnellauswahl</div>
+                <div class="panel-body">
+                    <p class="hauptkategorie"> <a href="#" class="" data-toggle="collapse" data-target=".subkategorien.kat0">Ferienzeiten</a> </p>
+                    <ul class="nav nav-pills subkategorien kat0 xhidden-xs xhidden-sm collapse">
+                        <li><a href="#">Winterferien 2015<span class="badge hidden-md pull-right">12</span></a></li>
+                        <li><a href="#">Osterferien 2016<span class="badge hidden-md pull-right">4</span></a></li>
+                        <li><a href="#">Pfingstferien 2016<span class="badge hidden-md pull-right">18</span></a></li>
+                        <li><a href="#">Sommerferien 2016<span class="badge hidden-md pull-right">27</span></a></li>
+                    </ul>
+                    <p class="hauptkategorie"> <a href="#" class="" data-toggle="collapse" data-target=".subkategorien.kat1">Altersgruppe</a> </p>
+                    <ul class="nav nav-pills subkategorien kat1 xhidden-xs xhidden-sm collapse">
+                        <li><a href="#">Kinder 6-12<span class="badge hidden-md pull-right">10</span></a></li>
+                        <li><a href="#">Jugendliche 13-14<span class="badge hidden-md pull-right">11</span></a></li>
+                        <li><a href="#">Jugendliche 14-17<span class="badge hidden-md pull-right">12</span></a></li>
+                        <li><a href="#">Junge Erwachsene 18-26<span class="badge hidden-md pull-right">13</span></a></li>
+                    </ul>
+                    <p class="hauptkategorie"> <a href="#" class="" data-toggle="collapse" data-target=".subkategorien.kat2">Land</a> </p>
+                    <ul class="nav nav-pills subkategorien kat2 xhidden-xs xhidden-sm collapse">
+                        <li><a href="#">Deutschland<span class="badge hidden-md pull-right">10</span></a></li>
+                        <li><a href="#">Italien<span class="badge hidden-md pull-right">11</span></a></li>
+                        <li><a href="#">Frankreich<span class="badge hidden-md pull-right">12</span></a></li>
+                        <li><a href="#">Österreich<span class="badge hidden-md pull-right">13</span></a></li>
+                        <li><a href="#">Norwegen<span class="badge hidden-md pull-right">14</span></a></li>
+                    </ul>
+                    <p class="hauptkategorie"> <a href="#" class="" data-toggle="collapse" data-target=".subkategorien.kat3">Kategorie</a> </p>
+                    <ul class="nav nav-pills subkategorien kat3 xhidden-xs xhidden-sm collapse">
+                        <li><a href="#">Zeltlager<span class="badge hidden-md pull-right">5</span></a></li>
+                        <li><a href="#">Reiterurlaub<span class="badge hidden-md pull-right">6</span></a></li>
+                        <li><a href="#">Skifreizeit<span class="badge hidden-md pull-right">7</span></a></li>
+                        <li><a href="#">Klettern<span class="badge hidden-md pull-right">8</span></a></li>
+                        <li><a href="#">Abenteuer<span class="badge hidden-md pull-right">9</span></a></li>
+                        <li><a href="#">Wandern<span class="badge hidden-md pull-right">10</span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="searchbar">
+                <div class="panel panel-primary search">
+                    <div class="panel-body">
+                        <form method="post" class="form-horizontal" action="../index.php?id=19&tx_bjrlend_pi1[action]=searchResult&tx_bjrlend_pi1[controller]=article&cHash=fb5237aeeb26269cb635fe686b1259e4">
+
+
+
+                            <div class="collapse-group">
+                                <div class="form-group">
+
+                                    <div class="col-sm-9 col-xs-9">
+                                        <input class="form-control input-sm" id="inputKeyword" type="text" name="tx_bjrlend_pi1[stichwort]" placeholder="Stichwort" />
+                                    </div>
+                                    <div class="col-sm-3 col-xs-3">
+                                        <button class="btn btn-sm btn-primary col-xs-12" type="submit" name="tx_bjrlend_pi1[simple]" value="simple"> <i class="fa fa-search fa-lg"></i></button>
+                                    </div>
+                                </div>
+                                <div class="collapse" id="viewdetails">
+
+
+
+
+
+                                    <div class="form-group">
+                                        <label for="selectKat" class="col-sm-12 col-xs-12">Datum</label>
+                                        <div class="col-xs-6">
+                                            <div class="input-group date" id="datetimepicker">
+                                                <input class="form-control input-sm" id="datepicker1" type="text" name="" placeholder="Datum von">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="input-group date" id="datetimepicker">
+                                                <input class="form-control input-sm" id="datepicker2" type="text" name="" placeholder="Datum bis">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="form-group">
+                                        <label for="selectKat" class="col-xs-12">Land</label>
+                                        <div class="col-xs-12">
+                                            <select class="form-control input-sm" id="selectKat" name="tx_bjrlend_pi1[selectKat]" multiple="multiple">
+                                                <option value="-1">--Bitte wählen Sie--</option>
+                                                <option value="AT">Austria</option>
+                                                <option value="BE">Belgium</option>
+                                                <option value="CZ">Czech Republic</option>
+                                                <option value="FI">Finland</option>
+                                                <option value="FR">France</option>
+                                                <option value="DE">Germany</option>
+                                                <option value="GR">Greece</option>
+                                                <option value="IT">Italy</option>
+                                                <option value="LU">Luxembourg</option>
+                                                <option value="NL">Netherlands</option>
+                                                <option value="RU">Russia</option>
+                                                <option value="SI">Slovenia</option>
+                                                <option value="KR">South Korea</option>
+                                                <option value="SE">Sweden</option>
+                                                <option value="TW">Taiwan</option>
+                                                <option value="GB">United Kingdom</option>
+                                            </select>
+                                            <input id="currentPageId" type="hidden" name="tx_bjrlend_pi1[currentPageId]" value="3" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="selectLoc" class="col-xs-12">Ort</label>
+                                        <div class="col-xs-12">
+                                            <select class="form-control input-sm" id="selectLoc" name="tx_bjrlend_pi1[selectLoc]" multiple="multible">
+                                                <option value="-1">--Bitte wählen Sie--</option>
+                                                <option value="89">Altes Rathaus</option>
+                                                <option value="119">Altmummen</option>
+                                                <option value="94">Angers</option>
+                                                <option value="73">Appartements Peta und Koutroulis</option>
+                                                <option value="81">Arona</option>
+                                                <option value="76">Bauernhof in Salmsdorf</option>
+                                                <option value="122">Berlin</option>
+                                                <option value="99">Biella</option>
+                                                <option value="91">Bournemouth</option>
+                                                <option value="114">Bournemouth</option>
+                                                <option value="49">Brombachsee</option>
+                                                <option value="95">Burg Rieneck</option>
+                                                <option value="46">CVJM-Haus</option>
+                                                <option value="85">Campingplatz Cesenatico</option>
+                                                <option value="39">Castell</option>
+                                                <option value="57">Circus Camp II</option>
+                                                <option value="116">Coburg</option>
+                                                <option value="21">Don Bosco Haus Friedrichshafen</option>
+                                                <option value="112">Dresden</option>
+                                                <option value="68">Eisenborn</option>
+                                                <option value="74">Ferienanlage Eden</option>
+                                                <option value="105">Frankenwarte</option>
+                                                <option value="24">Franziskanerkloster</option>
+                                                <option value="84">Fränkische Saale</option>
+                                                <option value="62">Gasthof "Hundsbichler"</option>
+                                                <option value="60">Greifswald</option>
+                                                <option value="120">Gunzenhausen</option>
+                                                <option value="56">Gut Erlasee</option>
+                                                <option value="28">Internationales Jugendzentrum</option>
+                                                <option value="19">Jugendbildungsstätte Volkersberg</option>
+                                                <option value="64">Jugendburg Neuerburg</option>
+                                                <option value="61">Jugendgästehaus "Hörbrunn"</option>
+                                                <option value="54">Jugendgästehaus Klotzenhof</option>
+                                                <option value="72">Jugendgästehaus Klotzenhof bei Miltenberg</option>
+                                                <option value="77">Jugendherberge  Königsberg</option>
+                                                <option value="47">Jugendzeltplatz</option>
+                                                <option value="100">Karoussades, Korfu</option>
+                                                <option value="14">Katakombe im Martinushaus</option>
+                                                <option value="25">Kilianeum - Haus der Jugend</option>
+                                                <option value="65">Kokkola</option>
+                                                <option value="63">Kryoneri Korinthias</option>
+                                                <option value="17">Kuusamo</option>
+                                                <option value="104">Königsberg</option>
+                                                <option value="11">La Roche en Ardenne, Belgien</option>
+                                                <option value="101">Limoges</option>
+                                                <option value="123">Mali Losjni</option>
+                                                <option value="115">Markt Bibart</option>
+                                                <option value="58">Metsäkartano</option>
+                                                <option value="18">Metsäkartano</option>
+                                                <option value="107">Moliets</option>
+                                                <option value="93">Moriani Plage</option>
+                                                <option value="92">Naturerlebnishaus Saalegrund</option>
+                                                <option value="118">Nürnberg</option>
+                                                <option value="87">Pilgramshof</option>
+                                                <option value="13">Posocje an der Soca, Slowenien</option>
+                                                <option value="70">Rautavaara</option>
+                                                <option value="9">Reiterhof Bartel</option>
+                                                <option value="5">Riva Valdobbia, Italien</option>
+                                                <option value="117">Roth</option>
+                                                <option value="108">Saint Malo</option>
+                                                <option value="26">Schatzberghütte</option>
+                                                <option value="45">Schullandheim Bauersberg/Zeltplatz</option>
+                                                <option value="121">Schullandheim Pottenstein</option>
+                                                <option value="55">Schullandheim Schaippachsmühle</option>
+                                                <option value="23">Seemannsheim</option>
+                                                <option value="96">Sjöasen</option>
+                                                <option value="102">Sjöhaga Ungdomsgard</option>
+                                                <option value="79">Sobotin</option>
+                                                <option value="29">Stechendorf</option>
+                                                <option value="16">Sulzfeld im Grabfeld</option>
+                                                <option value="31">Sylt</option>
+                                                <option value="103">Texel</option>
+                                                <option value="88">Theater Augenblick</option>
+                                                <option value="8">Toskana</option>
+                                                <option value="27">Veitshöchheim</option>
+                                                <option value="69">Veliky Novgorod</option>
+                                                <option value="78">Villa Bianca</option>
+                                                <option value="97">Villa Maria</option>
+                                                <option value="67">Virrat</option>
+                                                <option value="38">Wald</option>
+                                                <option value="109">Walderlebniszentrum Gramschatz</option>
+                                                <option value="7">Weißenstädter See</option>
+                                                <option value="98">Wimborne</option>
+                                                <option value="30">Wunsiedel</option>
+                                                <option value="12">Zeltlager 2013 in</option>
+                                                <option value="80">Zeltplatz Hutzelmühle</option>
+                                                <option value="66">Äänekoski</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="selectOrg" class="col-xs-12">Veranstalter</label>
+                                        <div class="col-xs-12">
+                                            <select class="form-control input-sm" id="selectOrg" name="tx_bjrlend_pi1[selectOrg]" multiple="multiple">
+                                                <option value="-1">--Bitte wählen Sie--</option>
+                                                <option value="3">Bezirksjugendring Unterfranken</option>
+                                                <option value="24">EJ Würzburg</option>
+                                                <option value="29">Ev. Jugend Markt Einersheim &amp; Castell</option>
+                                                <option value="26">Evangelische Jugend im Dekanat Lohr a.M</option>
+                                                <option value="23">Fahrten-Ferne-Abenteuer</option>
+                                                <option value="14">Internationale Jugendgemeinschaftsdienste</option>
+                                                <option value="13">Jugendbildungsstätte Volkerberg</option>
+                                                <option value="4">Jugendwerk AWO</option>
+                                                <option value="31">KJA Regio MSP</option>
+                                                <option value="28">KJG Umweltstation Schonungen</option>
+                                                <option value="20">KLJB Bad Kissingen</option>
+                                                <option value="12">Katakombe</option>
+                                                <option value="16">KjG Tauberbischofsheim</option>
+                                                <option value="27">KommJA Scheinfurt</option>
+                                                <option value="5">Kreisjugendring Kitzingen</option>
+                                                <option value="7">Kreisjugendring Rhön-Grabfeld</option>
+                                                <option value="6">Kreisjugendring Würzburg</option>
+                                                <option value="21">Regionalstelle für kirchliche Jugendarbeit KG</option>
+                                                <option value="9">Stadtjugendring Schweinfurt</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputKeyword" class="col-xs-12">Preis</label>
+                                        <div class="col-xs-6">
+                                            <input class="form-control input-sm" id="inputKeyword" type="text" name="tx_bjrlend_pi1[stichwort]" placeholder="Preis von" />
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <input class="form-control input-sm" id="inputKeyword" type="text" name="tx_bjrlend_pi1[stichwort]" placeholder="Preis bis" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <button class="btn btn-sm btn-primary col-xs-12" type="submit" name="tx_bjrlend_pi1[advanced]" value="advanced"> <i class="fa fa-search fa-lg"></i> Suchen </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="text-center expand-search"> <a class="btn" data-toggle="collapse" data-target="#viewdetails"> <i class="fa fa-chevron-down"></i> <i class="fa fa-chevron-up"></i> Erweiterte Suche </a> </p>
+                            </div>
+
+                            <!-- /.collapse-group -->
+                        </form>
+                    </div>
+                </div>
+            </div>      </div>
+    </f:comment>
+
+</f:section>

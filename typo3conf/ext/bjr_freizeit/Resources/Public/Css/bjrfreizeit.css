@@ -1,0 +1,31 @@
+
+.tx-bjr-freizeit .nav-pills>li {
+    float: none;
+}
+.tx-bjr-freizeit  .panel-primary>.panel-heading, .tx-bjr-freizeit  .btn-primary {
+    background-image: -webkit-linear-gradient(top, #047688 0, #036574 100%);
+    background-image: -o-linear-gradient(top, #047688 0, #036574 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#047688), to(#036574));
+    background-image: linear-gradient(to bottom, #047688 0, #036574 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#047688', endColorstr='#036574', GradientType=0);
+    background-repeat: repeat-x;
+}
+.tx-bjr-freizeit  .btn-primary, .panel-primary {
+    border-color: #036574;
+}
+.tx-bjr-freizeit  a {
+    color: #036574;
+    text-decoration: none;
+}
+.tx-bjr-freizeit  .badge {
+    background-color: #047688;
+}
+.tx-bjr-freizeit .nav-pills>li.selected>a {
+    border-radius: 4px;
+    background-color: #047688;
+    color: #FFFFFF;
+}
+.tx-bjr-freizeit .nav-pills>li.selected .badge {
+    background-color: #fff;
+    color: #047688;
+}

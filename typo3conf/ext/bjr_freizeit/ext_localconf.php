@@ -16,3 +16,16 @@ if (!defined('TYPO3_MODE')) {
 		
 	)
 );
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'MUM.' . $_EXTKEY,
+	'Search',
+	array(
+		'Search' => 'quickSearch, extendedSearch, search, searchResult',
+	),
+	// non-cacheable actions
+	array(
+		'Search' => 'quickSearch, extendedSearch, search',
+	)
+);
+

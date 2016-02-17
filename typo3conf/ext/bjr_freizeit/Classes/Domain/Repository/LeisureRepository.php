@@ -266,6 +266,17 @@ class LeisureRepository extends AbstractRepository
     }
 
 
+    /**
+     * @param $propertyName
+     * @param $value
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
+    public function findBy($propertyName, $value){
 
+        $propertyName = lcfirst($propertyName);
+        $query = $this->createQuery();
+        $result = $query->matching($query->equals($propertyName, $value))->execute();
+        return $result;
 
+    }
 }
