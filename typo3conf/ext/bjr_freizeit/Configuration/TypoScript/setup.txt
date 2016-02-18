@@ -33,6 +33,8 @@ plugin.tx_bjrfreizeit_search {
             searchCategories    ={$plugin.tx_bjrfreizeit_display.settings.searchCategories}
         }
         stylesheet = {$plugin.tx_bjrfreizeit_display.settings.stylesheet}
+        javascript = {$plugin.tx_bjrfreizeit_display.settings.jaavascript}
+        resultPagePid = 42
     }
 
 }
@@ -40,12 +42,19 @@ plugin.tx_bjrfreizeit_search {
 
 bjrFreizeitAjax = PAGE
 bjrFreizeitAjax {
-    typeNum = 87654321
-    config.disableAllHeaderCode = 1
-    config.metaCharset = UTF-8
-    10 = COA
-    10 <  styles.content.get
+    typeNum = 14545
+    config {
+        disableAllHeaderCode = 1
+        xhtml_cleaning = 0
+        admPanel = 0
+        additionalHeaders = Content-type: text/plain
+        no_cache = 1
+        debug = 0
+      }
+
+      10 < tt_content.list.20.bjrfreizeit_search
 }
+
 
 config.tx_extbase {
 	persistence {

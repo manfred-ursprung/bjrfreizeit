@@ -105,6 +105,7 @@ class SearchController extends \MUM\BjrFreizeit\Controller\AbstractController
 
 
 
+
     public function initializeAction(){
         $this->mapSearchCategoriesToRepository = array(
             'Ferienzeiten'      => $this->holidayRepository,
@@ -132,6 +133,19 @@ class SearchController extends \MUM\BjrFreizeit\Controller\AbstractController
             $GLOBALS['TSFE']->getPageRenderer()->addCssFile($css, 'stylesheet', 'all', $title = 'bjrfreizeit', true, true);
             //$this->response->addAdditionalHeaderData('<link rel="stylesheet" type="text/css" href="' . $css .'"> ');
         }
+        $js = $this->settings['javascript'];
+        if (strpos($css, 'EXT:') === 0) {
+            list($extKey, $local) = explode('/', substr($js, 4), 2);
+            $js = '';
+            if ((string)$extKey !== '' && ExtensionManagementUtility::isLoaded($extKey) && (string)$local !== '') {
+                $js = ExtensionManagementUtility::extRelPath($extKey) . $local;
+            }
+        }
+        if(strlen($js) > 0) {
+            $this->pageRenderer->addJsFooterFile($js, 'text/javascript', false, false);
+            //$GLOBALS['TSFE']->getPageRenderer()->addCssFile($css, 'stylesheet', 'all', $title = 'bjrfreizeit', true, true);
+            //$this->response->addAdditionalHeaderData('<link rel="stylesheet" type="text/css" href="' . $css .'"> ');
+        }
     }
 
     /**
@@ -153,6 +167,7 @@ class SearchController extends \MUM\BjrFreizeit\Controller\AbstractController
                 foreach($elements as $elem){
                     $option = new \stdClass();
                     $option->name = $elem->getName();
+                    $option->leisureProperty = $this->mapSearchCategoriesToLeisureProperties[$cat];
                     $queryResult = $this->leisureRepository->findBy($this->mapSearchCategoriesToLeisureProperties[$cat], $elem);
                     $option->number = $queryResult->count();
                     $item->options[] = $option;
@@ -164,5 +179,14 @@ class SearchController extends \MUM\BjrFreizeit\Controller\AbstractController
         //DebugUtility::debug($quickSearch, "Quicksearch");
         $this->view->assign('categories', $quickSearch);
         $this->view->assign('settings', $this->settings);
+    }
+
+
+    public function searchResultAction(){
+        if(isset($this->settings['action']) && ($this->settings['action'] == 'quickSearch')){
+            return $this->quickSearchAction();
+        }
+        $args = $this->request->getArguments();
+
     }
 }

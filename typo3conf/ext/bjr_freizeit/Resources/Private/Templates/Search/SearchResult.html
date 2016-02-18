@@ -9,29 +9,7 @@
     <f:flashMessages />
 
 
-    <!-- Quicksearch -->
-
-    <f:for each="{categories}" as="category" iteration="iteration">
-        <p class="hauptkategorie">
-            <div  class="express-search-title" data-toggle="collapse" data-target=".subkategorien.kat{iteration.index}">
-                {category.name}
-            </div>
-        </p>
-        <ul class="nav nav-pills subkategorien kat{iteration.index} xhidden-xs xhidden-sm collapse">
-            <f:for each="{category.options}"  as="option" iteration="innerIterator">
-                <li>
-                    <f:link.action action="searchResult" extensionName="BjrFreizeit" pluginName="Search"
-                                   pageUid="{settings.resultPagePid}" arguments="{category: '{category.name}', property: '{option.leisureProperty}'}" >
-                        {option.name}
-                        <span class="badge hidden-md pull-right">{option.number}</span>
-                    </f:link.action>
-                </li>
-
-            </f:for>
-            <li>Action aus Setting : {settings.action}</li>
-        </ul>
-
-    </f:for>
+    Hallo hier die Ergebnisseite
 
 </f:section>
 

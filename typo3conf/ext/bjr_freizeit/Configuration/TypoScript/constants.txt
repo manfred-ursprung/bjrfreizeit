@@ -26,5 +26,8 @@ plugin.tx_bjrfreizeit_display {
 
             # cat=plugin.tx_bjrlend/e type=string; label=Stylesheet Datei für alle Plugins der Extension
             stylesheet = EXT:bjr_freizeit/Resources/Public/Css/bjrfreizeit.css
+
+            # cat=plugin.tx_bjrlend/f type=string; label=Javascript Datei für alle Plugins der Extension
+            javascript = EXT:bjr_freizeit/Resources/Public/Script/bjrfreizeit.js
     }
 }
