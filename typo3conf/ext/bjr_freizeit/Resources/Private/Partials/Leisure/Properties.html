@@ -140,49 +140,46 @@
 
 
 	<!-- Detail -->
-	<div class="well">
+	<div class="wellx">
 		<div class="article-detail row">
-			<div class="article-image col-sm-3" data-article="{leisure.uid}" id="leisure-uid">
+			<!-- <div class="article-image col-sm-3" data-article="{leisure.uid}" id="leisure-uid">
 				<a class="fancybox" href="{leisure.urlForImage}" >
 
 					<f:image src="{leisure.urlForImage}" treatIdAsReference="FALSE" width="200c" height="150c" alt="Produktbild für {leisure.title}" class="img-responsive img-rounded"/>
-				</a>
-			</div>
-			<div class="article-desc col-sm-5">
-				<h3 class="art-title">{leisure.title}</h3>
-				<p class="art-traveling-time">
-					<span class="art-label">Reisedauer: </span>
-					<span class="traveling-time">{leisure.startDate -> f:format.date()} - {leisure.endDate -> f:format.date()}</span>
+				</a> 
+			</div>-->
+			<div class="article-desc col-sm-8">
+            <div class="clearfix">
+            	<div class="article-image">
+                <f:image src="{leisure.urlForImage}" treatIdAsReference="FALSE" width="200c" height="150c" alt="Produktbild für {leisure.title}" class="img-responsive img-rounded"/>
+                </div>
+				
+                <h3 class="art-title">{leisure.title}</h3>
+                
+                <p class="art-description">
+					<span class="art-label">Beschreibung: </span>
+					<span class="participants">{leisure.description}</span>
 				</p>
-
-				<p class="art-location">
-					<span class="art-label">Lokation: </span>
-					<span class="location">{leisure.location}</span>
-				</p>
-				<p class="art-target-group">
+                </div>
+                <div class="well">
+				
+                <p class="art-leader">
 					<span class="art-label">Leiter: </span>
 					<span class="leader">{leisure.leader}</span>
 				</p>
-				<p class="art-target-group">
-					<span class="art-label">Anbieter: </span>
-					<span class="target-group">{leisure.organization.name}</span>
-				</p>
+				
 				<p class="art-partner">
 					<span class="art-label">Partner: </span>
-					<span class="partner">{leisure.partner}</span></p>
-				<f:if condition="{leisure.cooperation}">
+					<span class="partner">{leisure.partner}</span>
+                </p>
+				
+                <f:if condition="{leisure.cooperation}">
 					<p class="art-cooperation">
 						<span class="art-label">Kooperation: </span>
 						<span class="cooperation">{leisure.cooperation}</span>
 					</p>
 				</f:if>
-				<p class="art-target-group">
-					<span class="art-label">Altersgruppe: </span>
-					<span class="target-group">
-						<f:for each="{leisure.targetGroup}" as="target">
-							{target.name}<br />
-						</f:for></span>
-				</p>
+				
 				<p class="art-holiday">
 					<span class="art-label">Ferienzeit: </span>
 					<span class="holiday">
@@ -190,17 +187,15 @@
 							{holiday.name}<br />
 						</f:for></span>
 				</p>
-				<p class="art-tags">
+				
+                <p class="art-tags">
 					<span class="art-label">Tags: </span>
 					<span class="tags">
 						<f:for each="{leisure.tags}" as="tag">
 							{tag.name}<br />
 						</f:for></span>
 				</p>
-				<p class="art-country">
-					<span class="art-label">Land: </span>
-					<span class="participants">{leisure.country.name}</span>
-				</p>
+
 				<f:if condition="{leisure.referent}">
 					<p class="art-referent">
 						<span class="art-label">Referent: </span>
@@ -212,26 +207,52 @@
 					<span class="art-label">Mindestteilnehmerzahl: </span>
 					<span class="participants">{leisure.minimumParticipants}</span>
 				</p>
-
-				<p class="art-kosten">
+                
+                </div>
+				
+			</div>
+            <div class="article-action col-sm-4">
+            <ul class="art-features">
+            	<li class="art-organization">
+					<span class="art-label">Anbieter: </span>
+					<span class="target-group">{leisure.organization.name}</span>
+				</li>
+                <li class="art-traveling-time">
+					<span class="art-label">Reisedauer: </span>
+					<span class="traveling-time">{leisure.startDate -> f:format.date()} - {leisure.endDate -> f:format.date()}</span>
+                </li>
+                <li class="art-target-group">
+					<span class="art-label">Altersgruppe: </span>
+					<span class="target-group">
+						<f:for each="{leisure.targetGroup}" as="target">
+							{target.name}<br />
+						</f:for></span>
+				</li>
+                <li class="art-country">
+					<span class="art-label">Land: </span>
+					<span class="participants">{leisure.country.name}</span>
+				</li>
+                <li class="art-location">
+					<span class="art-label">Ort: </span>
+					<span class="location">{leisure.location}</span>
+				</li>
+                <li class="art-kosten">
 					<span class="art-label">Preis: </span>
 					<span class="kosten"><f:format.currency currencySign="€" decimalSeparator="," thousandsSeparator=".">{leisure.price}</f:format.currency></span>
-				</p>
-				<f:if condition="{leisure.url}">
-					<p class="art-url">
-						<span class="art-label">URL zur Anbieterseite: </span>
+                </li>
+                <f:if condition="{leisure.url}">
+					<li class="art-url">
+						<!-- <span class="art-label">URL zur Anbieterseite: </span> -->
 						<span class="url">
-							<f:link.external uri="{leisure.url}" target="_blank">{leisure.url}
-							</f:link.external>
+							<f:link.external uri="{leisure.url}" target="_blank">zur Webseite des Anbieters <i class="fa fa-external-link-square"></i></f:link.external>
 						</span>
-					</p>
+					</li>
 				</f:if>
 
-				<p class="art-description">
-					<span class="art-label">Beschreibung: </span>
-					<span class="participants">{leisure.description}</span>
-				</p>
-			</div>
+                    </ul>
+                    
+
+            </div>
 
 		</div>
 		<div class="clearfix"></div>

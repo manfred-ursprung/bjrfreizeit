@@ -14,7 +14,7 @@
     border-color: #036574;
 }
 .tx-bjr-freizeit  a {
-    color: #036574;
+    /*color: #036574;*/
     text-decoration: none;
 }
 .tx-bjr-freizeit  .badge {
@@ -28,4 +28,93 @@
 .tx-bjr-freizeit .nav-pills>li.selected .badge {
     background-color: #fff;
     color: #047688;
+}
+
+
+/* NEW 2016-02-18
+----------------------------------------------- */
+
+@media (min-width: 768px) {
+	.article-detail ul.art-features {
+    text-align: right;
+}
+}
+
+.article-detail ul.art-features li.datum,
+.article-detail ul.art-features li.preis {
+    background-color: #F5F3F3;
+    font-size: 16px;
+    font-weight: bold;
+    color: #047688;
+    padding: 6px 12px;
+    border-radius: 3px;
+	}
+	
+.article-detail ul.art-features li.art-organization,
+.article-detail ul.art-features li.art-target-group,
+.article-detail ul.art-features li.art-traveling-time,
+.article-detail ul.art-features li.art-kosten,
+.article-detail ul.art-features li.art-country,
+.article-detail ul.art-features li.art-location,
+.article-detail ul.art-features li.art-kosten,
+.article-detail ul.art-features li.art-url {
+    background-color: #F5F3F3;
+    font-size: 14px;
+    font-weight: bold;
+    color: #047688;
+    padding: 6px 12px;
+    border-radius: 3px;
+	}
+
+.article-detail ul.art-features li.art-url,
+.article-detail ul.art-features li.art-url a {
+    background-color: #036A7A;
+    color: #ffffff;
+	font-weight:400;
+}
+
+.article-detail ul.art-features li span.art-label {
+    font-size: 12px;
+    color: #B3B3B3;
+	display:block;
+	font-weight:400;
+}
+
+
+.article-desc .art-leader,
+.article-desc .art-partner,
+.article-desc .art-cooperation,
+.article-desc .art-holiday,
+.article-desc .art-tags,
+.article-desc .art-referent,
+.article-desc .art-paricipants {
+	font-style:italic;
+}
+			
+			
+.article-detail ul.art-features li.preis {}
+@media (min-width: 768px) {
+.article-detail ul.art-features li.details a.btn.btn-primary {
+    width: 100%;
+    text-align: right;
+	}
+}
+
+.art-kategorie span {
+	display: block;
+    padding-bottom: 10px;
+	font-size:14px !important;
+	}
+	
+.art-kategorie span.art-target-group,
+.art-kategorie span.art-organization {
+	font-style:italic;
+}
+
+/* Detailsnsicht */
+.article-image img {
+	float: left;
+    margin-top: 3px;
+	margin-right: 15px;
+    margin-bottom: 10px;
 }
