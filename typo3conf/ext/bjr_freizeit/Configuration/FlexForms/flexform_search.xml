@@ -15,15 +15,15 @@
                                 <items>
                                     <numIndex index="0">
                                         <numIndex index="0">Quick Search</numIndex>
-                                        <numIndex index="1">Search->quickSearch</numIndex>
+                                        <numIndex index="1">Search->quickSearch;Search->searchResult</numIndex>
                                     </numIndex>
                                     <numIndex index="1">
                                         <numIndex index="0">Search extended</numIndex>
-                                        <numIndex index="1">Search->extendedSearch</numIndex>
+                                        <numIndex index="1">Search->extendedSearch;Search->searchResult</numIndex>
                                     </numIndex>
                                     <numIndex index="3">
                                         <numIndex index="0">Suche</numIndex>
-                                        <numIndex index="1">Search->search</numIndex>
+                                        <numIndex index="1">Search->search;Search->searchResult</numIndex>
                                     </numIndex>
                                     <numIndex index="4">
                                         <numIndex index="0">Suchergebnis anzeigen</numIndex>

@@ -2,7 +2,8 @@
 
 
 <f:layout name="Page" xmlns:f="http://www.w3.org/1999/html" xmlns:f="http://www.w3.org/1999/html"
-          xmlns:f="http://www.w3.org/1999/html" xmlns:f="http://www.w3.org/1999/html"/>
+          xmlns:f="http://www.w3.org/1999/html" xmlns:f="http://www.w3.org/1999/html"
+          xmlns:f="http://www.w3.org/1999/html"/>
 
 
 <v:page.header>
@@ -64,7 +65,9 @@
 
                 <f:render partial="PageObjects" section="Sidebar-left" />
 
-
+                <f:render partial="PageObjects" section="Searchbar" />
+            </div>
+            <f:comment>
                 <div class="searchbar">
                     <div class="panel panel-primary search">
                         <div class="panel-body">
@@ -276,8 +279,8 @@
                             </form>
                         </div>
                     </div>
-                </div>      </div>
-
+                </div>
+            </f:comment>
             <!-- /.sidebar -->
 
             <!-- hauptinhalt -->
@@ -811,4 +814,5 @@
     <!-- /.wrap -->
     <!--TYPO3SEARCH_end-->
 </div>
+
 

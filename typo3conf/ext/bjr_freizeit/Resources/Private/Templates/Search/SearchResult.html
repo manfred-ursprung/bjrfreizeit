@@ -9,8 +9,11 @@
     <f:flashMessages />
 
 
-    Hallo hier die Ergebnisseite
-
+    <!-- Freizeiten Übersicht -->
+    <div class="panel panel-default">
+        <div class="panel-heading">Gefundene Freizeiten</div>
+    </div>
+    <f:render partial="Leisure/List" section="List" arguments="{_all}" />
 </f:section>
 
 <f:section name="HTML-Vorlagen">

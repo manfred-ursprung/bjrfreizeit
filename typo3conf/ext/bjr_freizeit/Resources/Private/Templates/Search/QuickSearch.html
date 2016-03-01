@@ -20,15 +20,16 @@
         <ul class="nav nav-pills subkategorien kat{iteration.index} xhidden-xs xhidden-sm collapse">
             <f:for each="{category.options}"  as="option" iteration="innerIterator">
                 <li>
-                    <f:link.action action="searchResult" extensionName="BjrFreizeit" pluginName="Search"
-                                   pageUid="{settings.resultPagePid}" arguments="{category: '{category.name}', property: '{option.leisureProperty}'}" >
+
+                    <a href="javascript:void(0);" data-category="{category.name}" data-property="{option.uid}" >
+                        <i class="fa fa-close fa-lg"></i>
                         {option.name}
                         <span class="badge hidden-md pull-right">{option.number}</span>
-                    </f:link.action>
+                    </a>
                 </li>
 
             </f:for>
-            <li>Action aus Setting : {settings.action}</li>
+
         </ul>
 
     </f:for>

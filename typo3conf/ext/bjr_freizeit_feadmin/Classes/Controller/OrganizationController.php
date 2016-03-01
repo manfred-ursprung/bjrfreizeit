@@ -144,7 +144,9 @@ class OrganizationController extends AbstractController {
                 $organization = $this->findOrganizationByLogin();
             }
         }
-        if(is_null($organization)){
+        if(is_null($organization) && $this->isAdministratorMode()) {
+            $this->redirect('new');
+        }else{
             $this->setFlashMessage('Organisation konnte nicht gefunden werden.', '', \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
         }
         $msg =  $GLOBALS['TSFE']->fe_user->getKey("ses","editErrors");

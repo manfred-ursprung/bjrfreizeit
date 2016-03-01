@@ -33,8 +33,9 @@ plugin.tx_bjrfreizeit_search {
             searchCategories    ={$plugin.tx_bjrfreizeit_display.settings.searchCategories}
         }
         stylesheet = {$plugin.tx_bjrfreizeit_display.settings.stylesheet}
-        javascript = {$plugin.tx_bjrfreizeit_display.settings.jaavascript}
+        javascript = {$plugin.tx_bjrfreizeit_display.settings.javascript}
         resultPagePid = 42
+        detailPage = 10
     }
 
 }
@@ -75,3 +76,12 @@ config.tx_extbase {
 	}
 }
 
+plugin.tx_vhs.settings.asset {
+    bjrfreizeit-css {
+        name = bjrfreizeit-css
+        path = EXT:bjr_freizeit/Resources/Public/Css/bjrfreizeit.css
+        external = 0
+        standalone = 1
+        dependencies = bootstrap
+    }
+}

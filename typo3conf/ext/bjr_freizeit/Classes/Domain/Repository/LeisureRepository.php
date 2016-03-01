@@ -279,4 +279,35 @@ class LeisureRepository extends AbstractRepository
         return $result;
 
     }
+
+
+    /**
+     * @param \MUM\BjrFreizeit\Utility\SearchManager $searchManager
+     */
+    public function findAllBySearchManager(\MUM\BjrFreizeit\Utility\SearchManager $searchManager){
+        $query = $this->createQuery();
+        //$query->getQuerySettings()->setRespectStoragePage(FALSE);
+        $query->getQuerySettings()->setRespectSysLanguage(FALSE);
+        $andConstraints = array();
+        $orConstraints = array();
+        $constraints = array();
+
+        if(!empty($searchManager->getCategory())){
+            $searchItem = $searchManager->getCategory();
+            $constraints[] =   $query->like($searchItem['leisureProperty'], '%' . ($searchItem['value']) .'%', false);
+
+        }
+        if(strlen($searchManager->getTag()) > 0){
+
+            $constraints[] =   $query->like('bereich', '%' . ($searchManager->getTag()) .'%', false);
+
+        }
+        //\TYPO3\CMS\Core\Utility\DebugUtility::debug($constraints, 'DebugConstraints: ' . __FILE__ . ' in Line: ' . __LINE__);
+        if(!empty($constraints)) {
+            $query->matching($query->logicalAnd($constraints));
+            return $query->execute();
+        }else{
+            return $this->findAll();
+        }
+    }
 }

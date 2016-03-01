@@ -30,6 +30,7 @@ namespace MUM\BjrFreizeit\Controller;
  * SearchController
  */
 
+use MUM\BjrFreizeit\Utility\SearchManager;
 use TYPO3\CMS\Core\Utility\DebugUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use MUM\BjrFreizeit\Domain\Model\Holiday;
@@ -37,6 +38,7 @@ use MUM\BjrFreizeit\Domain\Model\Country;
 use MUM\BjrFreizeit\Domain\Model\TargetGroup;
 use MUM\BjrFreizeit\Domain\Model\Tags;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use MUM\BjrFreizeit\Utility\CategoryMapper;
 
 
 class SearchController extends \MUM\BjrFreizeit\Controller\AbstractController
@@ -101,7 +103,10 @@ class SearchController extends \MUM\BjrFreizeit\Controller\AbstractController
      */
     private $typoScript;
 
-
+    /**
+     * @var \TYPO3\CMS\Core\Log\Logger
+     */
+    protected $logger;
 
 
 
@@ -130,11 +135,11 @@ class SearchController extends \MUM\BjrFreizeit\Controller\AbstractController
             }
         }
         if(strlen($css) > 0) {
-            $GLOBALS['TSFE']->getPageRenderer()->addCssFile($css, 'stylesheet', 'all', $title = 'bjrfreizeit', true, true);
+            //$GLOBALS['TSFE']->getPageRenderer()->addCssFile($css, 'stylesheet', 'all', $title = 'bjrfreizeit', true, true);
             //$this->response->addAdditionalHeaderData('<link rel="stylesheet" type="text/css" href="' . $css .'"> ');
         }
         $js = $this->settings['javascript'];
-        if (strpos($css, 'EXT:') === 0) {
+        if (strpos($js, 'EXT:') === 0) {
             list($extKey, $local) = explode('/', substr($js, 4), 2);
             $js = '';
             if ((string)$extKey !== '' && ExtensionManagementUtility::isLoaded($extKey) && (string)$local !== '') {
@@ -146,6 +151,8 @@ class SearchController extends \MUM\BjrFreizeit\Controller\AbstractController
             //$GLOBALS['TSFE']->getPageRenderer()->addCssFile($css, 'stylesheet', 'all', $title = 'bjrfreizeit', true, true);
             //$this->response->addAdditionalHeaderData('<link rel="stylesheet" type="text/css" href="' . $css .'"> ');
         }
+        $this->logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger(__CLASS__);
+        $this->logger->info('hallo');
     }
 
     /**
@@ -167,12 +174,15 @@ class SearchController extends \MUM\BjrFreizeit\Controller\AbstractController
                 foreach($elements as $elem){
                     $option = new \stdClass();
                     $option->name = $elem->getName();
-                    $option->leisureProperty = $this->mapSearchCategoriesToLeisureProperties[$cat];
-                    $queryResult = $this->leisureRepository->findBy($this->mapSearchCategoriesToLeisureProperties[$cat], $elem);
+                    $option->uid  = $elem->getUid();
+                    $option->leisureProperty = CategoryMapper::getLeisurePropertiesFromSearchCategory($cat);
+                    $queryResult = $this->leisureRepository->findBy($option->leisureProperty, $elem);
                     $option->number = $queryResult->count();
                     $item->options[] = $option;
                 }
                 $quickSearch[] = $item;
+            }else{
+                //wrong setting in Typoscript
             }
         }
 
@@ -183,10 +193,51 @@ class SearchController extends \MUM\BjrFreizeit\Controller\AbstractController
 
 
     public function searchResultAction(){
-        if(isset($this->settings['action']) && ($this->settings['action'] == 'quickSearch')){
-            return $this->quickSearchAction();
-        }
+        $this->logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger(__CLASS__);
+        $this->logger->info('hallo');
         $args = $this->request->getArguments();
+        /** @var  $searchManager \MUM\BjrFreizeit\Utility\SearchManager */
+        $searchManager = GeneralUtility::makeInstance('MUM\\BjrFreizeit\\Utility\\SearchManager', $args);
 
+        $leisures = $this->leisureRepository->findAllBySearchManager($searchManager);
+
+        if($leisures->count() > 0){
+            //$this->typoScript = $this->getFullTypoScript();
+            $this->view->assign('found', true);
+            $this->view->assign('leisures', $leisures);
+            $this->view->assign('imagePath', $this->settings['leisureImagePath']);
+            $this->view->assign('detailPage', $this->settings['detailPage']);
+        }else{
+            $this->view->assign('found', false);
+        }
+
+        $html = $this->view->render();
+        $success = true;
+        $this->logger->info('SearchManager ', array(
+            'category' => $searchManager->getCategory(),
+        ));
+        $this->logger->info('Arguments ', $args);
+        return json_encode(array(
+            'html'  => $html,
+            'success' => $success,
+            'arguments' => $args,
+            'searchManagerCategory' => $searchManager->getCategory(),
+            'number'    => $leisures->count(),
+        ));
+
+        $success = true;
+        $html = 'DetailPage :' .$this->settings['detailPage'];
+        return json_encode(array('success' => $success,
+            'html' => $html));
     }
+
+
+    public function extendedSearchAction(){
+        $params = array(
+            'countryList'       => $this->countryRepository->findAll(),
+        );
+
+        $this->view->assignMultiple($params);
+    }
+
 }

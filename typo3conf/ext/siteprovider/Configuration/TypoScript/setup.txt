@@ -79,7 +79,13 @@ plugin.tx_vhs.settings.asset {
             external = 0
             standalone = 1
         }
-
+    bjrfreizeit-css {
+        name = bjrfreizeit-css
+        path = EXT:bjr_freizeit/Resources/Public/Css/bjrfreizeit.css
+        type = css
+        standalone = 1
+        dependencies = bootstrap
+    }
     jquery {
         name = jquery
         path = EXT:siteprovider/Resources/Public/scripts/jquery-1.11.3.js

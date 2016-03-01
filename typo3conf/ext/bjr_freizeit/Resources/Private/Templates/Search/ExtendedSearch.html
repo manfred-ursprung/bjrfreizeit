@@ -1,0 +1,60 @@
+{namespace fr = MUM\BjrFreizeit\ViewHelpers}
+{namespace v=FluidTYPO3\Vhs\ViewHelpers}
+
+<f:layout name="Default" />
+
+
+
+<f:section name="main">
+
+    <f:flashMessages />
+
+    <div class="searchbar">
+        <div class="panel panel-primary search">
+            <div class="panel-body">
+                <f:form action="searchResult" class="form-horizontal" enctype="application/x-www-form-urlencoded" id="leisure-search" name="leisure-search" class="clearfix " method="post" additionalAttributes="{accept-charset: 'UTF-8'}">
+                    <div class="collapse-group">
+                        <div class="form-group">
+
+                            <div class="col-sm-9 col-xs-9">
+                                <input class="form-control input-sm" id="inputKeyword" type="text" name="tx_bjrlend_pi1[stichwort]" placeholder="Stichwort" />
+                            </div>
+                            <div class="col-sm-3 col-xs-3">
+                                <button class="btn btn-sm btn-primary col-xs-12" type="submit" name="tx_bjrlend_pi1[simple]" value="simple"> <i class="fa fa-search fa-lg"></i></button>
+                            </div>
+                        </div>
+                        <div class="collapse" id="viewdetails">
+                            <div class="form-group">
+                                <label for="dateFrom" class="col-sm-12 col-xs-12">Datum</label>
+                                <div class="col-xs-6">
+                                    <div class="input-group date" id="datetimepicker">
+                                        <input class="form-control input-sm" id="datepicker1" type="text" name="dateFrom" placeholder="Datum von">
+
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="input-group date" id="datetimepicker">
+                                        <input class="form-control input-sm" id="datepicker2" type="text" name="dateTo" placeholder="Datum bis">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="selectCountry" class="col-xs-12">Land</label>
+                                <div class="col-xs-12">
+                                    <f:form.select name="country" options="{countryList}" optionValueField="uid" optionLabelField="name" value=""
+                                                   class=" form-control"  prependOptionLabel="--Bitte wählen Sie--"/>
+
+                                    <input id="currentPageId" type="hidden" name="tx_bjrlend_pi1[currentPageId]" value="3" />
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-center expand-search"> <a class="btn" data-toggle="collapse" data-target="#viewdetails"> <i class="fa fa-chevron-down"></i> <i class="fa fa-chevron-up"></i> Erweiterte Suche </a> </p>
+                    </div>
+
+                </f:form>
+            </div>
+        </div>
+    </div>
+
+</f:section>

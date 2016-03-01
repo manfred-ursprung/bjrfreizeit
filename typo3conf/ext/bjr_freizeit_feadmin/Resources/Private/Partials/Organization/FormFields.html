@@ -16,7 +16,7 @@
             </f:then>
             <f:else>
                 <f:form.select name="username" options="{feUserList}" optionValueField="uid" optionLabelField="username" value=""
-                               class=" form-control" additionalAttributes="{required: 'required'}"/>
+                               class=" form-control" additionalAttributes="{required: 'required'}" prependOptionLabel="--Bitte wählen Sie--"/>
             </f:else>
 
         </f:if>
@@ -71,7 +71,12 @@
     </div>
 </div>
 <!-- WWWW -->
-
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label required" for ="name">URL</label>
+    <div class="col-sm-9 col-xs-12">
+        <f:form.textfield property="url"  class="form-control" required="1"/>
+    </div>
+</div>
 
 <!-- Online-Verwaltung -->
 <div class="row form-group">
