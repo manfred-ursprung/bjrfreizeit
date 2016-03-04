@@ -12,16 +12,16 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'Freizeiten anzeigen',
-	'description' => 'Listen und suchen von Freizeiten',
+	'description' => 'Listen und Suchen von Freizeiten',
 	'category' => 'plugin',
 	'author' => 'Manfred Ursprung',
 	'author_email' => 'manfred@manfred-ursprung.de',
-	'state' => 'alpha',
+	'state' => 'beta',
 	'internal' => '',
 	'uploadfolder' => '1',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
-	'version' => '0.9.5',
+	'version' => '0.9.7',
 	'constraints' => array(
 		'depends' => array(
 			'typo3' => '7.6.0-7.6.99',

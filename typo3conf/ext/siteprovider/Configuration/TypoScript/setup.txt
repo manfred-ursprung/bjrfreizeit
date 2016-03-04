@@ -134,13 +134,13 @@ plugin.tx_vhs.settings.asset {
       standalone = 1
       dependencies = jquery
    }
-#   uiDe{
-#        name = uiDe
-#        path = EXT:siteprovider/Resources/Public/scripts/datepicker-de.js
-#        movable = 1
-#        standalone = 1
-#        dependencies = ui
-#   }
+   uiDe{
+        name = uiDe
+        path = EXT:bjr_freizeit/Resources/Public/Script/datepicker-de.js
+        movable = 1
+        standalone = 1
+        dependencies = ui
+   }
 #   modernizr {
 #     name = modernizr
 #      path = EXT:siteprovider/Resources/Public/scripts/modernizr.min.js

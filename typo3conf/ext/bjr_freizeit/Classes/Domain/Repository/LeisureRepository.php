@@ -282,26 +282,71 @@ class LeisureRepository extends AbstractRepository
 
 
     /**
-     * @param \MUM\BjrFreizeit\Utility\SearchManager $searchManager
+     * @param \MUM\BjrFreizeit\Utility\LeisureSearchForm $searchForm
      */
-    public function findAllBySearchManager(\MUM\BjrFreizeit\Utility\SearchManager $searchManager){
+    public function findAllBySearchForm(\MUM\BjrFreizeit\Utility\LeisureSearchForm $searchForm){
         $query = $this->createQuery();
         //$query->getQuerySettings()->setRespectStoragePage(FALSE);
         $query->getQuerySettings()->setRespectSysLanguage(FALSE);
         $andConstraints = array();
         $orConstraints = array();
         $constraints = array();
+        /** @var  $logger \TYPO3\CMS\Core\Log\Logger */
+        $logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger(__CLASS__);
+        $logger->warning('logger' . __METHOD__);
 
-        if(!empty($searchManager->getCategory())){
-            $searchItem = $searchManager->getCategory();
+        if(!empty($searchForm->getCategory())){
+            $searchItem = $searchForm->getCategory();
             $constraints[] =   $query->like($searchItem['leisureProperty'], '%' . ($searchItem['value']) .'%', false);
 
         }
-        if(strlen($searchManager->getTag()) > 0){
+        $classMethods = get_class_methods(get_class($searchForm));
+        foreach($classMethods as $method){
+            if(substr($method, 0, 3) == 'get'){
+                if(!empty($searchForm->$method())){
+                    $value = $searchForm->$method();
+                    $dbFieldname = substr($method, 3);
+                    if(!in_array($dbFieldname, array('Category', 'PriceFrom', 'PriceTo', 'StartDate', 'EndDate', 'ors', 'keyword', 'Description'))) {
+                        $constraints[] = $query->like($dbFieldname, '%' . $value . '%', false);
+                        $logger->warning('constraint erzeugt für  DB-Feldname : '. $dbFieldname);
+                    }
+                }
+            }
+        }
+        if(strlen($searchForm->getDescription()) > 0){
+            $orConstraints = array();
 
-            $constraints[] =   $query->like('bereich', '%' . ($searchManager->getTag()) .'%', false);
+                $orConstraints[] = $query->like('description', '%' . $searchForm->getDescription() . '%', false);
+                $orConstraints[] = $query->like('shortDescription', '%' . $searchForm->getDescription() . '%', false);
+
+            $constraints[] = $query->logicalOr($orConstraints);
+            //$constraints[] = $query->like('description', '%' . $searchForm->getDescription() . '%', false);
+            $logger->warning('searchForm has ors!!!!');
+        }else{
+            $logger->warning('searchForm has no ors!!!!');
+        }
+
+        if( (strlen($searchForm->getPriceFrom()) > 0) || (strlen($searchForm->getPriceTo()) > 0)){
+
+            $priceFrom = (strlen($searchForm->getPriceFrom()) > 0) ? floatval($searchForm->getPriceFrom()) : 0;
+            $priceTo   = (strlen($searchForm->getPriceTo()) > 0) ? floatval($searchForm->getPriceTo()) : 1000000;
+            $constraints[] = $query->greaterThanOrEqual('price',  $priceFrom);
+            $constraints[] = $query->lessThanOrEqual('price',  $priceTo);
 
         }
+
+        if( (strlen($searchForm->getStartDate()) > 0)){
+            $dateTime =  \DateTime::createFromFormat("d.m.Y", $searchForm->getStartDate());
+            if(is_object($dateTime))
+                $constraints[] = $query->greaterThanOrEqual('start_date',  $dateTime->format('Y-m-d'));
+        }
+        if( (strlen($searchForm->getEndDate()) > 0)){
+            $dateTime =  \DateTime::createFromFormat("d.m.Y", $searchForm->getEndDate());
+            if(is_object($dateTime))
+                $constraints[] = $query->lessThanOrEqual('start_date',  $dateTime->format('Y-m-d'));
+        }
+
+        //$logger->error('Searchform : ', array('statement' => $query->getStatement()->getStatement()));
         //\TYPO3\CMS\Core\Utility\DebugUtility::debug($constraints, 'DebugConstraints: ' . __FILE__ . ' in Line: ' . __LINE__);
         if(!empty($constraints)) {
             $query->matching($query->logicalAnd($constraints));
@@ -310,4 +355,23 @@ class LeisureRepository extends AbstractRepository
             return $this->findAll();
         }
     }
+
+    /**
+     * @return mixed
+     * returns a raw resul set
+     */
+    public function findAllLocations($raw = true){
+        $query = $this->createQuery();
+        //$query->getQuerySettings()->setReturnRawQueryResult(TRUE);  this is done bei execute(true)
+
+        return $query
+            ->statement('SELECT distinct location '
+                . 'FROM tx_bjrfreizeit_domain_model_leisure '
+                . 'WHERE deleted = 0 AND hidden = 0')
+            ->execute(true);   //returns raw query result set
+
+    }
+
+
+
 }

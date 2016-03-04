@@ -1,12 +1,11 @@
 <?php
 namespace MUM\BjrFreizeit\Utility;
 
-
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2016
+ *  (c) 2016 Manfred Ursprung <manfred@manfred-ursprung.de>, Webapplikationen Ursprung
  *
  *  All rights reserved
  *
@@ -28,16 +27,16 @@ namespace MUM\BjrFreizeit\Utility;
  ***************************************************************/
 
 /**
- * SearchManager : realisiert eine anspruchsvolle Suche
- *                 mit UND-Verknüpfungen und Satzteilen
- *
- *
+ * The Searchform for Leisures
  */
+class LeisureSearchForm
+{
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use \MUM\BjrFreizeit\Utility\CategoryMapper;
+    /**
+     * @var \string
+     */
+    protected $description;
 
-class SearchManager {
 
     /**
      * @var  \array
@@ -47,7 +46,12 @@ class SearchManager {
     /**
      * @var \array
      */
-    protected $ands;
+    protected $ors;
+
+    /**
+     * @var   \array
+     */
+    protected $ranges;
 
     /**
      * @var \string
@@ -91,19 +95,27 @@ class SearchManager {
     protected $endDate;
 
 
+    /**
+     * @var  \string
+     */
+    protected $shortDescription;
 
     /**
-     * SearchManager constructor.
-     * @param $searchArgs  array  keys : searchBox, searchLocation
-    }
+     * @var  \array
      */
-    public function __construct($searchArgs) {
+    protected $mapPropToDbFieldname;
+
+
+    public function __construct($searchArgs = array()) {
         if(!empty($searchArgs)) {
             unset($searchArgs['action']);
             unset($searchArgs['controller']);
             unset($searchArgs['ajax']);
             $this->initSearchValues($searchArgs);
         }
+        $this->initMapPropToDbFieldname();
+        $this->ors      = array();
+        $this->ranges   = array();
 
     }
 
@@ -120,29 +132,27 @@ class SearchManager {
         }
         unset($searchArgs['category']);
         unset($searchArgs['property']);
-        $exclude = array('priceFrom', 'priceTo', 'startDate', 'endDate');
+        $include = array('priceFrom', 'priceTo', 'startDate', 'endDate', 'organization', 'country', 'location', 'description');
         foreach($searchArgs as $key => $val){
-            if(!in_array($key, $exclude)) {
-                $this->ands[$key] = $val;
+            if(in_array($key, $include)) {
+                $this->$key = $val;
             }
         }
 
     }
 
-    /**
-     * @return array
-     */
-    public function getAnds()
-    {
-        return $this->ands;
+    protected function initMapPropToDbFieldname(){
+        $this->mapPropToDbFieldname = array(
+            'country'       => 'country');
     }
 
 
+    public function getDbFieldname(){
 
-
+    }
 
     /**
-     * @return \array
+     * @return array
      */
     public function getCategory()
     {
@@ -150,13 +160,12 @@ class SearchManager {
     }
 
     /**
-     * @param \array $category
+     * @param array $category
      */
     public function setCategory($category)
     {
         $this->category = $category;
     }
-
 
 
 
@@ -274,7 +283,74 @@ class SearchManager {
 
 
 
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
 
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShortDescription()
+    {
+        return $this->shortDescription;
+    }
+
+    /**
+     * @param string $shortDescription
+     */
+    public function setShortDescription($shortDescription)
+    {
+        $this->shortDescription = $shortDescription;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOrs()
+    {
+        return $this->ors;
+    }
+
+    /**
+     * @param array $ors
+     */
+    public function setOrs($ors)
+    {
+        $this->ors = $ors;
+    }
+
+    public function hasOrs(){
+        return count($this->ors) > 0;
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getRanges()
+    {
+        return $this->ranges;
+    }
+
+    /**
+     * @param array $ranges
+     */
+    public function setRanges($ranges)
+    {
+        $this->ranges = $ranges;
+    }
 
 
 

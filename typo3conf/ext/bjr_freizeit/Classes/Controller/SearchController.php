@@ -98,6 +98,16 @@ class SearchController extends \MUM\BjrFreizeit\Controller\AbstractController
      */
     protected $holidayRepository;
 
+
+    /**
+     * OrganizationRepository
+     *
+     * @var \MUM\BjrFreizeit\Domain\Repository\OrganizationRepository
+     * @inject
+     */
+    protected $organizationRepository;
+
+
     /**
      * @var array
      */
@@ -151,8 +161,8 @@ class SearchController extends \MUM\BjrFreizeit\Controller\AbstractController
             //$GLOBALS['TSFE']->getPageRenderer()->addCssFile($css, 'stylesheet', 'all', $title = 'bjrfreizeit', true, true);
             //$this->response->addAdditionalHeaderData('<link rel="stylesheet" type="text/css" href="' . $css .'"> ');
         }
-        $this->logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger(__CLASS__);
-        $this->logger->info('hallo');
+        //$this->logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger(__CLASS__);
+        //$this->logger->info('hallo');
     }
 
     /**
@@ -194,12 +204,24 @@ class SearchController extends \MUM\BjrFreizeit\Controller\AbstractController
 
     public function searchResultAction(){
         $this->logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger(__CLASS__);
-        $this->logger->info('hallo');
+        //$this->logger->warning('hallo hier der logger' . __METHOD__);
+        $debug = false;
+        $isAjax = true;
+        if($this->request->hasArgument('ajax')){
+            $isAjax = true;
+        }
         $args = $this->request->getArguments();
-        /** @var  $searchManager \MUM\BjrFreizeit\Utility\SearchManager */
-        $searchManager = GeneralUtility::makeInstance('MUM\\BjrFreizeit\\Utility\\SearchManager', $args);
 
-        $leisures = $this->leisureRepository->findAllBySearchManager($searchManager);
+        /** @var  $searchForm \MUM\BjrFreizeit\Utility\LeisureSearchForm */
+        $searchForm = GeneralUtility::makeInstance('MUM\\BjrFreizeit\\Utility\\LeisureSearchForm', $args);
+        if($debug){
+            return json_encode(array(
+                'html' => print_r($searchForm, true),
+                'args' => $args,
+            ));
+        }
+
+        $leisures = $this->leisureRepository->findAllBySearchForm($searchForm);
 
         if($leisures->count() > 0){
             //$this->typoScript = $this->getFullTypoScript();
@@ -210,34 +232,50 @@ class SearchController extends \MUM\BjrFreizeit\Controller\AbstractController
         }else{
             $this->view->assign('found', false);
         }
+        if($isAjax) {
+            $html = $this->view->render();
+            $success = true;
+            $this->logger->alert('SearchManager ', array(
+                'keyword' => $searchForm->getDescription(),
+            ));
+            $this->logger->alert('Arguments ', $args);
+            return json_encode(array(
+                'html' => $html,
+                'success' => $success,
+                'arguments' => $args,
+                'searchManagerCategory' => $searchForm->getCategory(),
+                'number' => $leisures->count(),
+            ));
+        }else{
 
-        $html = $this->view->render();
-        $success = true;
-        $this->logger->info('SearchManager ', array(
-            'category' => $searchManager->getCategory(),
-        ));
-        $this->logger->info('Arguments ', $args);
-        return json_encode(array(
-            'html'  => $html,
-            'success' => $success,
-            'arguments' => $args,
-            'searchManagerCategory' => $searchManager->getCategory(),
-            'number'    => $leisures->count(),
-        ));
+        }
 
-        $success = true;
-        $html = 'DetailPage :' .$this->settings['detailPage'];
-        return json_encode(array('success' => $success,
-            'html' => $html));
+
     }
 
 
     public function extendedSearchAction(){
+
         $params = array(
             'countryList'       => $this->countryRepository->findAll(),
+            'locationList'      => $this->getSelectLocationList(),
+            'organizationList'  => $this->organizationRepository->findAll(),
+            'searchForm'        => GeneralUtility::makeInstance('MUM\\BjrFreizeit\\Utility\\LeisureSearchForm'),
         );
 
         $this->view->assignMultiple($params);
+    }
+
+
+    protected function getSelectLocationList(){
+        $rawList = $this->leisureRepository->findAllLocations(true);
+        $selectList = array();
+        if(count($rawList) > 0) {
+            foreach ($rawList as $location) {
+                $selectList[] = array('name' => $location['location']);
+            }
+        }
+        return $selectList;
     }
 
 }
