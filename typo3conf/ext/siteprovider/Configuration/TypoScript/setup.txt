@@ -25,7 +25,7 @@ plugin.tx_vhs.settings.asset {
         path = http://fonts.googleapis.com/css?family=Exo+2:400,100,100italic,200,200italic,300,300italic,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic
         type = css
         external = 1
-        }
+    }
     bootstrap {
         name = bootstrap
         path = EXT:siteprovider/Resources/Public/css/bootstrap.min.css
@@ -36,10 +36,16 @@ plugin.tx_vhs.settings.asset {
         path = EXT:siteprovider/Resources/Public/css/bootstrap-theme.min.css
         standalone = 1
     }
-
+    ui-css{
+            name = ui-css
+            path = EXT:siteprovider/Resources/Public/css/jquery-ui.css
+            type = css
+            external = 0
+            standalone = 1
+        }
     font-awesome {
         name = font-awesome
-        path = EXT:siteprovider/Resources/Public/css/font-awesome.css
+        path = EXT:siteprovider/Resources/Public/css/font-awesome.min.css
         standalone = 1
     }
     menu {
@@ -72,13 +78,7 @@ plugin.tx_vhs.settings.asset {
             path = EXT:siteprovider/Resources/Public/css/custom.css
             standalone = 1
     }
-    ui-css{
-            name = ui-css
-            path = EXT:siteprovider/Resources/Public/css/jquery-ui.css
-            type = css
-            external = 0
-            standalone = 1
-        }
+
     bjrfreizeit-css {
         name = bjrfreizeit-css
         path = EXT:bjr_freizeit/Resources/Public/Css/bjrfreizeit.css

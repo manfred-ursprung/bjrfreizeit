@@ -6,7 +6,7 @@ if (!defined('TYPO3_MODE')) {
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'Organization',
-	'Kundenliste [Organisatoren] anzeigen / bearbeiten'
+	'Kundenliste [Veranstalter] anzeigen / bearbeiten'
 );
 
 $pluginSignature = str_replace('_','',$_EXTKEY) . '_organization';

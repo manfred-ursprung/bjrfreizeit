@@ -46,6 +46,12 @@ class CountryController extends \MUM\BjrFreizeitFeadmin\Controller\AbstractContr
 	 */
 	protected $countryRepository;
 
+    /**
+     * @var array
+     */
+    protected $validationErrors;
+
+
 
     public function initializeAction()
     {
@@ -90,8 +96,17 @@ class CountryController extends \MUM\BjrFreizeitFeadmin\Controller\AbstractContr
      *
      */
     public function newAction(\MUM\BjrFreizeit\Domain\Model\Country $country = NULL){
-
+        $msg = $GLOBALS['TSFE']->fe_user->getKey("ses","editErrors");  //wenn Land schon vorhanden war, dann steht hier der Fehler drin
+        if(strlen($msg) > 0) {
+            $this->setFlashMessage($msg, 'Fehler', \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
+            $GLOBALS['TSFE']->fe_user->setKey("ses", "editErrors", '');
+        }
         $this->view->assign('country', $country);
+        if(strlen($msg) == 0) {
+            $this->view->assign('backlinkUrl', GeneralUtility::getIndpEnv('HTTP_REFERER'));
+        }else{
+            $this->view->assign('backlinkUrl', $GLOBALS['TSFE']->fe_user->getKey("ses","referrer") );
+        }
 
     }
 
@@ -105,18 +120,32 @@ class CountryController extends \MUM\BjrFreizeitFeadmin\Controller\AbstractContr
     public function updateAction(\MUM\BjrFreizeit\Domain\Model\Country $country) {
         $redirectParams = array();
         $args = $this->request->getArguments();
+        $referrer = $args['referer'];
+        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($referrer, 'Referrer');
+
+        $GLOBALS['TSFE']->fe_user->setKey("ses","referrer", $referrer);
 
         if($country->_isNew() || $country->_isDirty()){
 
             if($country->_isNew()){
-                $country->setPid($this->settings['pidOrganizationFolder']);
+                if($this->validateCountry($args)) {
+                    $country->setPid($this->settings['pidOrganizationFolder']);
 
-                $this->countryRepository->add($country);
-                //it is not persistent already, we have to do it!
-                $persistenceManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
-                $persistenceManager->persistAll();
-                //now organization ist persistent
-                $GLOBALS['TSFE']->fe_user->setKey("ses","countryChange",'Die Ferienzeit <strong>'. $country->getName() .'</strong> wurde neu angelegt.');
+                    $this->countryRepository->add($country);
+                    //it is not persistent already, we have to do it!
+                    $persistenceManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
+                    $persistenceManager->persistAll();
+                    //now organization ist persistent
+                    $GLOBALS['TSFE']->fe_user->setKey("ses","countryChange",'Die Ferienzeit <strong>'. $country->getName() .'</strong> wurde neu angelegt.');
+                }else{
+                    $errors = $this->getValidationErrors();
+                    //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($errors, 'Errors');
+                    //exit;
+                    $GLOBALS['TSFE']->fe_user->setKey("ses", "editErrors", implode('. ', $errors));
+                    $redirectParams['country'] = null;
+                    $this->redirect('new', 'Country', NULL, $redirectParams);
+                }
+
             }else{
                 $this->countryRepository->update($country);
                 $GLOBALS['TSFE']->fe_user->setKey("ses","countryChange",'Die Ferienzeit <strong>'. $country->getName() .'</strong> wurde geändert.');
@@ -138,8 +167,16 @@ class CountryController extends \MUM\BjrFreizeitFeadmin\Controller\AbstractContr
     public function successUpdateAction(\MUM\BjrFreizeit\Domain\Model\Country $country){
 
         $msg = $GLOBALS['TSFE']->fe_user->getKey("ses","countryChange");
+        $referrer = $GLOBALS['TSFE']->fe_user->getKey("ses","referrer");
         $this->setFlashMessage($msg);
+        $GLOBALS['TSFE']->fe_user->setKey("ses","countryChange", '');
+        if(strpos($referrer, 'Leisure') !== FALSE){
+            $this->view->assign('backlinkText','Zurück');
+        }else{
+            $this->view->assign('backlinkText','Zur Liste der Länder');
+        }
         $this->view->assign('country',$country);
+        $this->view->assign('backlinkUrl',$referrer);
     }
 
 
@@ -151,7 +188,8 @@ class CountryController extends \MUM\BjrFreizeitFeadmin\Controller\AbstractContr
         $args = $this->request->getArguments();
         $country = $this->countryRepository->findByUid($args['country']);
         $name = $country->getName();
-
+        // @Todo 
+//prüfen , ob es verwendet wird !!!!!
         $this->countryRepository->remove($country);
         $persistenceManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
         $persistenceManager->persistAll();
@@ -234,5 +272,47 @@ EOT;
 
     }
 
+
+    protected function validateCountry($args){
+        $errors = array();
+        /** @var  $validator \MUM\BjrFreizeit\Validation\Validator\OrganizationValidator */
+        $validator = GeneralUtility::makeInstance('MUM\\BjrFreizeit\\Validation\\Validator\\CountryValidator');
+
+        $_errors =  $validator->validate($args);
+
+        if(count($_errors) > 0 ){
+            //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($_errors, 'Errors');
+
+            //$_errors = $validator->getErrors();
+            foreach($_errors->getErrors() as $error){
+                $errors[] = $error->getMessage();
+                //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($error, 'Single Error');
+            }
+            //exit;
+            $this->setValidationErrors($errors);
+            return false;
+        }
+        return true;
+
+
+    }
+
+    /**
+     * @return array
+     */
+    public function getValidationErrors()
+    {
+        return $this->validationErrors;
+    }
+
+    /**
+     * @param array $validationErrors
+     */
+    public function setValidationErrors($validationErrors)
+    {
+        $this->validationErrors = $validationErrors;
+    }
+
+    
 }
 ?>
