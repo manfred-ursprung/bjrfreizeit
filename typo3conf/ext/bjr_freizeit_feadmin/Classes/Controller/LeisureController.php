@@ -83,6 +83,14 @@ class LeisureController extends AbstractController {
      */
     protected $holidayRepository;
 
+    /**
+     * OrganizationRepository
+     *
+     * @var \MUM\BjrFreizeit\Domain\Repository\OrganizationRepository
+     * @inject
+     */
+    protected $organizationRepository;
+
 
     /**
      * FileReferenceRepository
@@ -213,6 +221,7 @@ class LeisureController extends AbstractController {
         $targetGroupList = $this->targetGroupRepository->findAll()->toArray();
         $countryList     = $this->countryRepository->findAll()->toArray();
         $holidayList     = $this->holidayRepository->findAll()->toArray();
+        $organizationList= $this->organizationRepository->findAll()->toArray();
     /*    print '<pre>';
         print_r($tagList);
         print '</pre>';
@@ -234,6 +243,7 @@ class LeisureController extends AbstractController {
             'targetGroupList'   => $targetGroupList,
             'countryList'       => $countryList,
             'holidayList'       => $holidayList,
+            'organizationList'  => $organizationList,
             'firstParent'       => $leisure->getTags()->next(),
             'currentPageId'     => $GLOBALS['TSFE']->id,
         );
@@ -483,6 +493,7 @@ class LeisureController extends AbstractController {
             'targetGroupList'   => $this->targetGroupRepository->findAll()->toArray(),
             'countryList'       => $this->countryRepository->findAll()->toArray(),
             'holidayList'       => $this->holidayRepository->findAll()->toArray(),
+            'organizationList'  => $this->organizationRepository->findAll()->toArray(),
             'currentPageId'     => $GLOBALS['TSFE']->id,
         );
         $this->view->assignMultiple($params);

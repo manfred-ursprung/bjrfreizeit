@@ -92,18 +92,20 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * @return  \TYPO3\CMS\Fluid\View\StandaloneView the Fluid instance
      */
     protected function getPlainRenderer($templateName = 'default', $format = 'html') {
-        $view = $this->objectManager->create('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
+        $view = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
         $view->setFormat($format);
 
-        $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+        $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK, "BjrFreizeit", "Search");
         $templateRootPath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
-        //echo 'TemplateRootPath: ' . $templateRootPath;
+        $templateRootPath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName('EXT:bjr_freizeit/Resources/Private/Templates/');
+        //echo json_encode(array('TemplateRootPath' => json_encode($extbaseFrameworkConfiguration)));
+        //exit;
         $templatePathAndFilename = $templateRootPath . $this->request->getControllerName().'/' . $templateName . '.' . $format;
         //echo 'TemplatePathAndFilename: ' . $templatePathAndFilename;
         $view->setTemplatePathAndFilename($templatePathAndFilename);
-        $layoutRootPath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['layoutRootPath']);
+        $layoutRootPath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName('EXT:bjr_freizeit/Resources/Private/Layouts/');
         $view->setLayoutRootPath($layoutRootPath);
-        $partialsRootPath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']);
+        $partialsRootPath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName('EXT:bjr_freizeit/Resources/Private/Partials/');
         $view->setPartialRootPath($partialsRootPath);
         $view->assign('settings', $this->settings);
         return $view;

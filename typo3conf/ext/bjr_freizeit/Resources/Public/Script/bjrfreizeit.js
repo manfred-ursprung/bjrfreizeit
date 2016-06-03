@@ -43,7 +43,9 @@ jQuery(document).ready(function() {
         var url = 'index.php?type=14545';
         var category = $this.data('category');
         var property = $this.data('property');
-        $this.parents('ul').find('li a i').hide();
+        //$this.parents('ul').find('li a i').hide();
+        $('.sidebar-left ul li a i').hide();
+        $this.parents('ul').find('li a span').show();
         if($this.hasClass('filter-active')){
             property = '';
         }
@@ -67,6 +69,7 @@ jQuery(document).ready(function() {
                 $('.hauptinhalt>div').html(result.html);
                 if($this.hasClass('filter-active')){
                     $this.removeClass('filter-active');
+                    $this.find('span').show();
                 }else {
                     $this.addClass('filter-active');
                     $this.find('span').hide();

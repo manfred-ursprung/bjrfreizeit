@@ -10,29 +10,31 @@
 
 
     <!-- Quicksearch -->
+    <div id="quicksearch-accordion">
+        <f:for each="{categories}" as="category" iteration="iteration">
+            <p class="hauptkategorie">
+                <div  class="express-search-title" data-toggle="collapse" data-target=".subkategorien.kat{iteration.index}"
+                        data-parent="quicksearch-accordion">
+                    {category.name}
+                </div>
+            </p>
+            <ul class="nav nav-pills subkategorien kat{iteration.index} xhidden-xs xhidden-sm collapse">
+                <f:for each="{category.options}"  as="option" iteration="innerIterator">
+                    <li>
 
-    <f:for each="{categories}" as="category" iteration="iteration">
-        <p class="hauptkategorie">
-            <div  class="express-search-title" data-toggle="collapse" data-target=".subkategorien.kat{iteration.index}">
-                {category.name}
-            </div>
-        </p>
-        <ul class="nav nav-pills subkategorien kat{iteration.index} xhidden-xs xhidden-sm collapse">
-            <f:for each="{category.options}"  as="option" iteration="innerIterator">
-                <li>
+                        <a href="javascript:void(0);" data-category="{category.name}" data-property="{option.uid}" >
+                            <i class="fa fa-close fa-lg"></i>
+                            {option.name}
+                            <span class="badge hidden-md pull-right">{option.number}</span>
+                        </a>
+                    </li>
 
-                    <a href="javascript:void(0);" data-category="{category.name}" data-property="{option.uid}" >
-                        <i class="fa fa-close fa-lg"></i>
-                        {option.name}
-                        <span class="badge hidden-md pull-right">{option.number}</span>
-                    </a>
-                </li>
+                </f:for>
 
-            </f:for>
+            </ul>
 
-        </ul>
-
-    </f:for>
+        </f:for>
+    </div>
 
 </f:section>
 

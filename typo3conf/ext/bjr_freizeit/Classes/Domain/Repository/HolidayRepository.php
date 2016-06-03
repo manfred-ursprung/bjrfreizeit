@@ -34,7 +34,7 @@ namespace MUM\BjrFreizeit\Domain\Repository;
  */
 class HolidayRepository extends AbstractRepository {
 
-
+    
 
 }
 ?>

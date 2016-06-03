@@ -13,7 +13,15 @@
     <div class="panel panel-default">
         <div class="panel-heading">Gefundene Freizeiten</div>
     </div>
-    <f:render partial="Leisure/List" section="List" arguments="{_all}" />
+    <f:if condition="{found}">
+        <f:then>
+            <f:render partial="Leisure/List" section="List" arguments="{_all}" />
+        </f:then>
+        <f:else>
+            <p>Keine Freizeiten gefunden.</p>
+        </f:else>
+    </f:if>
+
 </f:section>
 
 <f:section name="HTML-Vorlagen">

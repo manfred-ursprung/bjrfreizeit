@@ -183,10 +183,17 @@ class SearchController extends \MUM\BjrFreizeit\Controller\AbstractController
                 $item->options = array();
                 foreach($elements as $elem){
                     $option = new \stdClass();
+                    if($cat == "Ferienzeiten"){
+                       // DebugUtility::debugInPopUpWindow($elem, 'Ferienzeiten');
+                    }
                     $option->name = $elem->getName();
                     $option->uid  = $elem->getUid();
                     $option->leisureProperty = CategoryMapper::getLeisurePropertiesFromSearchCategory($cat);
-                    $queryResult = $this->leisureRepository->findBy($option->leisureProperty, $elem);
+                    if($cat == "Ferienzeiten"){
+                        $queryResult = $this->leisureRepository->findBy($option->leisureProperty, $elem->getUid());
+                    }else{
+                        $queryResult = $this->leisureRepository->findBy($option->leisureProperty, $elem);
+                    }
                     $option->number = $queryResult->count();
                     $item->options[] = $option;
                 }
@@ -233,7 +240,13 @@ class SearchController extends \MUM\BjrFreizeit\Controller\AbstractController
             $this->view->assign('found', false);
         }
         if($isAjax) {
-            $html = $this->view->render();
+            $renderer = $this->getPlainRenderer('SearchResult', 'html');
+            $renderer->assign('found', ($leisures->count() > 0));
+            $renderer->assign('leisures', $leisures);
+            $renderer->assign('imagePath', $this->settings['leisureImagePath']);
+            $renderer->assign('detailPage', $this->settings['detailPage']);
+            $html = $renderer->render();
+            //$html = $this->view->render();
             $success = true;
             $this->logger->alert('SearchManager ', array(
                 'keyword' => $searchForm->getDescription(),

@@ -14,7 +14,8 @@ plugin.tx_siteprovider {
 		}
 	}
 	conventions{
-        startPID = {$plugin.tx_siteprovider.conventions.start}
+        startPID    = {$plugin.tx_siteprovider.conventions.start}
+        contactPID  = {$plugin.tx_siteprovider.conventions.contact}
     }
 }
 

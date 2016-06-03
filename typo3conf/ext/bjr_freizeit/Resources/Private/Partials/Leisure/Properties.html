@@ -160,11 +160,16 @@
 					<span class="art-label">Beschreibung: </span>
 					<span class="participants">{leisure.description}</span>
 				</p>
+				<p class="art-description">
+					<span class="art-label">Zusätzliche Informationen: </span><br />
+					<span class="participants">{leisure.serviceSpecification}</span>
+				</p>
+
                 </div>
                 <div class="well">
 				
                 <p class="art-leader">
-					<span class="art-label">Leiter: </span>
+					<span class="art-label">Leitung: </span>
 					<span class="leader">{leisure.leader}</span>
 				</p>
 				
@@ -198,7 +203,7 @@
 
 				<f:if condition="{leisure.referent}">
 					<p class="art-referent">
-						<span class="art-label">Referent: </span>
+						<span class="art-label">Referent*innen: </span>
 						<span class="region">{leisure.referent}</span>
 					</p>
 				</f:if>
@@ -215,9 +220,9 @@
             <ul class="art-features">
             	<li class="art-organization">
 					<span class="art-label">Anbieter: </span>
-					<f:link.external uri="{leisure.organization.url}" target="_blank">
+					<f:comment><f:link.external uri="{leisure.url}" target="_blank"></f:link.external></f:comment>
 						<span class="target-group">{leisure.organization.name}</span>
-					</f:link.external>
+					<f:comment></f:comment>
 				</li>
                 <li class="art-traveling-time">
 					<span class="art-label">Reisedauer: </span>
