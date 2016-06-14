@@ -1,4 +1,5 @@
 {namespace fr = MUM\BjrFreizeit\ViewHelpers}
+{namespace v=FluidTYPO3\Vhs\ViewHelpers}
 
 <f:layout name="Default" />
 
@@ -15,7 +16,9 @@
             <p class="hauptkategorie">
                 <div  class="express-search-title" data-toggle="collapse" data-target=".subkategorien.kat{iteration.index}"
                         data-parent="quicksearch-accordion">
-                    {category.name}
+
+                    <f:translate id="quicksearch.filter.category.{category.name}" />
+
                 </div>
             </p>
             <ul class="nav nav-pills subkategorien kat{iteration.index} xhidden-xs xhidden-sm collapse">
