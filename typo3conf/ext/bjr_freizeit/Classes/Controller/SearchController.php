@@ -98,6 +98,16 @@ class SearchController extends \MUM\BjrFreizeit\Controller\AbstractController
      */
     protected $holidayRepository;
 
+
+    /**
+     * OrganizationRepository
+     *
+     * @var \MUM\BjrFreizeit\Domain\Repository\OrganizationRepository
+     * @inject
+     */
+    protected $organizationRepository;
+
+
     /**
      * @var array
      */
@@ -195,6 +205,12 @@ class SearchController extends \MUM\BjrFreizeit\Controller\AbstractController
     public function searchResultAction(){
         $this->logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger(__CLASS__);
         $this->logger->info('hallo');
+        $isAjax = true;
+        if($this->request->hasArgument('ajax')){
+            $isAjax = true;
+        }
+
+
         $args = $this->request->getArguments();
         /** @var  $searchManager \MUM\BjrFreizeit\Utility\SearchManager */
         $searchManager = GeneralUtility::makeInstance('MUM\\BjrFreizeit\\Utility\\SearchManager', $args);
@@ -210,34 +226,49 @@ class SearchController extends \MUM\BjrFreizeit\Controller\AbstractController
         }else{
             $this->view->assign('found', false);
         }
+        if($isAjax) {
+            $html = $this->view->render();
+            $success = true;
+            $this->logger->info('SearchManager ', array(
+                'category' => $searchManager->getCategory(),
+            ));
+            $this->logger->info('Arguments ', $args);
+            return json_encode(array(
+                'html' => $html,
+                'success' => $success,
+                'arguments' => $args,
+                'searchManagerCategory' => $searchManager->getCategory(),
+                'number' => $leisures->count(),
+            ));
+        }else{
 
-        $html = $this->view->render();
-        $success = true;
-        $this->logger->info('SearchManager ', array(
-            'category' => $searchManager->getCategory(),
-        ));
-        $this->logger->info('Arguments ', $args);
-        return json_encode(array(
-            'html'  => $html,
-            'success' => $success,
-            'arguments' => $args,
-            'searchManagerCategory' => $searchManager->getCategory(),
-            'number'    => $leisures->count(),
-        ));
+        }
 
-        $success = true;
-        $html = 'DetailPage :' .$this->settings['detailPage'];
-        return json_encode(array('success' => $success,
-            'html' => $html));
+
     }
 
 
     public function extendedSearchAction(){
+
         $params = array(
             'countryList'       => $this->countryRepository->findAll(),
+            'locationList'      => $this->getSelectLocationList(),
+            'organizationList'  => $this->organizationRepository->findAll(),
         );
 
         $this->view->assignMultiple($params);
+    }
+
+
+    protected function getSelectLocationList(){
+        $rawList = $this->leisureRepository->findAllLocations(true);
+        $selectList = array();
+        if(count($rawList) > 0) {
+            foreach ($rawList as $location) {
+                $selectList[] = array('name' => $location['location']);
+            }
+        }
+        return $selectList;
     }
 
 }

@@ -80,13 +80,13 @@ class SearchManager {
         }else{
             $this->category = array();
         }
-        if(!empty($searchArgs['searchLocation'])){
-            $this->location = $searchArgs['searchLocation'];
+        if(!empty($searchArgs['location'])){
+            $this->location = $searchArgs['location'];
         }else{
             $this->location = '';
         }
-        if(!empty($searchArgs['tag'])){
-            $this->tag = $searchArgs['tag'];
+        if(!empty($searchArgs['organization'])){
+            $this->tag = $searchArgs['organization'];
         }else{
             $this->tag = '';
         }

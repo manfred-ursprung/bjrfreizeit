@@ -297,9 +297,9 @@ class LeisureRepository extends AbstractRepository
             $constraints[] =   $query->like($searchItem['leisureProperty'], '%' . ($searchItem['value']) .'%', false);
 
         }
-        if(strlen($searchManager->getTag()) > 0){
+        if(strlen($searchManager->getLocation()) > 0){
 
-            $constraints[] =   $query->like('bereich', '%' . ($searchManager->getTag()) .'%', false);
+            $constraints[] =   $query->like('location', '%' . ($searchManager->getLocation()) .'%', false);
 
         }
         //\TYPO3\CMS\Core\Utility\DebugUtility::debug($constraints, 'DebugConstraints: ' . __FILE__ . ' in Line: ' . __LINE__);
@@ -309,5 +309,21 @@ class LeisureRepository extends AbstractRepository
         }else{
             return $this->findAll();
         }
+    }
+
+    /**
+     * @return mixed
+     * returns a raw resul set
+     */
+    public function findAllLocations($raw = true){
+        $query = $this->createQuery();
+        //$query->getQuerySettings()->setReturnRawQueryResult(TRUE);  this is done bei execute(true)
+
+        return $query
+            ->statement('SELECT distinct location '
+                . 'FROM tx_bjrfreizeit_domain_model_leisure '
+                . 'WHERE deleted = 0 AND hidden = 0')
+            ->execute(true);   //returns raw query result set
+
     }
 }

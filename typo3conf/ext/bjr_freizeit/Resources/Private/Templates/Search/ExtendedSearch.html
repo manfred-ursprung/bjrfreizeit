@@ -12,15 +12,17 @@
     <div class="searchbar">
         <div class="panel panel-primary search">
             <div class="panel-body">
-                <f:form action="searchResult" class="form-horizontal" enctype="application/x-www-form-urlencoded" id="leisure-search" name="leisure-search" class="clearfix " method="post" additionalAttributes="{accept-charset: 'UTF-8'}">
+                <f:form action="searchResult" controller="search"  class="form-horizontal" object="{leisure}"
+                        enctype="application/x-www-form-urlencoded" id="leisure-search"
+                        name="leisure-search" class="clearfix " method="post" additionalAttributes="{accept-charset: 'UTF-8'}">
                     <div class="collapse-group">
                         <div class="form-group">
 
                             <div class="col-sm-9 col-xs-9">
-                                <input class="form-control input-sm" id="inputKeyword" type="text" name="tx_bjrlend_pi1[stichwort]" placeholder="Stichwort" />
+                                <input class="form-control input-sm" id="inputKeyword" type="text" name="tx_bjrfreizeit_pi1[stichwort]" placeholder="Stichwort" />
                             </div>
                             <div class="col-sm-3 col-xs-3">
-                                <button class="btn btn-sm btn-primary col-xs-12" type="submit" name="tx_bjrlend_pi1[simple]" value="simple"> <i class="fa fa-search fa-lg"></i></button>
+                                <button class="btn btn-sm btn-primary col-xs-12" type="submit" name="tx_bjrfreizeit_pi1[simple]" value="simple"> <i class="fa fa-search fa-lg"></i></button>
                             </div>
                         </div>
                         <div class="collapse" id="viewdetails">
@@ -28,13 +30,13 @@
                                 <label for="dateFrom" class="col-sm-12 col-xs-12">Datum</label>
                                 <div class="col-xs-6">
                                     <div class="input-group date" id="datetimepicker">
-                                        <input class="form-control input-sm" id="datepicker1" type="text" name="dateFrom" placeholder="Datum von">
+                                        <input class="form-control input-sm" id="datepicker1" type="text" property="startDate" placeholder="Datum von">
 
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="input-group date" id="datetimepicker">
-                                        <input class="form-control input-sm" id="datepicker2" type="text" name="dateTo" placeholder="Datum bis">
+                                        <input class="form-control input-sm" id="datepicker2" type="text" property="endDate" placeholder="Datum bis">
 
                                     </div>
                                 </div>
@@ -42,10 +44,48 @@
                             <div class="form-group">
                                 <label for="selectCountry" class="col-xs-12">Land</label>
                                 <div class="col-xs-12">
-                                    <f:form.select name="country" options="{countryList}" optionValueField="uid" optionLabelField="name" value=""
+                                    <f:form.select property="country" options="{countryList}" optionValueField="uid" optionLabelField="name" value=""
                                                    class=" form-control"  prependOptionLabel="--Bitte wählen Sie--"/>
 
                                     <input id="currentPageId" type="hidden" name="tx_bjrlend_pi1[currentPageId]" value="3" />
+                                </div>
+                            </div>
+
+                            <f:comment> Auswahl der Orte </f:comment>
+                            <div class="form-group">
+                                <label for="selectLoc" class="col-xs-12">Ort</label>
+                                <div class="col-xs-12">
+                                    <select name="tx_bjrfreizeit_search[leisure-search][location]"  value=""
+                                                   class=" form-control"  >
+                                        <option value="-1">--Bitte wählen Sie--</option>
+                                        <f:for each="{locationList}" as="location">
+                                            <option value="{location.name}">{location.name}</option>
+
+                                        </f:for>
+                                    </select>
+
+
+                                </div>
+                            </div>
+
+                            <f:comment> Auswahl der Organisationen </f:comment>
+                            <div class="form-group">
+                                <label for="selectOrg" class="col-xs-12">Veranstalter</label>
+                                <div class="col-xs-12">
+                                    <f:form.select property="organization" options="{organizationList}" optionValueField="uid" optionLabelField="name" value=""
+                                                   class=" form-control"  prependOptionLabel="--Bitte wählen Sie--"/>
+
+                                </div>
+                            </div>
+
+                            <f:comment> Preisspanne eingeben </f:comment>
+                            <div class="form-group">
+                                <label for="inputKeyword" class="col-xs-12">Preis</label>
+                                <div class="col-xs-6">
+                                    <input class="form-control input-sm" id="inputKeyword" type="text" name="tx_bjrfreizeit_search[leisure-search][priceFrom]" placeholder="Preis von" />
+                                </div>
+                                <div class="col-xs-6">
+                                    <input class="form-control input-sm" id="inputKeyword" type="text" name="tx_bjrfreizeit_search[leisure-search][priceTo]" placeholder="Preis bis" />
                                 </div>
                             </div>
                         </div>
