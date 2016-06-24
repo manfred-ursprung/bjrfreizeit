@@ -135,7 +135,7 @@ class LeisureController extends AbstractController {
         $targetGroupList = $this->targetGroupRepository->findAll()->toArray();
         $countryList     = $this->countryRepository->findAll()->toArray();
         $holidayList     = $this->holidayRepository->findAll()->toArray();
-
+        $organizationList= $this->organizationRepository->findAll()->toArray();
         //$organizationUid = $GLOBALS['TSFE']->fe_user->getKey('ses',  'organization');
 
         //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump('Organization UID: ' . $organizationUid);
@@ -152,6 +152,7 @@ class LeisureController extends AbstractController {
         //    'articleImagePath' => (isset($this->typoScript['plugin.']['tx_bjrfreizeit.']['settings.']['leisureImagePath']) ?
         //        $this->typoScript['plugin.']['tx_bjr_lend.']['settings.']['leisureImagePath'] :
         //        'uploads/tx_bjrfreizeit/'),
+            'organizationList'  => $organizationList,
             'tagList'           => $tagList,
             'targetGroupList'   => $targetGroupList,
             'countryList'       => $countryList,
