@@ -39,6 +39,16 @@ jQuery(document).ready(function() {
     $('.subkategorien li a').click(function (event) {
 
         event.preventDefault();
+        $.fancybox({
+            'width': '80%',
+            'height': '80%',
+            'closeBtn' : false,
+            'autoScale': true,
+            'transitionIn': 'fade',
+            'transitionOut': 'fade',
+            'type': 'iframe',
+            'content': $('.search-spinner').html()
+        });
         var $this    = $(this);
         var url = 'index.php?type=14545';
         var category = $this.data('category');
@@ -75,10 +85,11 @@ jQuery(document).ready(function() {
                     $this.find('span').hide();
                     $this.find('i').show();
                 }
-
+                $.fancybox.close();
             },
             error: function (error) {
                 console.log(error);
+                $.fancybox.close();
             }
         });
     });
