@@ -7,5 +7,7 @@ plugin.tx_siteprovider {
 	conventions {
         # cat=plugin.tx_siteprovider/string; type=string; label=PID der Startseite
         start = 2
+       # cat=plugin.tx_siteprovider/string; type=string; label=PID für die Kontaktseite
+       contact = 45
     }
 }

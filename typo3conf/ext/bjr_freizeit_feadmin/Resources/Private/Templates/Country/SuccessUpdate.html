@@ -7,7 +7,7 @@
     <f:flashMessages renderMode="div" />
 
     <div class="backlink">
-        <f:link.action action="list" class="btn btn-default btn-form-back-left"> Zur Liste der Länder </f:link.action>
+        <a href="{backlinkUrl}" class="btn btn-default btn-form-back-left">{backlinkText} </a>
     </div>
 
     <f:form action="update" name="country" object="{country}" class="form-horizontal"

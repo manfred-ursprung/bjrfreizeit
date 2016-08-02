@@ -5,3 +5,6 @@
 .sidebar-left ul ul{
     margin-left: 10px;
 }
+.ui-dialog{
+    z-index: 1000;
+}

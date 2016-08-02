@@ -3,7 +3,7 @@
 
 <f:layout name="Page" xmlns:f="http://www.w3.org/1999/html" xmlns:f="http://www.w3.org/1999/html"
           xmlns:f="http://www.w3.org/1999/html" xmlns:f="http://www.w3.org/1999/html"
-          xmlns:f="http://www.w3.org/1999/html"/>
+          xmlns:f="http://www.w3.org/1999/html" xmlns:f="http://www.w3.org/1999/html"/>
 
 
 <v:page.header>
@@ -31,8 +31,42 @@
                 </button>
             </div>
             <nav class="navbar-collapse collapse">
+
                 <ul class="nav navbar-nav">
-                    <li> <a class="logo" href="#"> Startseite </a> </li>
+                    <li> <f:link.page pageUid="{v:variable.typoscript(path: 'plugin.tx_siteprovider.conventions.startPID')}" class="logo"> Startseite </f:link.page> </li>
+                    <v:page.menu useShortcutData="TRUE"  levels="2" entryLevel="1" >
+
+                        <f:for each="{menu}" as="item">
+                            <f:if condition="{item.hasSubPages}">
+                                <f:then>
+                                    <li class="dropdown dropdown">
+                                        <f:link.page pageUid="{item.uid}" title="{item.title}" class="dropdown-toggle" additionalAttributes="{data-toggle: 'dropdown'}">
+                                            {item.title}<b class="caret"></b>
+                                        </f:link.page>
+                                        <ul class="dropdown-menu">
+                                            <v:page.menu pageUid="{item.uid}" levels="3">
+                                                <f:for each="{menu}" as="subItem">
+                                                    <li>
+                                                        <f:link.page pageUid="{subItem.uid}" title="{subItem.title}">
+                                                            {subItem.title}
+                                                        </f:link.page>
+                                                    </li>
+                                                </f:for>
+                                            </v:page.menu>
+                                        </ul>
+                                    </li>
+                                </f:then>
+                                <f:else>
+                                    <li>
+                                        <f:link.page pageUid="{item.uid}" title="{item.title}">
+                                            {item.title}
+                                        </f:link.page>
+                                    </li>
+                                </f:else>
+                            </f:if>
+                        </f:for>
+                    </v:page.menu>
+<f:comment>
                     <li class="dropdown dropdown"> <a data-toggle="dropdown" class="dropdown-toggle" title="So funktioniert es" href="#"> So funktioniert es<b class="caret"></b> </a>
                         <ul class="dropdown-menu">
                             <li> <a title="Du möchtest etwas ausleihen?" href="#"> Du möchtest dich zu einer Freizeit anmelden? </a> </li>
@@ -41,11 +75,12 @@
                         </ul>
                     </li>
                     <li> <a title="Über diesen Service" href="#"> Über diesen Service </a> </li>
+</f:comment>
                 </ul>
                 <div class="clearfix visible-sm"></div>
                 <!-- Artikelliste -->
                 <ul class="nav navbar-nav navbar-right">
-                    <li> <a href="#" class=""> Kontakt </a> </li>
+                    <li> <f:link.page pageUid="{v:variable.typoscript(path: 'plugin.tx_siteprovider.conventions.contactPID')}" > Kontakt </f:link.page> </li>
                 </ul>
             </nav>
             <!--/.nav-collapse -->

@@ -75,6 +75,15 @@
     </div>
 </div>
 
+<!-- Organization  -->
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for="name">Veranstalter</label>
+    <div class="col-sm-9 col-xs-12">
+        <f:form.select property="organization" options="{organizationList}" optionValueField="uid" optionLabelField="name"
+                       prependOptionLabel="-- Veranstalter --"
+                       class=" form-control" additionalAttributes="{required: 'required'}"/>
+    </div>
+</div>
 
 <!-- Partner -->
 <div class="row form-group">
@@ -103,7 +112,7 @@
 
 <!-- Leader -->
 <div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label" for="name">Leiter</label>
+    <label class="col-sm-3 col-xs-12 control-label" for="name">Leitung</label>
     <div class="col-sm-9 col-xs-12">
         <f:form.textfield property="leader"  class="form-control"  additionalAttributes="{readonly: 'readonly'}" />
     </div>
@@ -112,7 +121,7 @@
 
 <!-- Referent -->
 <div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label" for="name">Referent</label>
+    <label class="col-sm-3 col-xs-12 control-label" for="name">Referent*innen</label>
     <div class="col-sm-9 col-xs-12">
         <f:form.textfield property="referent"  class="form-control"  additionalAttributes="{readonly: 'readonly'}" />
     </div>
@@ -131,6 +140,14 @@
         </div>
 
     </div>
+
+<!-- URL zum Flyer -->
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for="name">URL  zum Flyer</label>
+    <div class="col-sm-9 col-xs-12">
+        <f:form.textfield property="url"  class="form-control"  additionalAttributes="{readonly: 'readonly'}" />
+    </div>
+</div>
 
 
 

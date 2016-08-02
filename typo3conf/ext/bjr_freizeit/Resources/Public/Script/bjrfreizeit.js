@@ -30,6 +30,10 @@
 
 jQuery(document).ready(function() {
 
+    //initialize datepicker on search form
+    $( "#leisureSearchStartDate" ).datepicker();
+    $( "#leisureSearchEndDate" ).datepicker();
+
     $('.subkategorien li i').hide();
     //send search request per ajax
     $('.subkategorien li a').click(function (event) {
@@ -39,7 +43,9 @@ jQuery(document).ready(function() {
         var url = 'index.php?type=14545';
         var category = $this.data('category');
         var property = $this.data('property');
-        $this.parents('ul').find('li a i').hide();
+        //$this.parents('ul').find('li a i').hide();
+        $('.sidebar-left ul li a i').hide();
+        $this.parents('ul').find('li a span').show();
         if($this.hasClass('filter-active')){
             property = '';
         }
@@ -53,6 +59,7 @@ jQuery(document).ready(function() {
                 'tx_bjrfreizeit_search[controller]': 'Search',
                 'tx_bjrfreizeit_search[category]': category,
                 'tx_bjrfreizeit_search[property]': property,
+                'tx_bjrfreizeit_search[ajax]': true,
 
             },
             dataType: "json",
@@ -62,6 +69,7 @@ jQuery(document).ready(function() {
                 $('.hauptinhalt>div').html(result.html);
                 if($this.hasClass('filter-active')){
                     $this.removeClass('filter-active');
+                    $this.find('span').show();
                 }else {
                     $this.addClass('filter-active');
                     $this.find('span').hide();
@@ -73,6 +81,75 @@ jQuery(document).ready(function() {
                 console.log(error);
             }
         });
+    });
+
+    $("#leisure-search").submit(function(e){
+        e.preventDefault();
+        $.fancybox({
+            'width': '80%',
+            'height': '80%',
+            'closeBtn' : false,
+            'autoScale': true,
+            'transitionIn': 'fade',
+            'transitionOut': 'fade',
+            'type': 'iframe',
+            'content': $('.search-spinner').html()
+        });
+
+        var url = 'index.php?type=14545';
+        //var formData = $("#leisure-search").serializeArray();
+        //var data = 'tx_bjrfreizeit_search[action]=searchResult&tx_bjrfreizeit_search[controller]=Search';
+        var location = $('#leisureSearchLocation').val();
+        var country  = $('#leisureSearchCountry').val();
+        var organization = $('#leisureSearchOrganization').val();
+        var priceFrom   = $('#leisureSearchPriceFrom').val();
+        var priceTo   = $('#leisureSearchPriceTo').val();
+        var startDate = $('#leisureSearchStartDate').val();
+        var endDate = $('#leisureSearchEndDate').val();
+        var description = $('#leisureSearchDescription').val();
+
+        //data = encodeURIComponent(data);
+        //console.log(data);
+/*
+        data['tx_bjrfreizeit_search[action'] = 'searchResult';
+        data['tx_bjrfreizeit_search[controller'] = 'Search';
+        data['tx_bjrfreizeit_search[location'] = 'Bayern';
+*/
+        $.ajax({
+            async: 'true',
+            url: url,
+            type: 'POST',
+
+            data: {
+                'tx_bjrfreizeit_search[action]':        'searchResult',
+                'tx_bjrfreizeit_search[controller]':    'Search',
+                'tx_bjrfreizeit_search[location]':      location,
+                'tx_bjrfreizeit_search[organization]':  organization,
+                'tx_bjrfreizeit_search[country]':       country,
+                'tx_bjrfreizeit_search[priceFrom]':     priceFrom,
+                'tx_bjrfreizeit_search[priceTo]':       priceTo,
+                'tx_bjrfreizeit_search[startDate]':     startDate,
+                'tx_bjrfreizeit_search[endDate]':       endDate,
+                'tx_bjrfreizeit_search[description]':   description,
+                'tx_bjrfreizeit_search[ajax]':          true,
+            },
+            dataType: "json",
+            //dataType: 'html',
+            success: function (result) {
+                console.log(result);
+                $('.hauptinhalt>div').html(result.html);
+                $.fancybox.close();
+
+            },
+            error: function (error) {
+                console.log(error);
+                $.fancybox.close();
+            }
+        });
+        /*
+         'tx_bjrfreizeit_search[action]=searchResult&tx_bjrfreizeit_search[controller]=Search&tx_bjrfreizeit_search[location]=Bayern'
+
+         */
     });
 });
 

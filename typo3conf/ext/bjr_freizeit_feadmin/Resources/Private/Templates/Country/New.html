@@ -10,7 +10,7 @@
 
     <f:form action="update" name="country" object="{country}" class="form-horizontal" additionalAttributes="{autocomplete: 'off'}"
             enctype="multipart/form-data" arguments="{country: country}">
-
+        <f:form.hidden name="referer" value="{backlinkUrl}" />
         <div class="row form-group">
             <label class="col-sm-3 col-xs-12 control-label" for="name">Name</label>
             <div class="col-sm-9 col-xs-12">
@@ -18,7 +18,8 @@
             </div>
         </div>
 
-        <f:link.action action="list" class="btn btn-default btn-form-back-left"> Zurück </f:link.action>
+        <f:comment><f:link.action action="list" class="btn btn-default btn-form-back-left"> Zurück </f:link.action></f:comment>
+        <a href="{backlinkUrl}" class="btn btn-default btn-form-back-left">Zurück</a>
         <f:form.submit name="countryUpdate" value="Anlegen" class="btn btn-default"/>
     </f:form>
 

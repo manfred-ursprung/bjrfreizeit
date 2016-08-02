@@ -156,6 +156,19 @@
 			<trans-unit id="tx_bjrfreizeit_domain_model_leisure.leisure_period">
 				<source>Leisure Period</source>
 			</trans-unit>
+
+			<trans-unit id="quicksearch.filter.category.Ferienzeiten">
+				<source>Freizeiten</source>
+			</trans-unit>
+			<trans-unit id="quicksearch.filter.category.Tag">
+				<source>Themen</source>
+			</trans-unit>
+			<trans-unit id="quicksearch.filter.category.Altersgruppe">
+				<source>Altersgruppe</source>
+			</trans-unit>
+			<trans-unit id="quicksearch.filter.category.Land">
+				<source>Land</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

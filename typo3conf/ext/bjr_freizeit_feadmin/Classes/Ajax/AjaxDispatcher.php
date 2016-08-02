@@ -80,7 +80,7 @@ $ajax = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('request');
  * ExtensionName in upperCamelCase
  */
 $ajax['vendor'] =  'Bjr';  //'T3Developer';
-$ajax['extensionName'] = 'BjrFeadmin';  //'ProjectsAndTasks';
+$ajax['extensionName'] = 'BjrFreizeitFeadmin';  //'ProjectsAndTasks';
 
 /**
  * @var $TSFE \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
@@ -101,7 +101,7 @@ $TSFE->set_no_cache();
 //$TSFE->checkAlternativCoreMethods();
 $TSFE->checkAlternativeIdMethods();
 //$_SERVER['QUERY_STRING'] = '42';
-$TSFE->determineId();
+//$TSFE->determineId();
 // echo 'after determineId   TSFE->id : ' . $TSFE->id;
 list($theAlias) = explode('&', \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('QUERY_STRING'));
 $theAlias = trim($theAlias);
@@ -125,7 +125,7 @@ echo 'TSFE->all ';
 var_dump($TSFE->all);
 */
 
-$TSFE->getConfigArray();  //wirft immer Fehler !!!!
+//  $TSFE->getConfigArray();  //wirft immer Fehler !!!!
 \TYPO3\CMS\Core\Core\Bootstrap::getInstance()->loadConfigurationAndInitialize();
 /*echo 'TSFE->config ';
 var_dump($TSFE->config);

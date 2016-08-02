@@ -74,6 +74,15 @@
     </div>
 </div>
 
+<!-- Organization  -->
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for="name">Veranstalter</label>
+    <div class="col-sm-9 col-xs-12">
+        <f:form.select property="organization" options="{organizationList}" optionValueField="uid" optionLabelField="name"
+                        prependOptionLabel="-- Veranstalter --"
+                        class=" form-control" additionalAttributes="{required: 'required'}"/>
+    </div>
+</div>
 
 <!-- Partner -->
 <div class="row form-group">
@@ -102,7 +111,7 @@
 
 <!-- Leader -->
 <div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label" for="name">Leiter</label>
+    <label class="col-sm-3 col-xs-12 control-label" for="name">Leitung</label>
     <div class="col-sm-9 col-xs-12">
         <f:form.textfield property="leader"  class="form-control" required="0"/>
     </div>
@@ -111,7 +120,7 @@
 
 <!-- Referent -->
 <div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label" for="name">Referent</label>
+    <label class="col-sm-3 col-xs-12 control-label" for="name">Referent*innen</label>
     <div class="col-sm-9 col-xs-12">
         <f:form.textfield property="referent"  class="form-control" required="0"/>
     </div>
@@ -127,6 +136,17 @@
         <span> - </span>
     <f:form.textfield property="endDate" value="{f:format.date(date: leisure.endDate, format: 'd.m.y')}"
                           class="form-control date-field" required="0" />
+    </div>
+
+</div>
+
+
+<!-- URL zum Flyer auf der Website -->
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for="url">URL zum Flyer (mit http://)</label>
+    <div class="col-sm-9 col-xs-12">
+        <f:form.textfield property="url"  class="form-control" required="0" />
+
     </div>
 
 </div>
@@ -165,7 +185,7 @@
     </div>
 </div>
 
-<!-- INFO : siehe Ausleihbedingung  -->
+<!-- Land -->
 <div class="row form-group">
     <label class="col-sm-3 col-xs-12 control-label" for ="name">Land</label>
     <div class="col-sm-9 col-xs-12">
@@ -175,6 +195,16 @@
                        class=" form-control" additionalAttributes="{required: 'required'}"/>
 
     </div>
+</div>
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for ="">Wenn das Land nicht vorhanden ist, können Sie es über den Link anlegen</label>
+    <div class="col-sm-9 col-xs-12">
+        <f:link.action action="new" extensionName="BjrFreizeitFeadmin" controller="Country"
+                       pageUid="39" class="btn btn-default btn-form-back-left">
+            Neues Land
+        </f:link.action>
+    </div>
+
 </div>
 
 

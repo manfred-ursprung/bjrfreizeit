@@ -118,3 +118,14 @@
 	margin-right: 15px;
     margin-bottom: 10px;
 }
+
+/* Suche */
+.search-spinner{
+    display: none;
+}
+.search-spinner-inner{
+    text-align: center;
+}
+.search-spinner-inner .fa{
+    font-size: 65px;
+}

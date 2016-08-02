@@ -274,34 +274,108 @@ class LeisureRepository extends AbstractRepository
     public function findBy($propertyName, $value){
 
         $propertyName = lcfirst($propertyName);
-        $query = $this->createQuery();
-        $result = $query->matching($query->equals($propertyName, $value))->execute();
+        if($propertyName != 'country'){
+            //M:M Relationen
+            $result = $this->findAllLeisuresFor($propertyName, $value);
+        }else{
+            $query = $this->createQuery();
+            $result = $query->matching($query->equals($propertyName, $value))->execute();
+        }
+
         return $result;
 
     }
 
 
     /**
-     * @param \MUM\BjrFreizeit\Utility\SearchManager $searchManager
+     * @param \MUM\BjrFreizeit\Utility\LeisureSearchForm $searchForm
      */
-    public function findAllBySearchManager(\MUM\BjrFreizeit\Utility\SearchManager $searchManager){
+    public function findAllBySearchForm(\MUM\BjrFreizeit\Utility\LeisureSearchForm $searchForm){
         $query = $this->createQuery();
         //$query->getQuerySettings()->setRespectStoragePage(FALSE);
         $query->getQuerySettings()->setRespectSysLanguage(FALSE);
         $andConstraints = array();
         $orConstraints = array();
         $constraints = array();
+        /** @var  $logger \TYPO3\CMS\Core\Log\Logger */
+        $logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger(__CLASS__);
+        //$logger->warning('logger' . __METHOD__);
 
-        if(!empty($searchManager->getCategory())){
-            $searchItem = $searchManager->getCategory();
-            $constraints[] =   $query->like($searchItem['leisureProperty'], '%' . ($searchItem['value']) .'%', false);
+        if(!empty($searchForm->getCategory())){
+            $searchItem = $searchForm->getCategory();
+            if($searchItem['leisureProperty'] == 'country') {
+                $constraints[] = $query->like($searchItem['leisureProperty'], '%' . ($searchItem['value']) . '%', false);
+            }else{
+                $constraints[] = $query->contains($searchItem['leisureProperty'], $searchItem['value']);
+            }
 
         }
-        if(strlen($searchManager->getLocation()) > 0){
+        $classMethods = get_class_methods(get_class($searchForm));
+        foreach($classMethods as $method){
+            if(substr($method, 0, 3) == 'get'){
+                if(!empty($searchForm->$method())){
+                    $value = $searchForm->$method();
+                    $dbFieldname = substr($method, 3);
+                    if(!in_array($dbFieldname, array('Category', 'PriceFrom', 'PriceTo', 'StartDate', 'EndDate', 'ors', 'keyword', 'Description'))) {
+                        if($dbFieldname == "Organization"){
+                            //über Repository OrganizationRepository Organization holen , und dann die Folder Id holen
+                            //und dann über die PID die Leisure ermitteln.
+                            /** @var  $organizationRepository \MUM\BjrFreizeit\Domain\Repository\OrganizationRepository */
+                            $organizationRepository = $this->objectManager->get('MUM\\BjrFreizeit\\Domain\\Repository\\OrganizationRepository');
+                            /** @var  $organization \MUM\BjrFreizeit\Domain\Model\Organization */
+                            $organization = $organizationRepository->findByUid($value);
+                            $constraints[] = $query->equals('pid', $organization->getLeisureFolderPid(), false) ;
+                            $logger->warning('constraint erzeugt für  Organization, LeisureFolderPid: '. $organization->getLeisureFolderPid());
+                        }else {
+                            $constraints[] = $query->like($dbFieldname, '%' . $value . '%', false);
+                        }
+                        //$logger->warning('constraint erzeugt für  DB-Feldname : '. $dbFieldname);
+                    }else{
+                        //$logger->warning('für  DB-Feldname : '. $dbFieldname .' kein Constraint erzeugt');
+                    }
+                }else{
+                    //$logger->warning('Method liefert keinen Wert : '. $method);
+                }
+            }
+        }
+        if(strlen($searchForm->getDescription()) > 0){
+            $orConstraints = array();
 
-            $constraints[] =   $query->like('location', '%' . ($searchManager->getLocation()) .'%', false);
+                $orConstraints[] = $query->like('description', '%' . $searchForm->getDescription() . '%', false);
+                $orConstraints[] = $query->like('shortDescription', '%' . $searchForm->getDescription() . '%', false);
+
+            $constraints[] = $query->logicalOr($orConstraints);
+            //$constraints[] = $query->like('description', '%' . $searchForm->getDescription() . '%', false);
+            $logger->warning('searchForm has ors!!!!');
+        }else{
+            $logger->warning('searchForm has no ors!!!!');
+        }
+
+        if( (strlen($searchForm->getPriceFrom()) > 0) || (strlen($searchForm->getPriceTo()) > 0)){
+
+            $priceFrom = (strlen($searchForm->getPriceFrom()) > 0) ? floatval($searchForm->getPriceFrom()) : 0;
+            $priceTo   = (strlen($searchForm->getPriceTo()) > 0) ? floatval($searchForm->getPriceTo()) : 1000000;
+            $constraints[] = $query->greaterThanOrEqual('price',  $priceFrom);
+            $constraints[] = $query->lessThanOrEqual('price',  $priceTo);
 
         }
+
+        if( (strlen($searchForm->getStartDate()) > 0)){
+            $dateTime =  \DateTime::createFromFormat("d.m.Y", $searchForm->getStartDate());
+            if(is_object($dateTime)) {
+                $constraints[] = $query->greaterThanOrEqual('start_date', $dateTime->format('Y-m-d'));
+                $logger->warning('Suche nach StartDate : ' . $dateTime->format('Y-m-d'));
+            }else{
+                $logger->warning('Wert für StartDate : '. $searchForm->getStartDate());
+            }
+        }
+        if( (strlen($searchForm->getEndDate()) > 0)){
+            $dateTime =  \DateTime::createFromFormat("d.m.Y", $searchForm->getEndDate());
+            if(is_object($dateTime))
+                $constraints[] = $query->lessThanOrEqual('end_date',  $dateTime->format('Y-m-d'));
+        }
+
+        //$logger->error('Searchform : ', array('statement' => $query->getStatement()->getStatement()));
         //\TYPO3\CMS\Core\Utility\DebugUtility::debug($constraints, 'DebugConstraints: ' . __FILE__ . ' in Line: ' . __LINE__);
         if(!empty($constraints)) {
             $query->matching($query->logicalAnd($constraints));
@@ -326,4 +400,22 @@ class LeisureRepository extends AbstractRepository
             ->execute(true);   //returns raw query result set
 
     }
+
+    /**
+     * @param $param \string
+     * @param $value \int
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
+    public function findAllLeisuresFor($propertyName, $value){
+        $querySettings = $this->createQuery()->getQuerySettings();
+        //$querySettings->setStoragePageIds(array($article->getPid()));
+        //$this->setDefaultQuerySettings($querySettings);
+
+        $query = $this->createQuery();
+        $query->matching($query->contains($propertyName, $value));
+
+        return $query->execute();
+    }
+
+
 }

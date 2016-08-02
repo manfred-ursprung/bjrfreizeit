@@ -161,8 +161,8 @@ class SearchController extends \MUM\BjrFreizeit\Controller\AbstractController
             //$GLOBALS['TSFE']->getPageRenderer()->addCssFile($css, 'stylesheet', 'all', $title = 'bjrfreizeit', true, true);
             //$this->response->addAdditionalHeaderData('<link rel="stylesheet" type="text/css" href="' . $css .'"> ');
         }
-        $this->logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger(__CLASS__);
-        $this->logger->info('hallo');
+        //$this->logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger(__CLASS__);
+        //$this->logger->info('hallo');
     }
 
     /**
@@ -183,10 +183,17 @@ class SearchController extends \MUM\BjrFreizeit\Controller\AbstractController
                 $item->options = array();
                 foreach($elements as $elem){
                     $option = new \stdClass();
+                    if($cat == "Ferienzeiten"){
+                       // DebugUtility::debugInPopUpWindow($elem, 'Ferienzeiten');
+                    }
                     $option->name = $elem->getName();
                     $option->uid  = $elem->getUid();
                     $option->leisureProperty = CategoryMapper::getLeisurePropertiesFromSearchCategory($cat);
-                    $queryResult = $this->leisureRepository->findBy($option->leisureProperty, $elem);
+                    if($cat == "Ferienzeiten"){
+                        $queryResult = $this->leisureRepository->findBy($option->leisureProperty, $elem->getUid());
+                    }else{
+                        $queryResult = $this->leisureRepository->findBy($option->leisureProperty, $elem);
+                    }
                     $option->number = $queryResult->count();
                     $item->options[] = $option;
                 }
@@ -204,18 +211,24 @@ class SearchController extends \MUM\BjrFreizeit\Controller\AbstractController
 
     public function searchResultAction(){
         $this->logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger(__CLASS__);
-        $this->logger->info('hallo');
+        //$this->logger->warning('hallo hier der logger' . __METHOD__);
+        $debug = false;
         $isAjax = true;
         if($this->request->hasArgument('ajax')){
             $isAjax = true;
         }
-
-
         $args = $this->request->getArguments();
-        /** @var  $searchManager \MUM\BjrFreizeit\Utility\SearchManager */
-        $searchManager = GeneralUtility::makeInstance('MUM\\BjrFreizeit\\Utility\\SearchManager', $args);
 
-        $leisures = $this->leisureRepository->findAllBySearchManager($searchManager);
+        /** @var  $searchForm \MUM\BjrFreizeit\Utility\LeisureSearchForm */
+        $searchForm = GeneralUtility::makeInstance('MUM\\BjrFreizeit\\Utility\\LeisureSearchForm', $args);
+        if($debug){
+            return json_encode(array(
+                'html' => print_r($searchForm, true),
+                'args' => $args,
+            ));
+        }
+
+        $leisures = $this->leisureRepository->findAllBySearchForm($searchForm);
 
         if($leisures->count() > 0){
             //$this->typoScript = $this->getFullTypoScript();
@@ -227,17 +240,23 @@ class SearchController extends \MUM\BjrFreizeit\Controller\AbstractController
             $this->view->assign('found', false);
         }
         if($isAjax) {
-            $html = $this->view->render();
+            $renderer = $this->getPlainRenderer('SearchResult', 'html');
+            $renderer->assign('found', ($leisures->count() > 0));
+            $renderer->assign('leisures', $leisures);
+            $renderer->assign('imagePath', $this->settings['leisureImagePath']);
+            $renderer->assign('detailPage', $this->settings['detailPage']);
+            $html = $renderer->render();
+            //$html = $this->view->render();
             $success = true;
-            $this->logger->info('SearchManager ', array(
-                'category' => $searchManager->getCategory(),
+            $this->logger->alert('SearchManager ', array(
+                'keyword' => $searchForm->getDescription(),
             ));
-            $this->logger->info('Arguments ', $args);
+            $this->logger->alert('Arguments ', $args);
             return json_encode(array(
                 'html' => $html,
                 'success' => $success,
                 'arguments' => $args,
-                'searchManagerCategory' => $searchManager->getCategory(),
+                'searchManagerCategory' => $searchForm->getCategory(),
                 'number' => $leisures->count(),
             ));
         }else{
@@ -254,6 +273,7 @@ class SearchController extends \MUM\BjrFreizeit\Controller\AbstractController
             'countryList'       => $this->countryRepository->findAll(),
             'locationList'      => $this->getSelectLocationList(),
             'organizationList'  => $this->organizationRepository->findAll(),
+            'searchForm'        => GeneralUtility::makeInstance('MUM\\BjrFreizeit\\Utility\\LeisureSearchForm'),
         );
 
         $this->view->assignMultiple($params);

@@ -391,4 +391,6 @@ header #topheader img#logo3 {
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#047688', endColorstr='#036574', GradientType=0);
 	background-repeat: repeat-x;
 }
-
+.ui-front{
+	z-index: 10000;
+}

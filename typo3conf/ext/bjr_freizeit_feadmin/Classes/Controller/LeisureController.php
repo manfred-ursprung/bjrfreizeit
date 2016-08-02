@@ -83,6 +83,14 @@ class LeisureController extends AbstractController {
      */
     protected $holidayRepository;
 
+    /**
+     * OrganizationRepository
+     *
+     * @var \MUM\BjrFreizeit\Domain\Repository\OrganizationRepository
+     * @inject
+     */
+    protected $organizationRepository;
+
 
     /**
      * FileReferenceRepository
@@ -97,6 +105,13 @@ class LeisureController extends AbstractController {
      * @var array
      */
     private $typoScript;
+
+
+    /**
+     * @var \TYPO3\CMS\Core\Log\Logger
+     */
+    protected $logger;
+
 
 
     public function initializeAction(){
@@ -206,6 +221,7 @@ class LeisureController extends AbstractController {
         $targetGroupList = $this->targetGroupRepository->findAll()->toArray();
         $countryList     = $this->countryRepository->findAll()->toArray();
         $holidayList     = $this->holidayRepository->findAll()->toArray();
+        $organizationList= $this->organizationRepository->findAll()->toArray();
     /*    print '<pre>';
         print_r($tagList);
         print '</pre>';
@@ -227,6 +243,7 @@ class LeisureController extends AbstractController {
             'targetGroupList'   => $targetGroupList,
             'countryList'       => $countryList,
             'holidayList'       => $holidayList,
+            'organizationList'  => $organizationList,
             'firstParent'       => $leisure->getTags()->next(),
             'currentPageId'     => $GLOBALS['TSFE']->id,
         );
@@ -330,14 +347,29 @@ class LeisureController extends AbstractController {
      * per Ajax aufgerufen.
      */
     public function deleteAction() {
+        $this->logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger(__CLASS__);
+        $debug = false;
+        $isAjax = false;
+        if($this->request->hasArgument('ajax')){
+            $isAjax = true;
+        }
         $args = $this->request->getArguments();
         $leisure = $this->leisureRepository->findByUid($args['leisure']);
-        $leisureName = $leisure->getTitle();
+        if($debug){
+            return json_encode(array(
+                'args' => $args,
+            ));
+        }
+        if($leisure) {
+            $leisureName = $leisure->getTitle();
 
-        $this->leisureRepository->remove($leisure);
-        $persistenceManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
-        $persistenceManager->persistAll();
-        return 'Leisure ' . $leisureName .' ist gelöscht';
+            $this->leisureRepository->remove($leisure);
+            $persistenceManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
+            $persistenceManager->persistAll();
+            return 'Leisure ' . $leisureName . ' ist gelöscht';
+        }else{
+            return 'Keine Freizeit mit der ID ' . $args['leisure'] .' gefunden.';
+        }
     }
 
     /**
@@ -461,6 +493,7 @@ class LeisureController extends AbstractController {
             'targetGroupList'   => $this->targetGroupRepository->findAll()->toArray(),
             'countryList'       => $this->countryRepository->findAll()->toArray(),
             'holidayList'       => $this->holidayRepository->findAll()->toArray(),
+            'organizationList'  => $this->organizationRepository->findAll()->toArray(),
             'currentPageId'     => $GLOBALS['TSFE']->id,
         );
         $this->view->assignMultiple($params);
@@ -491,6 +524,7 @@ class LeisureController extends AbstractController {
 
         $(document).ready(function(){
             var pageId = $('#currentPageId').val();
+            var url = 'index.php?type=14555';
             $("#dialog").dialog({
                 autoOpen: false,
                 modal: true,
@@ -499,30 +533,24 @@ class LeisureController extends AbstractController {
                 {
                     text: 'Ja',
                     click : function() {
-                        var article = $('#dialog').data('articleuid');
+                        var leisureId = $(this).data('leisureuid');
                         $.ajax({
                             async: 'true',
-                            url: 'index.php',
+                            url: url,
                             type: 'POST',
                             data: {
-                                eID: "bjrfeadmin",
-                                request: {
-                                    pluginName:  'Article',
-                                    controller:  'Article',
-                                    action:      'delete',
-                                    arguments: {
-                                        'pageId': pageId,
-                                        'article': article
-                                    }
-                                }
-
+                                'tx_bjrfreizeitfeadmin_leisure[action]': 'delete',
+                                'tx_bjrfreizeitfeadmin_leisure[controller]': 'Leisure',
+                                'tx_bjrfreizeitfeadmin_leisure[leisure]': leisureId
+                                    
                             },
                             //dataType: "json",
                             dataType: 'html',
 
                             success: function(result) {
+                                //console.log(result);
                                 window.location.reload();
-
+                                //$("#dialog").dialog("close");
                             },
                             error: function(error) {
                                 //console.log(error);
@@ -542,8 +570,8 @@ class LeisureController extends AbstractController {
 
             $(".callDeleteConfirm").on("click", function(e) {
                 e.preventDefault();
-                var article = $(this).data('article');
-                $('#dialog').data('articleuid', $(this).data('articleuid'));
+                var article = $(this).data('leisure');
+                $('#dialog').data('leisureuid', $(this).data('leisureuid'));
                 $('#dialog').html('Sind sie sicher, dass der Artikel "' + article +'" gelöscht werden soll?');
                 $("#dialog").dialog("open");
             });
