@@ -275,12 +275,12 @@ EOT;
 
     protected function validateCountry($args){
         $errors = array();
-        /** @var  $validator \MUM\BjrFreizeit\Validation\Validator\OrganizationValidator */
+        /** @var  $validator \MUM\BjrFreizeit\Validation\Validator\CountryValidator */
         $validator = GeneralUtility::makeInstance('MUM\\BjrFreizeit\\Validation\\Validator\\CountryValidator');
 
         $_errors =  $validator->validate($args);
 
-        if(count($_errors) > 0 ){
+        if($_errors->hasErrors() > 0 ){
             //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($_errors, 'Errors');
 
             //$_errors = $validator->getErrors();

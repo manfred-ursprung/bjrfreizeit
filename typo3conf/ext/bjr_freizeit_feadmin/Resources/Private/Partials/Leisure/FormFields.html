@@ -1,10 +1,36 @@
-<div class="row form-group" xmlns:f="http://www.w3.org/1999/html" xmlns:f="http://www.w3.org/1999/html"
-     xmlns:f="http://www.w3.org/1999/html" xmlns:f="http://www.w3.org/1999/html">
+
+<div class="row form-group" >
+
     <label class="col-sm-3 col-xs-12 control-label required" for ="name">Titel der Freizeit:</label>
     <div class="col-sm-9 col-xs-12">
         <f:form.textfield property="title"  class="form-control" required="1"/>
     </div>
 </div>
+
+<!-- Land -->
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for ="name">Land</label>
+    <div class="col-sm-9 col-xs-12">
+
+        <f:form.select property="country" options="{countryList}" optionValueField="uid" optionLabelField="name"
+                       prependOptionLabel="-- Land --"
+                       class=" form-control" additionalAttributes="{required: 'required'}"/>
+
+    </div>
+</div>
+<div class="row form-group">
+    <label class="col-sm-3 col-xs-12 control-label" for ="">Wenn das Land nicht vorhanden ist, können Sie es über den Link anlegen</label>
+    <div class="col-sm-9 col-xs-12">
+        <f:link.action action="new" extensionName="BjrFreizeitFeadmin" controller="Country"
+                       pageUid="39" class="btn btn-default btn-form-back-left">
+            Neues Land
+        </f:link.action>
+        <span>Bevor Sie das Land anlegen, sichern Sie Ihre Eingaben</span>
+    </div>
+
+</div>
+
+
 <!-- Tags -->
 
 <div class="row form-group">
@@ -185,27 +211,6 @@
     </div>
 </div>
 
-<!-- Land -->
-<div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label" for ="name">Land</label>
-    <div class="col-sm-9 col-xs-12">
-
-        <f:form.select property="country" options="{countryList}" optionValueField="uid" optionLabelField="name"
-                       prependOptionLabel="-- Land --"
-                       class=" form-control" additionalAttributes="{required: 'required'}"/>
-
-    </div>
-</div>
-<div class="row form-group">
-    <label class="col-sm-3 col-xs-12 control-label" for ="">Wenn das Land nicht vorhanden ist, können Sie es über den Link anlegen</label>
-    <div class="col-sm-9 col-xs-12">
-        <f:link.action action="new" extensionName="BjrFreizeitFeadmin" controller="Country"
-                       pageUid="39" class="btn btn-default btn-form-back-left">
-            Neues Land
-        </f:link.action>
-    </div>
-
-</div>
 
 
 
