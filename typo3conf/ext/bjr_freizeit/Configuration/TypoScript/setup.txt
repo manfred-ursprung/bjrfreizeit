@@ -4,6 +4,7 @@ plugin.tx_bjrfreizeit_display {
 		templateRootPaths.0 = {$plugin.tx_bjrfreizeit_display.view.templateRootPath}
 		partialRootPaths.0 = {$plugin.tx_bjrfreizeit_display.view.partialRootPath}
 		layoutRootPaths.0 = {$plugin.tx_bjrfreizeit_display.view.layoutRootPath}
+		widget.TYPO3\CMS\Fluid\ViewHelpers\Widget\PaginateViewHelper.templateRootPath = {$plugin.tx_bjrfreizeit_display.view.templateRootPath}
 	}
 	persistence {
 		storagePid = {$plugin.tx_bjrfreizeit_display.persistence.storagePid}
@@ -85,3 +86,4 @@ plugin.tx_vhs.settings.asset {
         dependencies = bootstrap
     }
 }
+
