@@ -129,3 +129,15 @@
 .search-spinner-inner .fa{
     font-size: 65px;
 }
+/* List Paginator */
+.f3-widget-paginator li{
+    display: inline-block;
+    list-style-image: none;
+    padding-right: 10px;
+}
+.f3-widget-paginator .btn-primary{
+    padding: 10px;
+    -webkit-border-radius:;
+    -moz-border-radius:;
+    border-radius: 4px;
+}
