@@ -136,7 +136,7 @@ class CountryController extends \MUM\BjrFreizeitFeadmin\Controller\AbstractContr
                     $persistenceManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
                     $persistenceManager->persistAll();
                     //now organization ist persistent
-                    $GLOBALS['TSFE']->fe_user->setKey("ses","countryChange",'Die Ferienzeit <strong>'. $country->getName() .'</strong> wurde neu angelegt.');
+                    $GLOBALS['TSFE']->fe_user->setKey("ses","countryChange",'Das Land <strong>'. $country->getName() .'</strong> wurde neu angelegt.');
                 }else{
                     $errors = $this->getValidationErrors();
                     //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($errors, 'Errors');
